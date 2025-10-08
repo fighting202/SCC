@@ -1,0 +1,144 @@
+# Seoul Care Concierge (SCC) - Cursor AI Rules
+
+## Core Principles
+- Target: International medical/beauty tourists (Chinese 40%, Western 40%, Others 20%)
+- Mobile-first: 80%+ users on mobile while traveling
+- Trust is everything: Medical tourism requires maximum credibility
+- Bilingual: English (default) + Chinese (mandatory)
+
+## Component Naming
+ContactButton, ServiceCard, PricingCard, BookingForm, TrustBadge, EmergencyContact
+❌ Avoid: GenericButton, CommonCard, BaseLayout
+
+## Design System
+Colors:
+- primary: #2C5F7C (trust blue)
+- accent: #D4AF37 (premium gold)
+- success: #10B981 (CTA green)
+- wechat: #07C160
+- whatsapp: #25D366
+
+Typography:
+- Mobile body text: 16px minimum (NEVER smaller)
+- Touch targets: 48px × 48px minimum
+- Line height: 1.6 (Chinese readability)
+
+## Contact Info
+- Email: seoulcareconcierge@gmail.com
+- Phone: +82-10-2981-6653
+- WhatsApp: https://wa.me/821029816653
+- WeChat ID: SeoulCareConcierge
+
+## Mandatory Rules
+✅ Every text has EN + ZH versions
+✅ All buttons 48px+ height on mobile
+✅ Form inputs use correct type (email, tel, date)
+✅ Images use Next.js Image with lazy loading
+✅ WeChat prioritized for Chinese users
+✅ WhatsApp prioritized for others
+
+❌ Never use:
+- Text smaller than 16px
+- Touch targets under 48px
+- Desktop-first design
+- Fake testimonials
+- Medical guarantees
+- localStorage for sensitive data
+
+## Component Pattern
+typescript
+interface BilingualText {
+  en: string;
+  zh: string;
+}
+
+const example = {
+  title: {
+    en: "Medical Services",
+    zh: "医疗服务"
+  }
+};// store/scc-store.ts
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { Language, InquiryFormData } from '@/lib/scc-types';
+import { checkBusinessHours } from '@/lib/scc-utils';
+
+interface SCCStore {
+  // 언어
+  language: Language;
+  setLanguage: (lang: Language) => void;
+
+  // 영업시간
+  isBusinessHours: boolean;
+  updateBusinessHours: () => void;
+
+  // 문의 폼
+  inquiryForm: Partial<InquiryFormData>;
+  setInquiryForm: (data: Partial<InquiryFormData>) => void;
+  resetInquiryForm: () => void;
+
+  // 비용 계산기
+  costEstimate: {
+    duration: number;
+    services: string[];
+    accommodation: 'standard' | 'comfort' | 'luxury';
+  };
+  updateCostEstimate: (update: Partial<SCCStore['costEstimate']>) => void;
+}
+
+export const useSCCStore = create<SCCStore>()(
+  persist(
+    (set) => ({
+      // 언어 초기값: 영어
+      language: 'en',
+      setLanguage: (lang) => set({ language: lang }),
+
+      // 영업시간
+      isBusinessHours: checkBusinessHours().isOpen,
+      updateBusinessHours: () => {
+        const { isOpen } = checkBusinessHours();
+        set({ isBusinessHours: isOpen });
+      },
+
+      // 문의 폼
+      inquiryForm: {},
+      setInquiryForm: (data) =>
+        set((state) => ({
+          inquiryForm: { ...state.inquiryForm, ...data }
+        })),
+      resetInquiryForm: () => set({ inquiryForm: {} }),
+
+      // 비용 계산기
+      costEstimate: {
+        duration: 5,
+        services: [],
+        accommodation: 'comfort'
+      },
+      updateCostEstimate: (update) =>
+        set((state) => ({
+          costEstimate: { ...state.costEstimate, ...update }
+        }))
+    }),
+    {
+      name: 'scc-storage',
+      partialize: (state) => ({
+        language: state.language,
+        inquiryForm: state.inquiryForm
+      })
+    }
+  )
+);
+
+// 영업시간 자동 업데이트 (1분마다)
+if (typeof window !== 'undefined') {
+  setInterval(() => {
+    useSCCStore.getState().updateBusinessHours();
+  }, 60 * 1000);
+}
+
+
+## Performance
+- LCP < 2.5s
+- Images: WebP, lazy loading
+- Fonts: next/font/google
+- Mobile 3G network tested

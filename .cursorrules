@@ -1,0 +1,264 @@
+# Seoul Care Concierge (SCC) Development Rules
+
+## 🎯 SCC 프로젝트 핵심 원칙
+
+### 타겟 사용자 중심 개발
+- **국제 고객 우선**: 모든 UI는 외국인(중국인, 서양인) 관점에서 설계
+- **신뢰 구축**: 의료/뷰티 관광 특성상 신뢰도가 전환율에 직결
+- **모바일 최우선**: 여행 중 모바일 사용률 80% 이상 고려
+- **간편한 연락**: 문의 장벽을 최소화 (WhatsApp, WeChat 즉시 연결)
+
+### 다국어 지원
+- **이중 언어 동시 표시**: 영어(기본) + 중국어(필수)
+- **문화적 배려**: 중국 고객 선호도 반영 (WeChat 우선, 빨간색 회피)
+- **명확한 번역**: 의료 용어는 정확하게, 마케팅 문구는 현지화
+
+## 🏗️ SCC 컴포넌트 아키텍처
+
+### 컴포넌트 네이밍 규칙
+```typescript
+// SCC 도메인별 네이밍
+ServiceCard              // 서비스 카드 (Medical/Beauty/Support)
+ContactButton            // 연락 버튼 (WhatsApp/WeChat/Email)
+PricingCard              // 가격 카드
+BookingForm              // 예약 폼
+TrustBadge               // 신뢰 배지
+EmergencyContact         // 긴급 연락
+PackageComparison        // 패키지 비교 테이블
+LanguageToggle           // 언어 전환
+
+// 금지: GenericButton, CommonCard, BaseLayout
+```
+
+### 데이터 플로우 패턴
+```typescript
+// 언어 및 연락처 정보를 전역에서 관리
+interface SCCContext {
+  language: 'en' | 'zh';
+  setLanguage: (lang: 'en' | 'zh') => void;
+  contactInfo: ContactInfo;
+  businessHours: BusinessHours;
+  isOnline: boolean;
+}
+
+interface ContactInfo {
+  email: 'seoulcareconcierge@gmail.com';
+  phone: '+82-10-2981-6653';
+  whatsapp: 'https://wa.me/821029816653';
+  wechatId: 'SeoulCareConcierge';
+}
+```
+
+## 🎨 SCC 디자인 시스템
+
+### 색상 전략
+```css
+/* 신뢰성 중심 색상 팔레트 */
+--scc-primary: #2C5F7C;        /* 의료 신뢰성 (진한 파란색) */
+--scc-accent: #D4AF37;         /* 프리미엄 서비스 (골드) */
+--scc-success: #10B981;        /* 안전/성공 (초록색) */
+--scc-wechat: #07C160;         /* WeChat 브랜드 */
+--scc-whatsapp: #25D366;       /* WhatsApp 브랜드 */
+
+/* 중국 고객 고려사항 */
+/* 빨간색(#FF0000) 사용 금지 - 중국에서 부정적 의미 */
+/* 금색/노란색 선호 - 고급스러움, 행운 */
+```
+
+### 타이포그래피 전략
+```css
+/* 제목: 신뢰성과 전문성 */
+.font-serif { font-family: 'Playfair Display', serif; }
+
+/* 본문: 가독성과 접근성 */
+.font-sans { font-family: 'Inter', sans-serif; }
+
+/* 중국어 폰트 최적화 */
+.zh-text { font-family: 'Noto Sans SC', 'PingFang SC', sans-serif; }
+```
+
+## 📱 모바일 우선 설계
+
+### 반응형 브레이크포인트
+```css
+/* 모바일 우선 접근법 */
+sm: 640px   /* 태블릿 - 여행 중 주요 사용 */
+md: 768px   /* 작은 데스크톱 */
+lg: 1024px  /* 데스크톱 - 사전 계획 단계 */
+xl: 1280px  /* 큰 데스크톱 */
+```
+
+### 모바일 최적화 규칙
+- **터치 타겟**: 최소 44px × 44px
+- **연락 버튼**: 화면 하단 고정 또는 상단 고정
+- **폰트 크기**: 모바일에서 최소 16px
+- **이미지**: WebP 포맷, 지연 로딩 필수
+
+## 🌐 다국어 구현 패턴
+
+### BilingualText 컴포넌트 사용법
+```tsx
+// 올바른 사용법
+<BilingualText 
+  en="Medical Services" 
+  zh="医疗服务" 
+  className="text-xl font-bold"
+/>
+
+// 잘못된 사용법 (하드코딩)
+<span>{language === 'zh' ? '医疗服务' : 'Medical Services'}</span>
+```
+
+### 상수 정의 패턴
+```typescript
+// lib/scc-constants.ts
+export const SERVICES = {
+  medical: {
+    en: 'Medical Services',
+    zh: '医疗服务',
+    description: {
+      en: 'We guide you to Korea\'s leading medical facilities',
+      zh: '我们为您推荐韩国顶级医疗机构'
+    }
+  }
+} as const;
+```
+
+## 🔧 SCC 개발 규칙
+
+### 1. 컴포넌트 생성 순서
+1. `lib/scc-types.ts`에 타입 정의
+2. `lib/scc-constants.ts`에 상수 정의
+3. `components/scc/`에 컴포넌트 생성
+4. 다국어 지원 확인
+5. 모바일 반응형 테스트
+
+### 2. 파일 구조
+```
+components/scc/
+├── bilingualtext.tsx      # 이중 언어 텍스트
+├── contactbutton.tsx      # 연락 버튼
+├── service-card.tsx       # 서비스 카드
+├── package-card.tsx       # 패키지 카드
+├── trust-badge.tsx        # 신뢰 배지
+├── booking-form.tsx       # 예약 폼
+└── emergency-contact.tsx  # 긴급 연락
+```
+
+### 3. Props 타입 정의
+```typescript
+// 모든 SCC 컴포넌트는 명확한 타입 정의 필수
+interface ServiceCardProps {
+  service: ServiceItem;
+  className?: string;
+  onClick?: () => void;
+  variant?: 'default' | 'featured' | 'compact';
+}
+```
+
+## 🚀 성능 최적화 규칙
+
+### 이미지 최적화
+```tsx
+// Next.js Image 컴포넌트 필수 사용
+import Image from 'next/image'
+
+<Image
+  src="/medical-facility.jpg"
+  alt="Korean medical facility"
+  width={800}
+  height={600}
+  priority={isAboveFold}
+  className="rounded-lg"
+/>
+```
+
+### 번들 최적화
+- 동적 import 사용: `const ContactForm = dynamic(() => import('./contact-form'))`
+- 불필요한 라이브러리 제거
+- Tree shaking 활용
+
+## 🔒 보안 및 개인정보 보호
+
+### 의료 정보 보안
+- 의료진 라이선스 정보 검증
+- 환자 정보 암호화
+- GDPR 및 개인정보보호법 준수
+
+### 폼 검증
+```typescript
+// Zod 스키마 사용 필수
+const inquirySchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
+  agreeToTerms: z.boolean().refine(val => val === true, 'You must agree to terms')
+})
+```
+
+## 📊 분석 및 전환율 최적화
+
+### 핵심 지표 추적
+- **연락 버튼 클릭률**: WhatsApp, WeChat, Email 각각
+- **언어 전환률**: 영어 ↔ 중국어
+- **모바일 사용률**: 디바이스별 분석
+- **페이지 체류 시간**: 서비스 섹션별
+
+### A/B 테스트 우선순위
+1. 연락 버튼 위치 및 디자인
+2. 언어 전환 UI
+3. 가격 표시 방식
+4. 신뢰 배지 배치
+
+## 🎯 SCC 특화 기능
+
+### 긴급 연락 시스템
+```typescript
+interface EmergencyContact {
+  phone: string;
+  whatsapp: string;
+  wechat: string;
+  available24h: boolean;
+  languages: Language[];
+}
+```
+
+### 실시간 상태 표시
+- 온라인/오프라인 상태
+- 응답 시간 표시
+- 현재 지원 언어
+
+## ⚠️ 금지사항
+
+### 절대 사용 금지
+- 빨간색 (#FF0000) - 중국 문화상 부정적 의미
+- 복잡한 의료 용어 - 일반인도 이해 가능하게
+- 긴 문장 - 모바일에서 가독성 저하
+- 영어만 표시 - 중국어 병기 필수
+
+### 피해야 할 패턴
+- 하드코딩된 텍스트
+- 제네릭한 컴포넌트명
+- 접근성 무시한 UI
+- 모바일 최적화 없는 디자인
+
+## 🚀 배포 및 모니터링
+
+### 필수 체크리스트
+- [ ] 다국어 번역 정확성 확인
+- [ ] 모바일 반응형 테스트
+- [ ] 연락 버튼 작동 확인
+- [ ] 의료 정보 정확성 검증
+- [ ] 개인정보 보호 정책 준수
+- [ ] 성능 최적화 확인
+
+### 모니터링 지표
+- Core Web Vitals
+- 연락 버튼 클릭률
+- 언어 전환률
+- 모바일 사용률
+- 오류 발생률
+
+---
+
+**이 규칙들은 Seoul Care Concierge의 성공적인 서비스 제공을 위한 핵심 가이드라인입니다. 모든 개발자는 이 규칙을 준수하여 일관성 있고 효과적인 사용자 경험을 제공해야 합니다.**
