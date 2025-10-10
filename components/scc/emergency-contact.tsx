@@ -1,8 +1,8 @@
 'use client'
 
-import { Phone, MessageCircle, Clock, AlertTriangle } from 'lucide-react'
+import { Phone, MessageCircle, Clock, AlertTriangle, MessageSquare, Smartphone } from 'lucide-react'
 import { BilingualText } from './bilingualtext'
-import { ContactButton } from './contactbutton'
+import { Button } from '../ui/button'
 import { cn } from '@/lib/scc-utils'
 
 interface EmergencyContactProps {
@@ -23,7 +23,10 @@ export function EmergencyContact({
         <span className="text-sm font-medium text-red-600">
           <BilingualText en="Emergency?" zh="紧急情况？" />
         </span>
-        <ContactButton method="whatsapp" variant="ghost" size="sm" />
+        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+          <MessageSquare className="w-4 h-4 mr-2" />
+          <BilingualText en="WhatsApp" zh="WhatsApp" />
+        </Button>
       </div>
     )
   }
@@ -41,7 +44,10 @@ export function EmergencyContact({
               <BilingualText en="Available 24/7" zh="24小时可用" />
             </p>
           </div>
-          <ContactButton method="whatsapp" variant="outline" size="sm" />
+          <Button variant="outline" size="sm" className="text-red-600 border-red-300 hover:bg-red-50">
+            <MessageSquare className="w-4 h-4 mr-2" />
+            <BilingualText en="WhatsApp" zh="WhatsApp" />
+          </Button>
         </div>
       </div>
     )
@@ -109,16 +115,20 @@ export function EmergencyContact({
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 pt-4">
-            <ContactButton 
-              method="whatsapp" 
-              variant="default"
-              className="flex-1"
-            />
-            <ContactButton 
-              method="wechat" 
+            <Button 
+              variant="primary"
+              className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+            >
+              <MessageSquare className="w-4 h-4 mr-2" />
+              <BilingualText en="WhatsApp" zh="WhatsApp" />
+            </Button>
+            <Button 
               variant="outline"
-              className="flex-1"
-            />
+              className="flex-1 border-green-600 text-green-600 hover:bg-green-50"
+            >
+              <Smartphone className="w-4 h-4 mr-2" />
+              <BilingualText en="WeChat" zh="微信" />
+            </Button>
           </div>
 
           <div className="text-xs text-red-700 bg-red-100 p-3 rounded">
@@ -169,18 +179,22 @@ export function FloatingEmergencyButton({ className }: { className?: string }) {
             </h4>
             
             <div className="space-y-2">
-              <ContactButton 
-                method="whatsapp" 
+              <Button 
                 variant="outline" 
                 size="sm"
-                className="w-full"
-              />
-              <ContactButton 
-                method="wechat" 
+                className="w-full text-green-600 border-green-600 hover:bg-green-50"
+              >
+                <MessageSquare className="w-4 h-4 mr-2" />
+                <BilingualText en="WhatsApp" zh="WhatsApp" />
+              </Button>
+              <Button 
                 variant="outline" 
                 size="sm"
-                className="w-full"
-              />
+                className="w-full text-green-600 border-green-600 hover:bg-green-50"
+              >
+                <Smartphone className="w-4 h-4 mr-2" />
+                <BilingualText en="WeChat" zh="微信" />
+              </Button>
             </div>
 
             <div className="text-center text-xs text-gray-500">

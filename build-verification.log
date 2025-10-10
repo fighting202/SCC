@@ -1,0 +1,32 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: C:\Users\skyis\Downloads\korea-care-concierge\public\sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+ ⨯ ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+Failed to compile.
+
+./components/notion/blocks/BlockRenderer.tsx:40:12
+Type error: Type '{ block: NotionBlock; showEditButton: boolean; autoSave: boolean; onUpdate: ((blockId: string, content: any) => void) | undefined; }' is not assignable to type 'ParagraphBlockProps' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'onUpdate' are incompatible.
+    Type '((blockId: string, content: any) => void) | undefined' is not assignable to type '(blockId: string, content: any) => void'.
+      Type 'undefined' is not assignable to type '(blockId: string, content: any) => void'.
+
+[0m [90m 38 |[39m       [36mcase[39m [32m'paragraph'[39m[33m:[39m[0m
+[0m [90m 39 |[39m         [36mreturn[39m ([0m
+[0m[31m[1m>[22m[39m[90m 40 |[39m           [33m<[39m[33mParagraphBlock[39m [0m
+[0m [90m    |[39m            [31m[1m^[22m[39m[0m
+[0m [90m 41 |[39m             block[33m=[39m{block} [0m
+[0m [90m 42 |[39m             showEditButton[33m=[39m{showEditButton}[0m
+[0m [90m 43 |[39m             autoSave[33m=[39m{autoSave}[0m

@@ -1,0 +1,52 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: C:\Users\skyis\Downloads\korea-care-concierge\public\sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ✓ Compiled successfully
+   Skipping validation of types
+   Linting ...
+ ⨯ ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+   Collecting page data ...
+   Generating static pages (0/12) ...
+   Generating static pages (3/12) 
+   Generating static pages (6/12) 
+   Generating static pages (9/12) 
+ ✓ Generating static pages (12/12)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    27.5 kB         130 kB
+├ ○ /_not-found                          142 B          89.6 kB
+├ ƒ /api/notion/client                   0 B                0 B
+├ ƒ /api/notion/databases                0 B                0 B
+├ ƒ /api/notion/pages                    0 B                0 B
+├ ƒ /api/submit-inquiry                  0 B                0 B
+├ ƒ /databases                           175 B          96.4 kB
+├ ○ /privacy-policy                      6.61 kB         104 kB
+├ ○ /robots.txt                          0 B                0 B
+├ ƒ /settings                            1.83 kB         102 kB
+├ ○ /setup                               2.43 kB         103 kB
+├ ○ /sitemap.xml                         0 B                0 B
+└ ○ /wechat-qr                           3.96 kB         101 kB
++ First Load JS shared by all            89.4 kB
+  ├ chunks/997-e800efa738dccd47.js       33.8 kB
+  ├ chunks/fd9d1056-3750f1c68fb99acb.js  53.6 kB
+  └ other shared chunks (total)          1.98 kB
+
+
+ƒ Middleware                             26.8 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

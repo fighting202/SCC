@@ -1,0 +1,516 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: C:\Users\skyis\Downloads\korea-care-concierge\public\sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/15) ...
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /api/notion/pages couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at b (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:5528)
+    at s (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6608)
+    at o (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6843)
+    at d (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:853)
+    at j (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:4006)
+    at C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37016
+    at C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\server\lib\trace\tracer.js:140:36
+    at NoopContextManager.with (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:7062) {
+  description: "Route /api/notion/pages couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+페이지 조회 실패: Error: Notion API 키가 설정되지 않았습니다. /setup 페이지에서 API 키를 설정해주세요.
+    at s (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6623)
+    at async o (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6837)
+    at async d (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:839)
+    at async j (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:4000)
+    at async C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37010
+    at async eC.execute (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:27552)
+    at async eC.handle (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:38344)
+    at async exportAppRoute (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\export\routes\app-route.js:77:26)
+    at async exportPageImpl (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\export\worker.js:175:20)
+    at async Span.traceAsyncFn (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\trace\trace.js:154:20)
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /api/notion/client couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at y (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2523)
+    at u (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:832)
+    at C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37016
+    at C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\server\lib\trace\tracer.js:140:36
+    at NoopContextManager.with (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:7062)
+    at ContextAPI.with (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:518)
+    at NoopTracer.startActiveSpan (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:18093)
+    at ProxyTracer.startActiveSpan (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:18854) {
+  description: "Route /api/notion/client couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /api/notion/databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at b (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8395)
+    at s (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6608)
+    at c (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6743)
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:854)
+    at g (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:3375)
+    at C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37016
+    at C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\server\lib\trace\tracer.js:140:36
+    at NoopContextManager.with (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\@opentelemetry\api\index.js:1:7062) {
+  description: "Route /api/notion/databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+데이터베이스 조회 실패: Error: Notion API 키가 설정되지 않았습니다. /setup 페이지에서 API 키를 설정해주세요.
+    at s (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6623)
+    at async c (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:6737)
+    at async l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:840)
+    at async g (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\databases\route.js:1:3369)
+    at async C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:37010
+    at async eC.execute (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:27552)
+    at async eC.handle (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-route.runtime.prod.js:6:38344)
+    at async exportAppRoute (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\export\routes\app-route.js:77:26)
+    at async exportPageImpl (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\export\worker.js:175:20)
+    at async Span.traceAsyncFn (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\trace\trace.js:154:20)
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:150268)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '1055891741'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+   Generating static pages (3/15) 
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:150268)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '1055891741'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:150268)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '1055891741'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:150268)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '1055891741'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:150268)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '1055891741'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at g (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6247)
+    at y (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6422)
+    at h (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6494)
+    at b (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6678)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:7312)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542)
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:138016) {
+  description: "Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:150268)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '1055891741'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at g (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6247)
+    at y (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6422)
+    at h (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6494)
+    at b (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\pages\route.js:1:6678)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:7312)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542)
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:138016) {
+  description: "Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at y (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2523)
+    at x (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2698)
+    at i (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:2168)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:2202)
+    at o (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:3031)
+    at M (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:7482)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542) {
+  description: "Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at y (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2523)
+    at x (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2698)
+    at g (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2770)
+    at w (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2954)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:7312)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542)
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:138016) {
+  description: "Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:150268)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '1055891741'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at y (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2523)
+    at x (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2698)
+    at i (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:2168)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:2202)
+    at o (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:3031)
+    at M (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:7482)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542) {
+  description: "Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at y (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2523)
+    at x (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2698)
+    at g (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2770)
+    at w (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\api\notion\client\route.js:1:2954)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:7312)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542)
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:138016) {
+  description: "Route /databases couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Notion API 키가 설정되지 않았습니다. /setup 페이지에서 API 키를 설정해주세요.
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:2218)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async o (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:3025)
+    at async M (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:7476) {
+  digest: '1480610179'
+}
+Error: Event handlers cannot be passed to Client Component props.
+  {data-slot: "button", className: ..., disabled: ..., onClick: function onClick, children: ...}
+                                                                ^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:140437)
+    at Object.toJSON (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135626)
+    at stringify (<anonymous>)
+    at eP (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142090)
+    at eE (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:142569)
+    at Timeout._onTimeout (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:135346)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7) {
+  digest: '3326479123'
+}
+Error: Notion API 키가 설정되지 않았습니다. /setup 페이지에서 API 키를 설정해주세요.
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:2218)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:69:3)
+    at listOnTimeout (node:internal/timers:549:9)
+    at process.processTimers (node:internal/timers:523:7)
+    at async o (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:3025)
+    at async M (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\app\(workspace)\databases\page.js:1:7476) {
+  digest: '19250666'
+}
+   Generating static pages (7/15) 
+ ⚠ Sending SIGTERM signal to static worker due to timeout of 300 seconds. Subsequent errors may be a result of the worker exiting.
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⨯ Static worker exited with code: 3221225794 and signal: null
+ ⚠ Restarted static page generation for /settings because it took more than 300 seconds
+ ⚠ See more info here https://nextjs.org/docs/messages/static-page-generation-timeout
+ ⚠ Restarted static page generation for /setup because it took more than 300 seconds
+ ⚠ Restarted static page generation for /privacy-policy because it took more than 300 seconds
+ ⚠ Restarted static page generation for / because it took more than 300 seconds
+ ⚠ Restarted static page generation for /_not-found because it took more than 300 seconds
+ ⚠ Restarted static page generation for /wechat-qr because it took more than 300 seconds
+ ⚠ Restarted static page generation for /databases because it took more than 300 seconds
+
+> Build error occurred
+Error: Jest worker encountered 4 child process exceptions, exceeding retry limit
+    at ChildProcessWorker.initialize (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\jest-worker\index.js:1:11580)
+    at ChildProcessWorker._onExit (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\jest-worker\index.js:1:12545)
+    at ChildProcess.emit (node:events:519:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:293:12) {
+  type: 'WorkerError'
+}

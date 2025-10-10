@@ -1,6 +1,7 @@
 'use client'
 
 import { ReactNode, useState, useCallback } from 'react'
+import { cn } from '@/lib/scc-utils'
 import {
   DndContext,
   DragEndEvent,
@@ -195,14 +196,14 @@ export function DraggableBlockWrapper({
     <DraggableBlock
       block={block}
       index={index}
-      onEdit={onEdit}
-      onDelete={onDelete}
-      onDuplicate={onDuplicate}
-      onAddChild={onAddChild}
+      {...(onEdit && { onEdit })}
+      {...(onDelete && { onDelete })}
+      {...(onDuplicate && { onDuplicate })}
+      {...(onAddChild && { onAddChild })}
       showActions={showActions}
       isDragDisabled={isDragDisabled}
     >
-      {children}
+      {children as any}
     </DraggableBlock>
   )
 }

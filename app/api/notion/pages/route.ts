@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPages } from '@/app/actions/notion-pages'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const result = await getPages()
@@ -14,7 +16,6 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json(result.data)
   } catch (error) {
-    console.error('Error fetching pages:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

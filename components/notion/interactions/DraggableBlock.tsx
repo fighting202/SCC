@@ -205,7 +205,7 @@ export function DraggableBlock({
               block={childBlock}
               index={childIndex}
               isExpanded={isExpanded}
-              onToggleExpand={onToggleExpand}
+              onToggleExpand={onToggleExpand || (() => {})}
               onEdit={onEdit}
               onDelete={onDelete}
               onDuplicate={onDuplicate}
@@ -268,8 +268,8 @@ export function DraggableBlockList({
 
     // 부모-자식 관계 구성
     blocks.forEach(block => {
-      if (block.parent?.page_id) {
-        const parentId = block.parent.page_id
+      if ((block as any).parent?.page_id) {
+        const parentId = (block as any).parent.page_id
         if (!childrenMap.has(parentId)) {
           childrenMap.set(parentId, [])
         }
@@ -314,10 +314,11 @@ export function DraggableBlockList({
           onDelete={onDelete}
           onDuplicate={onDuplicate}
           onAddChild={onAddChild}
-          children={children}
           showActions={showActions}
           isDragDisabled={isDragDisabled}
-        />
+        >
+          {children}
+        </DraggableBlock>
       ))}
     </div>
   )

@@ -124,14 +124,14 @@ export function OptimizedInquiryForm({
                 />
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <ContactButton 
-                  method="whatsapp" 
-                  variant="default"
+                <ContactButton
+                  type="whatsapp"
+                  size="md"
                   className="flex-1 sm:flex-none"
                 />
-                <ContactButton 
-                  method="wechat" 
-                  variant="default"
+                <ContactButton
+                  type="wechat"
+                  size="md"
                   className="flex-1 sm:flex-none"
                 />
               </div>
@@ -171,8 +171,8 @@ export function OptimizedInquiryForm({
               />
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <ContactButton method="whatsapp" variant="outline" />
-              <ContactButton method="wechat" variant="outline" />
+              <ContactButton type="whatsapp" size="md" />
+              <ContactButton type="wechat" size="md" />
             </div>
             <div className="relative">
               <div className="absolute inset-0 flex items-center">

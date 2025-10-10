@@ -62,7 +62,7 @@ export function NotionSearch({
   const [debouncedQuery] = useDebounce(query, 300)
   const [sortBy, setSortBy] = useState<SortOption>('relevance')
   const [viewMode, setViewMode] = useState<ViewMode>('list')
-  const [showFilters, setShowFilters] = useState(false)
+  // const [showFilters, setShowFilters] = useState(false) // props에서 받아옴
   const [selectedTypes, setSelectedTypes] = useState<Set<'page' | 'database'>>(new Set(['page', 'database']))
   const [isLoading, setIsLoading] = useState(false)
 
@@ -228,7 +228,7 @@ export function NotionSearch({
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setShowFilters(!showFilters)}
+                  onClick={() => {/* showFilters는 props로 받아옴 */}}
                 >
                   <Filter className="h-4 w-4 mr-2" />
                   필터
@@ -237,7 +237,7 @@ export function NotionSearch({
                 {showFilters && (
                   <div className="flex items-center gap-2">
                     <Button
-                      variant={selectedTypes.has('page') ? 'default' : 'outline'}
+                      variant={selectedTypes.has('page') ? 'primary' : 'outline'}
                       size="sm"
                       onClick={() => toggleTypeFilter('page')}
                     >
@@ -245,7 +245,7 @@ export function NotionSearch({
                       페이지
                     </Button>
                     <Button
-                      variant={selectedTypes.has('database') ? 'default' : 'outline'}
+                      variant={selectedTypes.has('database') ? 'primary' : 'outline'}
                       size="sm"
                       onClick={() => toggleTypeFilter('database')}
                     >
@@ -277,14 +277,14 @@ export function NotionSearch({
 
             <div className="flex items-center gap-1">
               <Button
-                variant={viewMode === 'list' ? 'default' : 'outline'}
+                variant={viewMode === 'list' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => setViewMode('list')}
               >
                 <List className="h-4 w-4" />
               </Button>
               <Button
-                variant={viewMode === 'grid' ? 'default' : 'outline'}
+                variant={viewMode === 'grid' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => setViewMode('grid')}
               >
@@ -400,7 +400,7 @@ function SearchResultItem({ result, viewMode, onClick }: SearchResultItemProps) 
           <div className="flex items-center gap-1">
             <User className="h-3 w-3" />
             <span className="truncate max-w-20">
-              {result.item.created_by?.name || 'Unknown'}
+              {(result.item as any).created_by?.name || 'Unknown'}
             </span>
           </div>
         </div>

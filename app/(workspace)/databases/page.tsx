@@ -4,6 +4,8 @@ import { Badge } from '@/components/ui/badge'
 import { Database, Calendar, User, FileText } from 'lucide-react'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export default async function DatabasesPage() {
   const notionService = await createNotionService()
   

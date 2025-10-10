@@ -1,0 +1,32 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: C:\Users\skyis\Downloads\korea-care-concierge\public\sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+ ⨯ ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+Failed to compile.
+
+./components/notion/interactions/DndProvider.tsx:196:6
+Type error: Type '{ children: any; block: NotionBlock; index: number; onEdit: ((block: NotionBlock) => void) | undefined; onDelete: ((blockId: string) => void) | undefined; onDuplicate: ((block: NotionBlock) => void) | undefined; onAddChild: ((parentId: string) => void) | undefined; showActions: boolean; isDragDisabled: boolean; }' is not assignable to type 'DraggableBlockProps' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+  Types of property 'onEdit' are incompatible.
+    Type '((block: NotionBlock) => void) | undefined' is not assignable to type '(block: NotionBlock) => void'.
+      Type 'undefined' is not assignable to type '(block: NotionBlock) => void'.
+
+[0m [90m 194 |[39m }[33m:[39m [33mDraggableBlockWrapperProps[39m) {[0m
+[0m [90m 195 |[39m   [36mreturn[39m ([0m
+[0m[31m[1m>[22m[39m[90m 196 |[39m     [33m<[39m[33mDraggableBlock[39m[0m
+[0m [90m     |[39m      [31m[1m^[22m[39m[0m
+[0m [90m 197 |[39m       block[33m=[39m{block}[0m
+[0m [90m 198 |[39m       index[33m=[39m{index}[0m
+[0m [90m 199 |[39m       onEdit[33m=[39m{onEdit}[0m

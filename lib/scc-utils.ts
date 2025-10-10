@@ -465,7 +465,7 @@ export const throttle = <T extends (...args: any[]) => any>(
 }
 
 // 기본 내보내기
-export default {
+const sccUtils = {
   cn,
   languageUtils,
   formUtils,
@@ -478,3 +478,5 @@ export default {
   debounce,
   throttle
 }
+
+export default sccUtils

@@ -13,9 +13,10 @@ export function BilingualText({
   const { language } = useSCCStore()
   
   const text = language === 'zh' ? (zh || en) : (en || zh)
+  const isChinese = language === 'zh' && zh
   
   return (
-    <Component className={cn(className)}>
+    <Component className={cn(isChinese ? 'font-chinese' : '', className)}>
       {text || ''}
     </Component>
   )

@@ -2,7 +2,7 @@
 
 import type { ServiceCardProps } from "@/lib/scc-types"
 import { cn } from "@/lib/scc-utils"
-import BilingualText from "./bilingualtext"
+import { BilingualText } from "./bilingualtext"
 import { HoverScale, FadeIn } from "./animations"
 import { LucideIcon } from "lucide-react"
 
@@ -11,7 +11,7 @@ export default function ServiceCard({
   className,
   onClick 
 }: ServiceCardProps) {
-  const Icon = service.icon as LucideIcon
+  const Icon = service.icon as unknown as LucideIcon
 
   return (
     <FadeIn>
@@ -31,7 +31,7 @@ export default function ServiceCard({
           </div>
 
           {/* 제목 */}
-          <h3 className="text-xl font-serif font-semibold mb-3 group-hover:text-primary transition-colors">
+          <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
             <BilingualText {...service.title} />
           </h3>
 

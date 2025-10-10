@@ -177,7 +177,7 @@ export async function toggleDatabaseArchive(databaseId: string, archived: boolea
     const updated = await client.databases.update({
       database_id: databaseId,
       archived
-    })
+    } as any)
     
     // 캐시 무효화
     revalidatePath('/databases')

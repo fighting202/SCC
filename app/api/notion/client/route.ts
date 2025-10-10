@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getNotionApiKey } from '@/app/actions/auth'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const apiKey = await getNotionApiKey()
@@ -14,7 +16,6 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({ apiKey })
   } catch (error) {
-    console.error('Error getting Notion API key:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

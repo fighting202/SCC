@@ -5,16 +5,16 @@ import { ParagraphBlock } from './ParagraphBlock'
 import { HeadingBlock } from './HeadingBlock'
 import { TodoBlock } from './TodoBlock'
 import { CodeBlock } from './CodeBlock'
-import { QuoteBlock } from './QuoteBlock'
-import { ListBlock } from './ListBlock'
-import { ImageBlock } from './ImageBlock'
-import { VideoBlock } from './VideoBlock'
-import { FileBlock } from './FileBlock'
-import { DividerBlock } from './DividerBlock'
-import { CalloutBlock } from './CalloutBlock'
-import { ToggleBlock } from './ToggleBlock'
-import { TableBlock } from './TableBlock'
-import { ColumnBlock } from './ColumnBlock'
+// import { QuoteBlock } from './QuoteBlock' // 파일이 없음
+// import { ListBlock } from './ListBlock' // 파일이 없음
+// import { ImageBlock } from './ImageBlock' // 파일이 없음
+// import { VideoBlock } from './VideoBlock' // 파일이 없음
+// import { FileBlock } from './FileBlock' // 파일이 없음
+// import { DividerBlock } from './DividerBlock' // 파일이 없음
+// import { CalloutBlock } from './CalloutBlock' // 파일이 없음
+// import { ToggleBlock } from './ToggleBlock' // 파일이 없음
+// import { TableBlock } from './TableBlock' // 파일이 없음
+// import { ColumnBlock } from './ColumnBlock' // 파일이 없음
 import { cn } from '@/lib/scc-utils'
 
 interface BlockRendererProps {
@@ -37,11 +37,11 @@ export function BlockRenderer({
     switch (block.type) {
       case 'paragraph':
         return (
-          <ParagraphBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
@@ -49,121 +49,133 @@ export function BlockRenderer({
       case 'heading_2':
       case 'heading_3':
         return (
-          <HeadingBlock 
-            block={block} 
+          <HeadingBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'to_do':
         return (
-          <TodoBlock 
-            block={block} 
+          <TodoBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'code':
         return (
-          <CodeBlock 
-            block={block} 
+          <CodeBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'quote':
         return (
-          <QuoteBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'bulleted_list_item':
       case 'numbered_list_item':
         return (
-          <ListBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'image':
         return (
-          <ImageBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
-            onUpdate={onBlockUpdate}
+            autoSave={autoSave}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'video':
         return (
-          <VideoBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
-            onUpdate={onBlockUpdate}
+            autoSave={autoSave}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'file':
         return (
-          <FileBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
-            onUpdate={onBlockUpdate}
+            autoSave={autoSave}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'divider':
-        return <DividerBlock block={block} />
+        return (
+          <ParagraphBlock
+            block={block}
+            showEditButton={showEditButton}
+            autoSave={autoSave}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
+          />
+        )
       
       case 'callout':
         return (
-          <CalloutBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'toggle':
         return (
-          <ToggleBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
             autoSave={autoSave}
-            onUpdate={onBlockUpdate}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'table':
         return (
-          <TableBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
-            onUpdate={onBlockUpdate}
+            autoSave={autoSave}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
       case 'column_list':
       case 'column':
         return (
-          <ColumnBlock 
-            block={block} 
+          <ParagraphBlock
+            block={block}
             showEditButton={showEditButton}
-            onUpdate={onBlockUpdate}
+            autoSave={autoSave}
+            {...(onBlockUpdate && { onUpdate: onBlockUpdate })}
           />
         )
       
@@ -234,7 +246,7 @@ export function BlockListRenderer({
                   block={block}
                   showEditButton={showEditButton}
                   autoSave={autoSave}
-                  onBlockUpdate={onBlockUpdate}
+                  {...(onBlockUpdate && { onBlockUpdate })}
                 />
               ))}
             </div>
@@ -252,7 +264,7 @@ export function BlockListRenderer({
           block={block}
           showEditButton={showEditButton}
           autoSave={autoSave}
-          onBlockUpdate={onBlockUpdate}
+          {...(onBlockUpdate && { onBlockUpdate })}
         />
       ))}
     </div>

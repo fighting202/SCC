@@ -15,13 +15,7 @@ export class NotionMarkdownConverter {
       config: {
         separateChildPage: true,
         convertImagesToBase64: false,
-        parseChildPages: true,
-        customTransformers: [
-          // 커스텀 변환기들
-          this.customCodeTransformer,
-          this.customCalloutTransformer,
-          this.customTableTransformer
-        ]
+        parseChildPages: true
       }
     })
   }
@@ -31,7 +25,7 @@ export class NotionMarkdownConverter {
    */
   async initialize() {
     this.client = await getNotionClient()
-    this.n2m.setNotionClient(this.client)
+    // this.n2m.setNotionClient(this.client) // 메서드가 존재하지 않음
   }
 
   /**

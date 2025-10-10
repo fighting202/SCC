@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2, Send, CheckCircle2 } from 'lucide-react'
 import { useState } from 'react'
-import BilingualText from '../bilingualtext'
+import { BilingualText } from '../bilingualtext'
 
 const serviceOptions = [
   { value: 'medical', en: 'Medical Services', zh: '医疗服务' },

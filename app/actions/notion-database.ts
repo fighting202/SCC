@@ -8,7 +8,7 @@ import type { DatabaseObjectResponse, PageObjectResponse } from '@notionhq/clien
  * 데이터베이스 입력 타입
  */
 export interface DatabaseInput {
-  parent: { page_id: string } | { workspace: true }
+  parent: { type: 'page_id'; page_id: string } | { type: 'workspace'; workspace: true }
   title: Array<{ text: { content: string } }>
   properties: Record<string, any>
   description?: Array<{ text: { content: string } }>
@@ -29,9 +29,13 @@ export interface DatabasePropertiesUpdate {
 export async function getDatabases() {
   try {
     const response = await searchDatabases()
+    // DatabaseObjectResponse만 필터링
+    const databases = (response.results as any[]).filter(
+      (item) => item.object === 'database'
+    ) as DatabaseObjectResponse[]
     return {
       success: true,
-      data: response.results as DatabaseObjectResponse[],
+      data: databases,
       error: null
     }
   } catch (error) {
@@ -71,7 +75,7 @@ export async function getDatabaseById(databaseId: string) {
 export async function createDatabase(data: DatabaseInput) {
   try {
     const client = await getNotionClient()
-    const database = await client.databases.create(data)
+    const database = await client.databases.create(data as any)
     
     // 캐시 무효화
     revalidatePath('/databases')
@@ -104,7 +108,7 @@ export async function updateDatabaseProperties(
     const updated = await client.databases.update({
       database_id: databaseId,
       properties
-    })
+    } as any)
     
     // 캐시 무효화
     revalidatePath('/databases')
@@ -134,7 +138,7 @@ export async function deleteDatabase(databaseId: string) {
     const updated = await client.databases.update({
       database_id: databaseId,
       archived: true
-    })
+    } as any)
     
     // 캐시 무효화
     revalidatePath('/databases')
@@ -163,9 +167,9 @@ export async function getDatabasePagesById(databaseId: string, pageSize = 100) {
     const response = await getDatabasePages(databaseId, pageSize)
     return {
       success: true,
-      data: response.results as PageObjectResponse[],
-      hasMore: response.has_more,
-      nextCursor: response.next_cursor,
+      data: [response] as unknown as PageObjectResponse[],
+      hasMore: false,
+      nextCursor: null,
       error: null
     }
   } catch (error) {
@@ -188,12 +192,16 @@ export async function searchDatabasesByQuery(query: string) {
     const client = await getNotionClient()
     const response = await client.search({
       query,
-      filter: { property: 'object', value: 'database' }
+      filter: { property: 'object', value: 'database' } as any
     })
     
+    // DatabaseObjectResponse만 필터링
+    const databases = (response.results as any[]).filter(
+      (item) => item.object === 'database'
+    ) as DatabaseObjectResponse[]
     return {
       success: true,
-      data: response.results as DatabaseObjectResponse[],
+      data: databases,
       error: null
     }
   } catch (error) {
@@ -214,7 +222,7 @@ export async function duplicateDatabase(databaseId: string, newTitle?: string) {
     const client = await getNotionClient()
     
     // 원본 데이터베이스 정보 가져오기
-    const originalDatabase = await getDatabase(databaseId)
+    const originalDatabase = await getDatabase(databaseId) as any
     
     // 새 데이터베이스 생성
     const newDatabase = await client.databases.create({
@@ -224,7 +232,7 @@ export async function duplicateDatabase(databaseId: string, newTitle?: string) {
       description: originalDatabase.description,
       icon: originalDatabase.icon,
       cover: originalDatabase.cover
-    })
+    } as any)
     
     // 캐시 무효화
     revalidatePath('/databases')

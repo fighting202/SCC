@@ -2,7 +2,7 @@
 
 import type { PackageCardProps } from "@/lib/scc-types"
 import { cn, languageUtils } from "@/lib/scc-utils"
-import BilingualText from "./bilingualtext"
+import { BilingualText } from "./bilingualtext"
 import { Check, Star } from "lucide-react"
 
 export default function PackageCard({ 
@@ -35,7 +35,7 @@ export default function PackageCard({
 
       {/* 패키지 이름 */}
       <h3 className={cn(
-        "text-2xl font-serif font-bold mb-2",
+        "text-2xl font-bold mb-2",
         isPremium ? "text-accent" : "text-primary"
       )}>
         <BilingualText {...packageInfo.name} />

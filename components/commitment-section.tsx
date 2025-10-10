@@ -1,59 +1,122 @@
 "use client"
 
-import { Shield, DollarSign, Clock, Star } from "lucide-react"
+import { Shield, DollarSign, Clock, Star, FileText } from "lucide-react"
 import { useSCCStore } from "@/lib/store/sccStore"
+import { useEffect, useRef, useState } from "react"
 
 export function CommitmentSection() {
   const { language } = useSCCStore()
+  const [visibleElements, setVisibleElements] = useState<Set<number>>(new Set())
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-card-index') || '0')
+            setVisibleElements(prev => new Set([...prev, index]))
+            // Add visible class for immediate animation
+            entry.target.classList.add('animate-visible')
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    // Observe all card elements
+    cardRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref)
+    })
+
+    // Also observe the main section for initial animations
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+  // Updated: 2025-01-09
 
   const commitments = [
     {
       icon: Shield,
-      title: language === 'zh' ? '仅与认证合作伙伴合作' : 'Verified Partners Only',
-      description: language === 'zh' 
-        ? '我们只与获得国际认证的医疗机构和知名美容中心合作。'
-        : 'We only work with licensed, internationally accredited medical facilities and established beauty centers.'
+      title: language === 'zh' ? '您的安全第一' : 'Your Safety First',
+      description: language === 'zh'
+        ? '严格筛选医疗机构\n确保最高安全标准'
+        : 'Rigorous facility screening\nensuring highest safety standards'
     },
     {
       icon: DollarSign,
+      title: language === 'zh' ? '仅与认证合作伙伴\n合作' : 'Verified Partners Only',
+      description: language === 'zh'
+        ? '我们只与国际认证的\n医疗和美容机构合作'
+        : 'We only work with licensed, internationally accredited medical facilities and established beauty centers.'
+    },
+    {
+      icon: FileText,
       title: language === 'zh' ? '无隐藏费用' : 'No Hidden Costs',
       description: language === 'zh'
-        ? '所有费用都提前说明。在确认任何服务之前，您将收到详细的报价。'
+        ? '所有费用都提前说明\n确认前提供详细报价'
         : 'Every expense is explained upfront. You\'ll receive a detailed quote before confirming any services.'
     },
     {
       icon: Clock,
       title: language === 'zh' ? '24/7紧急热线' : '24/7 Emergency Line',
       description: language === 'zh'
-        ? '您的专属护理经理通过WhatsApp全天候为您服务，无论白天还是夜晚。'
+        ? '专属护理经理全天候待命\n随时通过WhatsApp为您服务'
         : 'Your dedicated care manager is available via WhatsApp any time, day or night, throughout your stay.'
     }
   ]
 
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-scc-primary/5 to-scc-accent/5">
+    <section ref={sectionRef} className="py-20 lg:py-32 bg-gradient-to-br from-scc-primary/5 to-scc-accent/5 dark:from-scc-dark-bg dark:to-scc-dark-bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-serif font-bold text-gray-900 mb-4">
+          <h2 className={`text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-scc-dark-text mb-4 ${language === 'zh' ? 'font-chinese' : 'font-sans'}`} style={{ fontWeight: 700 }}>
             {language === 'zh' ? '我们对您的承诺' : 'Our Commitment to You'}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className={`text-lg text-gray-600 dark:text-scc-dark-text-secondary max-w-2xl mx-auto ${language === 'zh' ? 'font-chinese' : 'font-sans'}`}>
             {language === 'zh' ? '通过透明度和关怀建立信任' : 'Building trust through transparency and care'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
           {commitments.map((commitment, index) => (
-            <div key={index} className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="w-16 h-16 rounded-full bg-scc-primary/10 flex items-center justify-center mb-6">
-                <commitment.icon className="w-8 h-8 text-scc-primary" />
+            <div 
+              key={index} 
+              ref={(el) => { cardRefs.current[index] = el }}
+              data-card-index={index}
+              className={`bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 min-h-[320px] flex flex-col cursor-pointer animate-on-scroll hover-lift hover-glow hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] hover:shadow-[0_0_40px_rgba(44,95,124,0.3)] ${
+                visibleElements.has(index) ? 'animate-visible' : ''
+              }`}
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              {/* 아이콘 영역 */}
+              <div className="flex-shrink-0 flex justify-center mb-6">
+                <div className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[#2C5F7C] flex items-center justify-center">
+                  <commitment.icon className="w-8 h-8 md:w-9 md:h-9 text-white" />
+                </div>
               </div>
-              <h3 className="text-xl font-serif font-semibold mb-4 text-gray-900">
-                {commitment.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {commitment.description}
-              </p>
+              
+              {/* 카드 내용 */}
+              <div className="flex flex-col flex-1 text-center">
+                <h3 className={`text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-scc-dark-text mb-4 ${language === 'zh' ? 'font-chinese' : 'font-sans'}`}>
+                  {commitment.title}
+                </h3>
+                <p className={`text-gray-600 dark:text-scc-dark-text-secondary leading-relaxed flex-1 text-sm md:text-base ${language === 'zh' ? 'font-chinese' : 'font-sans'}`} style={{
+                  wordBreak: language === 'zh' ? 'keep-all' : 'normal',
+                  overflowWrap: language === 'zh' ? 'break-word' : 'normal',
+                  whiteSpace: language === 'zh' ? 'normal' : 'normal'
+                }}>
+                  {commitment.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
@@ -62,12 +125,19 @@ export function CommitmentSection() {
         <div className="text-center">
           <button 
             onClick={() => {
-              const contactSection = document.getElementById('contact')
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: 'smooth' })
+              const getStartedSection = document.getElementById('get-started')
+              if (getStartedSection) {
+                const headerHeight = 160 // 헤더(112px) + 여백(48px) = 160px
+                const elementRect = getStartedSection.getBoundingClientRect()
+                const elementPosition = elementRect.top + window.pageYOffset - headerHeight
+                
+                window.scrollTo({
+                  top: elementPosition,
+                  behavior: "smooth"
+                })
               }
             }}
-            className="inline-flex items-center justify-center px-8 py-4 bg-scc-primary hover:bg-scc-primary/90 text-white font-semibold rounded-lg transition-colors shadow-lg hover:shadow-xl"
+            className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold bg-scc-primary hover:bg-scc-primary/90 active:bg-scc-primary/80 text-white hover:text-scc-gold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl active:shadow-lg hover:scale-105 active:scale-95"
           >
             {language === 'zh' ? '开始使用' : 'Get Started'}
           </button>

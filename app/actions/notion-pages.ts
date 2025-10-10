@@ -70,7 +70,7 @@ export async function getPageById(pageId: string) {
 export async function createPage(data: PageInput) {
   try {
     const client = await getNotionClient()
-    const page = await client.pages.create(data)
+    const page = await client.pages.create(data as any)
     
     // 캐시 무효화
     revalidatePath('/pages')
@@ -213,7 +213,7 @@ export async function duplicatePage(pageId: string, newTitle?: string) {
     const client = await getNotionClient()
     
     // 원본 페이지 정보 가져오기
-    const originalPage = await getPage(pageId)
+    const originalPage = await getPage(pageId) as any
     const originalBlocks = await getPageBlocks(pageId)
     
     // 새 페이지 생성
@@ -228,7 +228,7 @@ export async function duplicatePage(pageId: string, newTitle?: string) {
       children: originalBlocks.results as BlockObjectResponse[],
       icon: originalPage.icon,
       cover: originalPage.cover
-    })
+    } as any)
     
     // 캐시 무효화
     revalidatePath('/pages')
@@ -256,14 +256,14 @@ export async function movePageToDatabase(pageId: string, databaseId: string) {
     const client = await getNotionClient()
     
     // 페이지의 현재 속성 가져오기
-    const page = await getPage(pageId)
+    const page = await getPage(pageId) as any
     
     // 새 데이터베이스로 이동
     const updated = await client.pages.update({
       page_id: pageId,
       parent: { database_id: databaseId },
       properties: page.properties
-    })
+    } as any)
     
     // 캐시 무효화
     revalidatePath('/pages')

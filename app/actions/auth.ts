@@ -30,7 +30,7 @@ export async function saveNotionApiKey(apiKey: string) {
     const notion = new Client({ auth: apiKey })
     
     // 간단한 API 호출로 연결 테스트
-    await notion.users.me()
+    await notion.users.me({})
     
     // 2. JWT 토큰 생성
     const token = await new SignJWT({ apiKey })
@@ -90,7 +90,7 @@ export async function validateNotionApiKey(): Promise<boolean> {
     const client = await getNotionClient()
     if (!client) return false
     
-    await client.users.me()
+    await client.users.me({})
     return true
   } catch (error) {
     console.error('API 키 유효성 검사 실패:', error)

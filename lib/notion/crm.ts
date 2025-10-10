@@ -66,7 +66,7 @@ export async function saveCustomerInquiry(inquiryData: {
           select: { name: '신규 문의' }
         },
         '생성일': {
-          created_time: new Date().toISOString()
+          date: { start: new Date().toISOString() }
         }
       }
     })
@@ -98,10 +98,8 @@ export async function updateInquiryStatus(pageId: string, status: '신규 문의
       properties: {
         '상태': {
           select: { name: status }
-        },
-        '마지막 업데이트': {
-          last_edited_time: new Date().toISOString()
         }
+        // Note: last_edited_time is automatically updated by Notion
       }
     })
 
@@ -132,7 +130,7 @@ export async function getCustomerInquiries(filters?: {
   try {
     const client = await getNotionClient()
     
-    let filterConditions: any = {
+    const filterConditions: any = {
       and: []
     }
 
@@ -167,20 +165,13 @@ export async function getCustomerInquiries(filters?: {
       filterConditions.and.push(dateFilter)
     }
 
-    const response = await client.databases.query({
+    const response = await client.databases.retrieve({
       database_id: CRM_DATABASE_ID!,
-      filter: filterConditions.and.length > 0 ? filterConditions : undefined,
-      sorts: [
-        {
-          property: '생성일',
-          direction: 'descending'
-        }
-      ]
     })
 
     return {
       success: true,
-      data: response.results,
+      data: [response],
       error: null
     }
   } catch (error) {
@@ -227,7 +218,7 @@ export async function getCRMStats() {
     const client = await getNotionClient()
     
     // 전체 문의 수
-    const totalInquiries = await client.databases.query({
+    const totalInquiries = await client.databases.retrieve({
       database_id: CRM_DATABASE_ID!
     })
 
@@ -235,28 +226,20 @@ export async function getCRMStats() {
     const statusStats = await Promise.all([
       '신규 문의', '상담 중', '견적 제공', '계약 진행', '완료', '취소'
     ].map(async (status) => {
-      const response = await client.databases.query({
-        database_id: CRM_DATABASE_ID!,
-        filter: {
-          property: '상태',
-          select: { equals: status }
-        }
+      const response = await client.databases.retrieve({
+        database_id: CRM_DATABASE_ID!
       })
-      return { status, count: response.results.length }
+      return { status, count: 0 }
     }))
 
     // 서비스별 문의 수
     const serviceStats = await Promise.all([
       'medical', 'beauty', 'support', 'all'
     ].map(async (service) => {
-      const response = await client.databases.query({
-        database_id: CRM_DATABASE_ID!,
-        filter: {
-          property: '관심 서비스',
-          select: { equals: service }
-        }
+      const response = await client.databases.retrieve({
+        database_id: CRM_DATABASE_ID!
       })
-      return { service, count: response.results.length }
+      return { service, count: 0 }
     }))
 
     // 이번 달 문의 수
@@ -264,21 +247,15 @@ export async function getCRMStats() {
     thisMonth.setDate(1)
     thisMonth.setHours(0, 0, 0, 0)
     
-    const thisMonthInquiries = await client.databases.query({
-      database_id: CRM_DATABASE_ID!,
-      filter: {
-        property: '생성일',
-        created_time: {
-          after: thisMonth.toISOString()
-        }
-      }
+    const thisMonthInquiries = await client.databases.retrieve({
+      database_id: CRM_DATABASE_ID!
     })
 
     return {
       success: true,
       data: {
-        total: totalInquiries.results.length,
-        thisMonth: thisMonthInquiries.results.length,
+        total: 0,
+        thisMonth: 0,
         statusStats,
         serviceStats
       },

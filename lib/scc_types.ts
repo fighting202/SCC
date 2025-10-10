@@ -260,7 +260,7 @@ export interface ServerActionResponse<T = any> {
 
 // 데이터베이스 입력 타입
 export interface DatabaseInput {
-  parent: { page_id: string } | { workspace: true };
+  parent: { type: 'page_id'; page_id: string } | { type: 'workspace'; workspace: true };
   title: Array<{ text: { content: string } }>;
   properties: Record<string, any>;
   description?: Array<{ text: { content: string } }>;
@@ -272,7 +272,7 @@ export interface DatabaseInput {
 export interface PageInput {
   parent: { database_id: string } | { page_id: string };
   properties: Record<string, any>;
-  children?: NotionBlock[];
+  children?: any[];
   icon?: { emoji: string } | { external: { url: string } };
   cover?: { external: { url: string } };
 }

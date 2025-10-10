@@ -84,18 +84,18 @@ export function AppHeader() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuItem asChild>
-                  <Link href="/settings" className="flex items-center">
+                  <Link href="/settings">
                     <Settings className="mr-2 h-4 w-4" />
-                    설정
+                    <span>설정</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem 
                   onClick={handleLogout}
                   disabled={isLoggingOut}
-                  className="text-destructive focus:text-destructive"
+                  className="text-destructive focus:text-destructive flex items-center"
                 >
                   <LogOut className="mr-2 h-4 w-4" />
-                  {isLoggingOut ? '로그아웃 중...' : '로그아웃'}
+                  <span>{isLoggingOut ? '로그아웃 중...' : '로그아웃'}</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -145,10 +145,10 @@ export function AppHeader() {
                 variant="ghost" 
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="justify-start text-destructive hover:text-destructive"
+                className="justify-start text-destructive hover:text-destructive flex items-center"
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                {isLoggingOut ? '로그아웃 중...' : '로그아웃'}
+                <span>{isLoggingOut ? '로그아웃 중...' : '로그아웃'}</span>
               </Button>
             </nav>
           </div>

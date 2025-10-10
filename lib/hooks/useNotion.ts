@@ -38,7 +38,7 @@ export function useDatabases() {
     queryFn: async () => {
       const result = await getDatabases()
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },
@@ -52,7 +52,7 @@ export function useDatabase(databaseId: string) {
     queryFn: async () => {
       const result = await getDatabaseById(databaseId)
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },
@@ -67,7 +67,7 @@ export function useDatabasePages(databaseId: string, pageSize = 100) {
     queryFn: async () => {
       const result = await getDatabasePagesById(databaseId, pageSize)
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },
@@ -82,7 +82,7 @@ export function useSearchDatabases(query: string) {
     queryFn: async () => {
       const result = await searchDatabasesByQuery(query)
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },
@@ -146,7 +146,7 @@ export function usePages() {
     queryFn: async () => {
       const result = await getPages()
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },
@@ -160,7 +160,7 @@ export function usePage(pageId: string) {
     queryFn: async () => {
       const result = await getPageById(pageId)
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },
@@ -175,7 +175,7 @@ export function usePageBlocks(pageId: string) {
     queryFn: async () => {
       const result = await getPageBlocksById(pageId)
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },
@@ -190,7 +190,7 @@ export function useSearchPages(query: string) {
     queryFn: async () => {
       const result = await searchPagesByQuery(query)
       if (!result.success) {
-        throw new Error(result.error)
+        throw new Error(result.error || 'Unknown error')
       }
       return result.data
     },

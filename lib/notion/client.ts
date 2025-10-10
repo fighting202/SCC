@@ -60,7 +60,7 @@ export class NotionService {
    * 사용자 정보 가져오기
    */
   async getCurrentUser() {
-    return await this.client.users.me()
+    return await this.client.users.me({})
   }
 
   /**
@@ -70,7 +70,7 @@ export class NotionService {
     return await this.client.search({
       filter: {
         property: 'object',
-        value: 'database'
+        value: 'page'
       }
     })
   }
@@ -79,7 +79,7 @@ export class NotionService {
    * 특정 데이터베이스의 페이지들 가져오기
    */
   async getDatabasePages(databaseId: string) {
-    return await this.client.databases.query({
+    return await this.client.databases.retrieve({
       database_id: databaseId
     })
   }

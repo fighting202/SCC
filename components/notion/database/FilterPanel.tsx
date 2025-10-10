@@ -415,7 +415,7 @@ export function FilterPanel({
                     <Controller
                       name={`groups.${groupIndex}.conditions.${conditionIndex}.value`}
                       control={form.control}
-                      render={({ field }) => {
+                      render={({ field }): React.ReactElement => {
                         const selectedProperty = form.watch(`groups.${groupIndex}.conditions.${conditionIndex}.property`)
                         const propertyType = propertyOptions.find(p => p.value === selectedProperty)?.type || 'rich_text'
                         const condition = form.watch(`groups.${groupIndex}.conditions.${conditionIndex}.condition`)
@@ -424,7 +424,7 @@ export function FilterPanel({
                         const noValueConditions = ['is_empty', 'is_not_empty', 'past_week', 'past_month', 'past_year', 'next_week', 'next_month', 'next_year']
                         
                         if (noValueConditions.includes(condition)) {
-                          return null
+                          return <div />
                         }
 
                         if (propertyType === 'checkbox') {
@@ -455,7 +455,7 @@ export function FilterPanel({
                                   <PopoverTrigger asChild>
                                     <Button variant="outline" className="w-40 justify-start text-left font-normal">
                                       <CalendarIcon className="mr-2 h-4 w-4" />
-                                      {dateField.value ? format(new Date(dateField.value), 'PPP') : '날짜 선택'}
+                                      <span>{dateField.value ? format(new Date(dateField.value), 'PPP') : '날짜 선택'}</span>
                                     </Button>
                                   </PopoverTrigger>
                                   <PopoverContent className="w-auto p-0">

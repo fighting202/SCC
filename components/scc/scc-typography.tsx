@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { cn } from '@/lib/scc-utils'
-import BilingualText from './bilingualtext'
+import { BilingualText } from './bilingualtext'
 
 // SCC 타이포그래피 타입 정의
 export type SCCHeadingLevel = 'xl' | 'lg' | 'md' | 'sm'
@@ -84,7 +84,7 @@ export function SCCHeading({
   return (
     <Component
       className={cn(
-        'font-serif leading-tight',
+        'leading-tight',
         sizeClasses[level],
         weightClasses[weight],
         alignClasses[align],
@@ -126,8 +126,10 @@ export function SCCBody({
     justify: 'text-justify'
   }
 
+  const Component = as as keyof JSX.IntrinsicElements
+  
   return (
-    <as
+    <Component
       className={cn(
         'font-sans leading-chinese', // 중국어 가독성 확보
         sizeClasses[size],
@@ -137,7 +139,7 @@ export function SCCBody({
       )}
     >
       {children}
-    </as>
+    </Component>
   )
 }
 
@@ -178,7 +180,7 @@ export function SCCBilingualHeading({
   return (
     <Component
       className={cn(
-        'font-serif leading-tight',
+        'leading-tight',
         sizeClasses[level],
         weightClasses[weight],
         alignClasses[align],
@@ -221,8 +223,10 @@ export function SCCBilingualBody({
     justify: 'text-justify'
   }
 
+  const Component = as as keyof JSX.IntrinsicElements
+  
   return (
-    <as
+    <Component
       className={cn(
         'font-sans leading-chinese', // 중국어 가독성 확보
         sizeClasses[size],
@@ -232,7 +236,7 @@ export function SCCBilingualBody({
       )}
     >
       <BilingualText en={en} zh={zh} />
-    </as>
+    </Component>
   )
 }
 

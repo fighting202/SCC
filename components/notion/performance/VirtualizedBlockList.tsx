@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { FixedSizeList as List } from 'react-window'
+// import { FixedSizeList as List } from 'react-window' // 패키지가 설치되지 않음
 import { Virtuoso } from 'react-virtuoso'
 import { cn } from '@/lib/scc-utils'
 import { NotionBlock } from '@/lib/scc_types'
@@ -154,15 +154,17 @@ export function VirtualizedBlockList({
 
       {/* 가상화된 리스트 */}
       <div className="border rounded-lg overflow-hidden">
-        <List
-          height={height}
-          itemCount={filteredBlocks.length}
-          itemSize={itemHeight}
-          itemData={itemData}
-          overscanCount={5}
-        >
-          {VirtualBlockItem}
-        </List>
+        <Virtuoso
+          style={{ height: height }}
+          data={filteredBlocks}
+          itemContent={(index, block) => (
+            <VirtualBlockItem
+              index={index}
+              style={{ height: itemHeight }}
+              data={itemData}
+            />
+          )}
+        />
       </div>
     </div>
   )

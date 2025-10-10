@@ -337,7 +337,7 @@ export function PageProperty({
                 className="w-full justify-start text-left font-normal"
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {tempValue ? format(new Date(tempValue), 'PPP') : placeholder}
+                <span>{tempValue ? format(new Date(tempValue), 'PPP') : placeholder}</span>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">

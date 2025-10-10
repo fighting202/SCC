@@ -103,7 +103,7 @@ export default function StoreDemo() {
                 <Button
                   key={view}
                   onClick={() => handleViewChange(view)}
-                  variant={currentView === view ? 'default' : 'outline'}
+                  variant={currentView === view ? 'primary' : 'outline'}
                   size="sm"
                 >
                   {view}

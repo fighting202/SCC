@@ -1,3 +1,5 @@
+'use server'
+
 import { Client } from '@notionhq/client'
 import { getNotionApiKey } from '@/app/actions/auth'
 
@@ -47,7 +49,7 @@ export async function validateNotionApiKey(apiKey: string): Promise<boolean> {
 export async function searchDatabases() {
   const client = await getNotionClient()
   return await client.search({
-    filter: { property: 'object', value: 'database' }
+    filter: { property: 'object', value: 'page' }
   })
 }
 
@@ -74,9 +76,8 @@ export async function getDatabase(databaseId: string) {
  */
 export async function getDatabasePages(databaseId: string, pageSize = 100) {
   const client = await getNotionClient()
-  return await client.databases.query({
-    database_id: databaseId,
-    page_size: pageSize
+  return await client.databases.retrieve({
+    database_id: databaseId
   })
 }
 

@@ -1,0 +1,80 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for server...
+ ✓ (pwa) Compiling for client (static)...
+ ○ (pwa) Service worker: C:\Users\skyis\Downloads\korea-care-concierge\public\sw.js
+ ○ (pwa)   URL: /sw.js
+ ○ (pwa)   Scope: /
+ ✓ Compiled successfully
+   Skipping validation of types
+   Linting ...
+ ⨯ ESLint: Invalid Options: - Unknown options: useEslintrc, extensions - 'extensions' has been removed.
+   Collecting page data ...
+   Generating static pages (0/12) ...
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at b (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8396)
+    at x (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8571)
+    at h (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8643)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8827)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:7313)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542)
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:138016) {
+  description: "Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+API 키 복호화 실패: n [Error]: Dynamic server usage: Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at l (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\379.js:1:37140)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\118.js:2:1864)
+    at b (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8396)
+    at x (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8571)
+    at h (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8643)
+    at p (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:8827)
+    at n (C:\Users\skyis\Downloads\korea-care-concierge\.next\server\chunks\465.js:1:7313)
+    at eh (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:134657)
+    at e (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:137542)
+    at ek (C:\Users\skyis\Downloads\korea-care-concierge\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:12:138016) {
+  description: "Route /settings couldn't be rendered statically because it used `cookies`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+   Generating static pages (3/12) 
+   Generating static pages (6/12) 
+   Generating static pages (9/12) 
+ ✓ Generating static pages (12/12)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    27.4 kB         130 kB
+├ ○ /_not-found                          142 B          89.6 kB
+├ ƒ /api/notion/client                   0 B                0 B
+├ ƒ /api/notion/databases                0 B                0 B
+├ ƒ /api/notion/pages                    0 B                0 B
+├ ƒ /api/submit-inquiry                  0 B                0 B
+├ ƒ /databases                           175 B          96.4 kB
+├ ○ /privacy-policy                      6.61 kB         104 kB
+├ ○ /robots.txt                          0 B                0 B
+├ ƒ /settings                            1.83 kB         102 kB
+├ ○ /setup                               2.43 kB         103 kB
+├ ○ /sitemap.xml                         0 B                0 B
+└ ○ /wechat-qr                           3.96 kB         101 kB
++ First Load JS shared by all            89.4 kB
+  ├ chunks/997-e800efa738dccd47.js       33.8 kB
+  ├ chunks/fd9d1056-3750f1c68fb99acb.js  53.6 kB
+  └ other shared chunks (total)          1.98 kB
+
+
+ƒ Middleware                             41.9 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

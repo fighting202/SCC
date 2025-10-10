@@ -523,7 +523,7 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.email": "电子邮箱：seoulcareconcierge@gmail.com",
     "footer.whatsapp": "WhatsApp: +82-10-2981-6653",
     "footer.wechat": "微信ID：SeoulCareConcierge",
-    "footer.hours": "营业时间：周一至周五 9AM-6PM KST | 周六 10AM-4PM KST",
+    "footer.hours": "营业时间：周一至周五 09:00-18:00 (韩国时间) | 周六 10:00-16:00 (韩国时间)",
     "footer.emergency": "紧急支持：全天候WhatsApp和微信",
     "footer.social": "关注我们的社交媒体（即将推出）",
     "footer.copyright": "© 2025 Seoul Care Concierge. 保留所有权利。",

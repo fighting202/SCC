@@ -54,13 +54,13 @@ export const useSCCStore = create<SCCStore>()(
   persist(
     (set, get) => ({
       // 언어 설정
-      language: 'en',
-      setLanguage: (lang) => set({ language: lang }),
+  language: 'en',
+  setLanguage: (lang) => set({ language: lang }),
       
       // 문의 폼 상태
-      inquiryForm: {},
-      setInquiryForm: (data) => set((state) => ({ 
-        inquiryForm: { ...state.inquiryForm, ...data } 
+  inquiryForm: {},
+  setInquiryForm: (data) => set((state) => ({ 
+    inquiryForm: { ...state.inquiryForm, ...data } 
       })),
       resetInquiryForm: () => set({ inquiryForm: {} }),
       isFormSubmitted: false,

@@ -3,20 +3,9 @@
 import { useState, useEffect } from "react"
 import { CONTACT } from "@/lib/scc-constants"
 import { useSCCStore } from "@/lib/store/sccStore"
+import { Button } from "@/components/ui/button"
 
-// Tally global object type
-declare global {
-  interface Window {
-    Tally: {
-      openPopup: (id: string, options?: { 
-        layout?: string; 
-        width?: number; 
-        autoClose?: number; 
-        emoji?: { text: string; animation: string } 
-      }) => void;
-    };
-  }
-}
+// Tally global object type - moved to global types
 
 export default function ContactSection() {
   const { language } = useSCCStore()
@@ -39,13 +28,13 @@ export default function ContactSection() {
 
     // 모바일: 새 탭에서 열기 (더 나은 UX)
     if (window.innerWidth < 768) {
-      window.open('https://tally.so/r/nWxl8Q', '_blank')
+      window.open(`https://tally.so/r/${process.env.NEXT_PUBLIC_TALLY_FORM_ID}`, '_blank')
       return
     }
 
     // 데스크톱: 팝업 모달
     if (isTallyLoaded && (window as any).Tally) {
-      (window as any).Tally.openPopup('nWxl8Q', {
+      (window as any).Tally.openPopup(process.env.NEXT_PUBLIC_TALLY_FORM_ID, {
         layout: 'modal',
         width: 700,
         autoClose: 3000,
@@ -56,25 +45,46 @@ export default function ContactSection() {
       })
     } else {
       // Fallback: 새 탭
-      window.open('https://tally.so/r/nWxl8Q', '_blank')
+      window.open(`https://tally.so/r/${process.env.NEXT_PUBLIC_TALLY_FORM_ID}`, '_blank')
     }
   }
 
+  const [showWeChatQR, setShowWeChatQR] = useState(false)
+  const [copied, setCopied] = useState(false)
+
   const handleWeChatClick = () => {
-    alert(language === 'zh' ? `微信ID '${CONTACT.wechatId}' 已复制！` : `WeChat ID '${CONTACT.wechatId}' copied!`)
-    navigator.clipboard.writeText(CONTACT.wechatId)
+    // 모바일에서는 새 탭으로 열기, 데스크톱에서는 모달
+    if (window.innerWidth < 768) {
+      window.open('/wechat-qr', '_blank')
+    } else {
+      setShowWeChatQR(true)
+    }
+  }
+
+  const closeWeChatQR = () => {
+    setShowWeChatQR(false)
+  }
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Copy failed silently
+    }
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 text-center">
+    <section id="get-started" className="section-padding bg-gray-50 dark:bg-scc-dark-bg">
+      <div className="container-responsive text-center">
         {/* 섹션 제목 */}
-        <h2 className="text-4xl font-bold mb-4">
+        <h2 className={`text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-scc-dark-text mb-4 ${language === 'zh' ? 'font-chinese' : 'font-sans'}`} style={{ fontWeight: 700 }}>
           {language === 'en' ? 'Get Started Today' : '立即开始'}
-        </h2>
+          </h2>
         
         {/* 설명 */}
-        <p className="text-xl text-gray-600 mb-12">
+        <p className="body-text text-gray-600 dark:text-scc-dark-text-secondary mb-12">
           {language === 'en' 
             ? 'Complete our quick form and receive a personalized consultation within 24 hours' 
             : '填写快速表格，24小时内收到个性化咨询'
@@ -83,66 +93,196 @@ export default function ContactSection() {
         
         {/* 메인 CTA 버튼 */}
         <div className="mb-8">
-          <button
+          <Button
             onClick={handleTallyClick}
-            className="w-full sm:w-auto inline-flex flex-col items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-700 
-                       text-white px-8 sm:px-16 py-6 sm:py-8 rounded-2xl text-xl sm:text-2xl font-bold
-                       hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl
-                       hover:from-blue-700 hover:to-blue-800 min-h-[64px] min-w-[280px]"
+            variant="primary"
+            size="xl"
+            language={language}
+            className="w-full md:w-auto min-w-[280px] h-20 px-16 text-2xl
+              bg-[#2C5F7C] border-2 border-[#D4AF37]
+              hover:border-[#E5C158] hover:bg-[#2C5F7C] hover:text-scc-gold
+              hover:scale-105 transition-all duration-500
+              shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]
+              inline-flex items-center justify-center gap-3"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-2xl sm:text-3xl">📋</span>
-              <span>{language === 'en' ? 'Get Free Consultation' : '免费咨询'}</span>
-            </div>
-            <div className="text-base sm:text-lg font-normal opacity-90">
-              ⏱️ {language === 'en' ? 'Takes only 2 minutes' : '仅需2分钟'}
-            </div>
-          </button>
+            <span 
+              className="text-xl md:text-2xl"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.6))' }}
+            >
+              📋
+            </span>
+            <span className={language === 'zh' ? 'font-chinese' : ''}>
+              {language === 'en' ? 'Get Free Consultation' : '免费咨询'}
+            </span>
+          </Button>
+          <p className={`small-text mt-3 text-gray-600 dark:text-scc-dark-text-secondary ${language === 'zh' ? 'font-chinese' : ''}`}>
+            ⏱️ {language === 'en' ? 'Takes only 2 minutes' : '仅需2分钟'}
+          </p>
         </div>
-        
+
         {/* 대안 연락 방법 */}
         <div className="mt-16">
-          <p className="text-gray-600 mb-6 text-lg">
+          <p className={`text-gray-600 mb-6 body-text ${language === 'zh' ? 'font-chinese' : ''}`}>
             {language === 'en' ? 'Or contact us directly:' : '或直接联系我们：'}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-            {/* WhatsApp */}
-            <a
-              href={`https://wa.me/${CONTACT.phone.replace(/[^0-9]/g, '')}?text=Hi%20Seoul%20Care%20Concierge!%0A%0AName:%20%0AService:%20%0ATravel%20dates:%20`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white 
-                         px-6 py-4 rounded-lg font-semibold transition-all duration-200 
-                         shadow-md hover:shadow-lg hover:scale-105 min-h-[56px]"
-            >
-              <span className="text-xl">💬</span>
-              <span className="text-base">WhatsApp</span>
-            </a>
+          <div className="flex flex-col sm:flex-row card-gap justify-center max-w-2xl mx-auto">
+            {language === 'zh' ? (
+              <>
+                {/* WeChat - 중국 고객 우선 */}
+                <Button
+                  onClick={handleWeChatClick}
+                  variant="success"
+                  size="lg"
+                  language={language}
+                  className="w-full sm:w-auto bg-[#07C160] hover:bg-[#059B4A] text-white 
+                             shadow-lg hover:shadow-2xl hover:scale-105
+                             inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300
+                             h-12 min-h-[48px]"
+                >
+                  <span className="text-xl">🔲</span>
+                  <span className="text-base font-chinese">微信</span>
+              </Button>
 
-            {/* WeChat */}
-            <button
-              onClick={handleWeChatClick}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#07C160] hover:bg-[#059B4A] text-white 
-                         px-6 py-4 rounded-lg font-semibold transition-all duration-200 
-                         shadow-md hover:shadow-lg hover:scale-105 min-h-[56px]"
-            >
-              <span className="text-xl">💚</span>
-              <span className="text-base">{language === 'en' ? 'WeChat' : '微信'}</span>
-            </button>
+              {/* WhatsApp */}
+              <a
+                href={`https://wa.me/${CONTACT.phone.replace(/[^0-9]/g, '')}?text=Hi%20Seoul%20Care%20Concierge!%0A%0AName:%20%0AService:%20%0ATravel%20dates:%20`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1DA851] text-white 
+                           shadow-lg hover:shadow-2xl hover:scale-105
+                           inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300
+                           h-12 min-h-[48px]"
+              >
+                <span className="text-xl">💬</span>
+                <span className="text-base">WhatsApp</span>
+              </a>
 
-            {/* Email */}
-            <a
-              href={`mailto:${CONTACT.email}`}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white 
-                         px-6 py-4 rounded-lg font-semibold transition-all duration-200 
-                         shadow-md hover:shadow-lg hover:scale-105 min-h-[56px]"
-            >
-              <span className="text-xl">✉️</span>
-              <span className="text-base">Email</span>
-            </a>
+              {/* Email */}
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className="w-full sm:w-auto bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white 
+                           shadow-lg hover:shadow-2xl hover:scale-105
+                           inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300
+                           h-12 min-h-[48px]"
+              >
+                <span className="text-xl">✉️</span>
+                <span className="text-base font-chinese">邮箱</span>
+              </a>
+              </>
+            ) : (
+              <>
+                {/* WhatsApp - 영문 고객 우선 */}
+                <Button
+                  asChild
+                  variant="success"
+                  size="lg"
+                  language={language}
+                  className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1DA851] text-white
+                           shadow-lg hover:shadow-2xl hover:scale-105"
+                >
+                  <a
+                    href={`https://wa.me/${CONTACT.phone.replace(/[^0-9]/g, '')}?text=Hi%20Seoul%20Care%20Concierge!%0A%0AName:%20%0AService:%20%0ATravel%20dates:%20`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="text-xl">💬</span>
+                    <span className="text-base">WhatsApp</span>
+                  </a>
+                </Button>
+
+              {/* WeChat */}
+                <Button
+                  onClick={handleWeChatClick}
+                  variant="success"
+                  size="lg"
+                  language={language}
+                  className="w-full sm:w-auto bg-[#07C160] hover:bg-[#059B4A] text-white 
+                             shadow-lg hover:shadow-2xl hover:scale-105
+                             inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300"
+                >
+                  <span className="text-xl">🔲</span>
+                  <span className="text-base">WeChat</span>
+                </Button>
+
+                {/* Email */}
+                <Button
+                  asChild
+                  variant="primary"
+                  size="lg"
+                  language={language}
+                  className="w-full sm:w-auto bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white
+                           shadow-lg hover:shadow-2xl hover:scale-105"
+                >
+                  <a href={`mailto:${CONTACT.email}`}>
+                    <span className="text-xl">✉️</span>
+                    <span className="text-base">Email</span>
+                  </a>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
+
+      {/* WeChat QR Code Modal */}
+      {showWeChatQR && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl p-8 max-w-sm w-full text-center">
+            <h3 className="text-xl font-bold mb-4 text-gray-900">
+              {language === 'zh' ? 'WeChat 二维码' : 'WeChat QR Code'}
+            </h3>
+            <div className="bg-gray-100 p-6 rounded-lg mb-4">
+              <div className="flex flex-col items-center">
+                <div className="w-48 h-48 bg-white rounded-lg shadow-md mb-4 flex items-center justify-center">
+                  <img
+                    src="/optimized/scc-wechat-qr.webp"
+                    alt="WeChat QR Code"
+                    className="max-w-full max-h-full object-contain rounded-lg"
+                    onError={(e) => {
+                      // Fallback to original JPG if WebP fails
+                      e.currentTarget.src = '/scc-wechat-qr.jpg'
+                    }}
+                  />
+                  <div className="text-center text-gray-500 p-4 hidden" id="qr-fallback">
+                    <div className="text-4xl mb-2">📱</div>
+                    <div className="text-sm">QR Code</div>
+                    <div className="text-xs mt-1">WeChat ID: SeoulCareConcierge</div>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600">
+                  {language === 'zh' ? 'WeChat ID: ' : 'WeChat ID: '}
+                  <span className="font-mono font-bold">{CONTACT.wechatId}</span>
+                </p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 mb-6">
+              {language === 'zh' 
+                ? '请使用 WeChat 扫描二维码或搜索 ID 添加好友' 
+                : 'Scan QR code with WeChat or search by ID to add friend'
+              }
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => copyToClipboard(CONTACT.wechatId)}
+                className="no-gold-hover flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors"
+              >
+                {language === 'zh' ? '复制 ID' : 'Copy ID'}
+              </button>
+              <button
+                onClick={closeWeChatQR}
+                className="no-gold-hover flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+              >
+                {language === 'zh' ? '关闭' : 'Close'}
+              </button>
+            </div>
+            {copied && (
+              <p className="text-xs text-green-600 mt-2">
+                {language === 'zh' ? '已复制!' : 'Copied!'}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   )
 }

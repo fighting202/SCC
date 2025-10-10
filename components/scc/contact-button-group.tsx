@@ -19,10 +19,10 @@ export function ContactButtonGroup({
   showLabels = true,
   priority = 'wechat'
 }: ContactButtonGroupProps) {
-  const getButtonSize = () => {
+  const getButtonSize = (): 'sm' | 'md' | 'lg' => {
     switch (variant) {
       case 'minimal': return 'sm'
-      case 'compact': return 'default'
+      case 'compact': return 'md'
       default: return 'lg'
     }
   }
@@ -65,24 +65,21 @@ export function ContactButtonGroup({
       <div className={getLayoutClasses()}>
         {/* WeChat 우선 (중국 고객) */}
         <ContactButton
-          method="wechat"
-          variant={getButtonVariant('wechat')}
+          type="wechat"
           size={getButtonSize()}
           className="flex-1"
         />
 
         {/* WhatsApp (기타 국제 고객) */}
         <ContactButton
-          method="whatsapp"
-          variant={getButtonVariant('whatsapp')}
+          type="whatsapp"
           size={getButtonSize()}
           className="flex-1"
         />
 
         {/* 이메일 (보조) */}
         <ContactButton
-          method="email"
-          variant={getButtonVariant('email')}
+          type="email"
           size={getButtonSize()}
           className="flex-1"
         />
@@ -112,15 +109,13 @@ export function ContactButtonGroup({
 export function QuickContactButtons({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-wrap gap-3 justify-center", className)}>
-      <ContactButton 
-        method="whatsapp" 
-        variant="default" 
+      <ContactButton
+        type="whatsapp"
         size="sm"
         className="flex-1 min-w-0 sm:flex-none"
       />
-      <ContactButton 
-        method="wechat" 
-        variant="outline" 
+      <ContactButton
+        type="wechat"
         size="sm"
         className="flex-1 min-w-0 sm:flex-none"
       />
@@ -133,30 +128,28 @@ export function PriorityContactButtons({ className }: { className?: string }) {
     <div className={cn("space-y-3", className)}>
       <div className="text-center">
         <h4 className="font-semibold text-gray-900 mb-1">
-          <BilingualText 
-            en="Recommended for Chinese customers" 
-            zh="推荐给中国客户" 
+          <BilingualText
+            en="Recommended for Chinese customers"
+            zh="推荐给中国客户"
           />
         </h4>
       </div>
-      
-      <ContactButton 
-        method="wechat" 
-        variant="default" 
+
+      <ContactButton
+        type="wechat"
         size="lg"
         className="w-full"
       />
-      
+
       <div className="text-center text-sm text-gray-500">
-        <BilingualText 
-          en="or" 
-          zh="或" 
+        <BilingualText
+          en="or"
+          zh="或"
         />
       </div>
-      
-      <ContactButton 
-        method="whatsapp" 
-        variant="outline" 
+
+      <ContactButton
+        type="whatsapp"
         size="lg"
         className="w-full"
       />
@@ -169,39 +162,37 @@ export function EmergencyContactButtons({ className }: { className?: string }) {
     <div className={cn("space-y-3", className)}>
       <div className="text-center">
         <h4 className="font-semibold text-red-900 mb-1">
-          <BilingualText 
-            en="Emergency Contact" 
-            zh="紧急联系" 
+          <BilingualText
+            en="Emergency Contact"
+            zh="紧急联系"
           />
         </h4>
         <p className="text-sm text-red-700">
-          <BilingualText 
-            en="Available 24/7" 
-            zh="24小时可用" 
+          <BilingualText
+            en="Available 24/7"
+            zh="24小时可用"
           />
         </p>
       </div>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <ContactButton 
-          method="whatsapp" 
-          variant="default" 
+        <ContactButton
+          type="whatsapp"
           size="lg"
           className="bg-red-500 hover:bg-red-600"
         />
-        <ContactButton 
-          method="email" 
-          variant="outline" 
+        <ContactButton
+          type="email"
           size="lg"
           className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
         />
       </div>
-      
+
       <div className="text-center text-sm text-gray-600">
         <p>
-          <BilingualText 
-            en="Direct call: +82-10-2981-6653" 
-            zh="直接致电：+82-10-2981-6653" 
+          <BilingualText
+            en="Direct call: +82-10-2981-6653"
+            zh="直接致电：+82-10-2981-6653"
           />
         </p>
       </div>

@@ -36,3 +36,45 @@ export function generateWhatsAppLink(message?: string): string {
   );
   return `https://wa.me/821029816653?text=${message || defaultMsg}`;
 }
+
+/**
+ * Smooth scroll to section with header offset
+ * Eliminates code duplication across header, hero-section, and footer components
+ *
+ * @param {string} id - The ID of the element to scroll to
+ *
+ * @example
+ * ```tsx
+ * <button onClick={() => scrollToSection('services')}>
+ *   Go to Services
+ * </button>
+ * ```
+ */
+export function scrollToSection(id: string): void {
+  const element = document.getElementById(id)
+  if (!element) {
+    console.warn(`Element with id "${id}" not found`)
+    return
+  }
+
+  // Define header offsets for different sections
+  const offsets: Record<string, number> = {
+    'get-started': 160,
+    'services': 120,
+    'how-it-works': 120,
+    'about': 120,
+    'why-choose-us': 120,
+    'contact': 120,
+    'faq': 120,
+    'default': 120,
+  }
+
+  const headerHeight = offsets[id] || offsets.default
+  const elementPosition = element.getBoundingClientRect().top
+  const offsetPosition = elementPosition + window.pageYOffset - headerHeight
+
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: 'smooth',
+  })
+}

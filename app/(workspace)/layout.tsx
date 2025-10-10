@@ -1,6 +1,8 @@
 import { checkAuthAndRedirect } from '@/app/actions/auth'
 import { AppHeader } from '@/components/layout/app-header'
 
+export const dynamic = 'force-dynamic'
+
 export default async function WorkspaceLayout({
   children,
 }: {
