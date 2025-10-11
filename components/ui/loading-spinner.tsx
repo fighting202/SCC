@@ -1,36 +1,36 @@
-import { Loader2 } from 'lucide-react'
+'use client'
+
 import { cn } from '@/lib/utils'
 
 interface LoadingSpinnerProps {
+  size?: 'sm' | 'md' | 'lg'
   className?: string
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  label?: string
+  text?: string
 }
 
-const sizeMap = {
-  sm: 'h-4 w-4',
-  md: 'h-8 w-8',
-  lg: 'h-12 w-12',
-  xl: 'h-16 w-16'
-}
-
-export function LoadingSpinner({
+export function LoadingSpinner({ 
+  size = 'md', 
   className,
-  size = 'md',
-  label
+  text = 'Loading...'
 }: LoadingSpinnerProps) {
+  const sizeClasses = {
+    sm: 'w-4 h-4',
+    md: 'w-6 h-6',
+    lg: 'w-8 h-8'
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <Loader2
+    <div className={cn('flex items-center justify-center space-x-2', className)}>
+      <div
         className={cn(
-          'animate-spin text-primary',
-          sizeMap[size],
-          className
+          'animate-spin rounded-full border-2 border-gray-300 border-t-scc-primary',
+          sizeClasses[size]
         )}
-        aria-label={label || 'Loading'}
       />
-      {label && (
-        <p className="text-sm text-muted-foreground">{label}</p>
+      {text && (
+        <span className="text-sm text-gray-600 dark:text-scc-dark-text-secondary">
+          {text}
+        </span>
       )}
     </div>
   )
@@ -38,21 +38,10 @@ export function LoadingSpinner({
 
 export function PageLoadingSpinner() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <LoadingSpinner size="xl" label="Loading..." />
-    </div>
-  )
-}
-
-export function ButtonLoadingSpinner() {
-  return <Loader2 className="h-4 w-4 animate-spin" />
-}
-
-export function InlineLoadingSpinner({ text }: { text?: string }) {
-  return (
-    <div className="flex items-center gap-2">
-      <Loader2 className="h-4 w-4 animate-spin" />
-      {text && <span className="text-sm text-muted-foreground">{text}</span>}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-scc-dark-bg">
+      <div className="text-center">
+        <LoadingSpinner size="lg" text="Loading Seoul Care Concierge..." />
+      </div>
     </div>
   )
 }

@@ -206,10 +206,10 @@ export function DraggableBlock({
               index={childIndex}
               isExpanded={isExpanded}
               onToggleExpand={onToggleExpand || (() => {})}
-              onEdit={onEdit}
-              onDelete={onDelete}
-              onDuplicate={onDuplicate}
-              onAddChild={onAddChild}
+              onEdit={onEdit || (() => {})}
+              onDelete={onDelete || (() => {})}
+              onDuplicate={onDuplicate || (() => {})}
+              onAddChild={onAddChild || (() => {})}
               showActions={showActions}
               isDragDisabled={isDragDisabled}
             />
@@ -310,10 +310,10 @@ export function DraggableBlockList({
           index={index}
           isExpanded={expandedBlocks.has(block.id)}
           onToggleExpand={() => toggleBlockExpansion(block.id)}
-          onEdit={onEdit}
-          onDelete={onDelete}
-          onDuplicate={onDuplicate}
-          onAddChild={onAddChild}
+          onEdit={onEdit || (() => {})}
+          onDelete={onDelete || (() => {})}
+          onDuplicate={onDuplicate || (() => {})}
+          onAddChild={onAddChild || (() => {})}
           showActions={showActions}
           isDragDisabled={isDragDisabled}
         >

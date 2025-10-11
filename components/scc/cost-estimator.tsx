@@ -45,8 +45,8 @@ export function CostEstimator({ className, onEstimateChange }: CostEstimatorProp
 
   const estimate = useMemo((): EstimateResult => {
     const selectedServices = services.filter(service => SERVICE_PRICES[service as keyof typeof SERVICE_PRICES])
-    const days = duration[0]
-    
+    const days = duration[0] ?? 5
+
     let totalBase = 0
     let totalPerDay = 0
     

@@ -72,7 +72,7 @@ export default function Footer() {
                 title={language === 'zh' ? '返回顶部' : 'Back to top'}
               >
                 <Image
-                  src="/optimized/scc-logo-footer.webp" 
+                  src="/scc-logo-footer.png" 
                   alt="SCC Logo" 
                   width={80}
                   height={80}
@@ -203,7 +203,7 @@ export default function Footer() {
               <div className="flex flex-col items-center">
                 <div className="w-48 h-48 bg-white rounded-lg shadow-md mb-4 flex items-center justify-center">
                     <Image
-                    src="/optimized/scc-wechat-qr.webp"
+                    src="/scc-wechat-qr.jpg"
                     alt="WeChat QR Code"
                     width={200}
                     height={200}

@@ -28,12 +28,14 @@ export function FormField({
       const timer = setTimeout(() => setShowError(false), 300)
       return () => clearTimeout(timer)
     }
+    return undefined
   }, [error])
 
   useEffect(() => {
     if (success) {
       setShowSuccess(true)
     }
+    return undefined
   }, [success])
 
   return (

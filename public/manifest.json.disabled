@@ -3,7 +3,7 @@
   "short_name": "SCC",
   "description": "Professional medical and beauty care concierge service in Seoul, Korea",
   "start_url": "/",
-  "display": "standalone",
+  "display": "minimal-ui",
   "background_color": "#F8F9FA",
   "theme_color": "#2C5F7C",
   "orientation": "portrait-primary",

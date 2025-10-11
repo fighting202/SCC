@@ -82,8 +82,7 @@ export default function FAQSection() {
 
       const observer = new IntersectionObserver(
         (entries) => {
-          const entry = entries[0]
-          if (entry && entry.isIntersecting) {
+          if (entries[0]?.isIntersecting) {
             setTimeout(() => {
               setVisibleItems(prev => [...prev, index])
             }, index * 80)

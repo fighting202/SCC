@@ -19,13 +19,16 @@ export default function Error({
       stack: error.stack,
       digest: error.digest,
       timestamp: new Date().toISOString(),
+      userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'unknown',
+      url: typeof window !== 'undefined' ? window.location.href : 'unknown',
     })
 
-    // TODO: Send to error tracking service
-    // if (process.env.NODE_ENV === 'production') {
-    //   // Sentry.captureException(error)
-    //   // LogRocket.captureException(error)
-    // }
+    // Send to error tracking service in production
+    if (process.env.NODE_ENV === 'production') {
+      // TODO: Implement error tracking service
+      // Sentry.captureException(error)
+      // LogRocket.captureException(error)
+    }
   }, [error])
 
   return (

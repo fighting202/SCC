@@ -39,6 +39,7 @@ export function AnimatedFormField({
       const timeout = setTimeout(() => setShake(false), 500)
       return () => clearTimeout(timeout)
     }
+    return undefined
   }, [error, touched])
 
   const hasError = !!error && touched

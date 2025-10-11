@@ -46,11 +46,11 @@ function VirtualBlockItem({ index, style, data }: VirtualBlockItemProps) {
       <DraggableBlock
         block={block}
         index={index}
-        onEdit={onEdit}
-        onDelete={onDelete}
-        onDuplicate={onDuplicate}
-        onAddChild={onAddChild}
-        showActions={showDragHandles}
+        onEdit={onEdit || (() => {})}
+        onDelete={onDelete || (() => {})}
+        onDuplicate={onDuplicate || (() => {})}
+        onAddChild={onAddChild || (() => {})}
+        showActions={showDragHandles || false}
       />
     </div>
   )
@@ -253,7 +253,7 @@ export function VirtuosoBlockList({
           onDelete={onDelete}
           onDuplicate={onDuplicate}
           onAddChild={onAddChild}
-          showActions={showDragHandles}
+          showActions={showDragHandles || false}
         />
       </div>
     )

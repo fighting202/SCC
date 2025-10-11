@@ -101,7 +101,7 @@ export default function Header() {
                   <div className="h-12 w-12 md:h-16 md:w-16 lg:h-20 lg:w-20 bg-gray-700 animate-pulse rounded-full" />
                 )}
                 <Image
-                  src="/optimized/scc-logo-header.webp" 
+                  src="/scc-logo-header.webp" 
                   alt="SCC Logo" 
                   width={80}
                   height={80}

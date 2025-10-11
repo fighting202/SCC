@@ -1,4 +1,3 @@
-import withPWA from '@ducanh2912/next-pwa'
 import bundleAnalyzer from '@next/bundle-analyzer'
 
 const withBundleAnalyzer = bundleAnalyzer({
@@ -100,15 +99,5 @@ const nextConfig = {
   },
 }
 
-// PWA 설정 적용
-const pwaConfig = withPWA({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
-  register: true,
-  skipWaiting: true,
-  sw: 'sw.js',
-  publicExcludes: ['!robots.txt', '!sitemap.xml'],
-})
-
-// Bundle Analyzer와 PWA 설정을 함께 적용
-export default withBundleAnalyzer(pwaConfig(nextConfig))
+// Bundle Analyzer 설정 적용
+export default withBundleAnalyzer(nextConfig)

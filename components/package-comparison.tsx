@@ -37,7 +37,7 @@ export default function PackageComparison() {
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
+          if (entry?.isIntersecting) {
             setTimeout(() => {
               setVisibleCards(prev => [...prev, index])
             }, index * 150)
@@ -152,23 +152,23 @@ export default function PackageComparison() {
             >
             <CardHeader className="text-center pb-4">
               <div className="text-sm font-semibold text-gray-600 dark:text-scc-dark-text-secondary mb-2">
-                {packages[0].badge}
+                {packages[0]?.badge}
               </div>
               <CardTitle className={`text-2xl font-bold mb-2 ${language === 'zh' ? 'font-chinese' : 'font-sans'}`}>
-                {packages[0].title}
+                {packages[0]?.title}
               </CardTitle>
               <div className="space-y-1">
                 <div className="text-3xl font-bold text-[#2C5F7C]">
-                  {packages[0].price}
+                  {packages[0]?.price}
                 </div>
                 <div className="text-sm text-gray-500 dark:text-scc-dark-text-secondary line-through">
-                  {packages[0].originalPrice}
+                  {packages[0]?.originalPrice}
                 </div>
               </div>
             </CardHeader>
             
             <CardContent className="space-y-4 flex-1">
-              {packages[0].features.map((feature, idx) => (
+              {packages[0]?.features?.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
                     feature.startsWith('✓') 
@@ -214,25 +214,25 @@ export default function PackageComparison() {
             >
             {/* Popular Badge */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-              {packages[1].badge}
+              {packages[1]?.badge}
             </div>
 
             <CardHeader className="text-center pb-4">
               <CardTitle className={`text-2xl font-bold mb-2 ${language === 'zh' ? 'font-chinese' : 'font-sans'}`}>
-                {packages[1].title}
+                {packages[1]?.title}
               </CardTitle>
               <div className="space-y-1">
                 <div className="text-3xl font-bold text-[#2C5F7C]">
-                  {packages[1].price}
+                  {packages[1]?.price}
                 </div>
                 <div className="text-sm text-gray-500 dark:text-scc-dark-text-secondary line-through">
-                  {packages[1].originalPrice}
+                  {packages[1]?.originalPrice}
                 </div>
               </div>
             </CardHeader>
-            
+
             <CardContent className="space-y-4 flex-1">
-              {packages[1].features.map((feature, idx) => (
+              {packages[1]?.features?.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
                     feature.startsWith('✓') 
