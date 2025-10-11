@@ -244,7 +244,7 @@ export default function ContactSection() {
                     </div>
                   ) : (
                     <Image
-                      src="/scc-wechat-qr.jpg"
+                      src="/optimized/scc-wechat-qr.webp"
                       alt="WeChat QR Code"
                       width={192}
                       height={192}

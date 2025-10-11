@@ -77,7 +77,7 @@ export default function HeroSection() {
           <div className="absolute inset-0 z-0">
             {/* Main image */}
             <Image
-              src="/modern-seoul-skyline-at-sunset-with-luxury-medical.jpg"
+              src="/optimized/modern-seoul-skyline-at-sunset-with-luxury-medical.webp"
               alt="Seoul medical tourism skyline with luxury medical facilities"
               fill
               className="object-cover dark:brightness-75 dark:contrast-110"

@@ -7,12 +7,15 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useSCCStore } from "@/lib/store/sccStore"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import { SkipToMain, SkipToNavigation } from "@/components/ui/skip-link"
+import { useMobileMenuFocus } from "@/hooks/use-focus-management"
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [logoLoaded, setLogoLoaded] = useState(false)
   const { language, setLanguage } = useSCCStore()
+  const { menuRef, triggerRef, focusFirstMenuItem, focusTrigger } = useMobileMenuFocus()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,11 +63,22 @@ export default function Header() {
   }
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
+    const newState = !isMobileMenuOpen
+    setIsMobileMenuOpen(newState)
+    
+    if (newState) {
+      // 메뉴가 열릴 때 첫 번째 메뉴 아이템에 포커스
+      setTimeout(focusFirstMenuItem, 100)
+    } else {
+      // 메뉴가 닫힐 때 트리거 버튼에 포커스
+      focusTrigger()
+    }
   }
 
   return (
     <header
+      id="navigation"
+      role="banner"
       className={`header-fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm dark:bg-scc-dark-bg/95" : "bg-transparent"
       }`}

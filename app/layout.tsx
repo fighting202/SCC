@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LanguageAwareLayout } from "@/components/language-aware-layout"
 import { GoogleAnalytics, GoogleTagManager } from "@/components/analytics"
+import { SkipToMain, SkipToNavigation } from "@/components/ui/skip-link"
 import "./globals.css"
 
 // Elegant, thin and refined sans-serif for body text (얇고 세련된 폰트)

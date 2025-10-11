@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import accessibility styles */
+@import '../styles/accessibility.css';
+
 /* Dark mode base styles */
 @layer base {
   :root {

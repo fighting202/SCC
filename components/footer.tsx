@@ -72,7 +72,7 @@ export default function Footer() {
                 title={language === 'zh' ? '返回顶部' : 'Back to top'}
               >
                 <Image
-                  src="/scc-logo-footer.png" 
+                  src="/optimized/scc-logo-footer.webp" 
                   alt="SCC Logo" 
                   width={80}
                   height={80}
