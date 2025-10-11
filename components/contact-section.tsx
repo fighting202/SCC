@@ -52,6 +52,7 @@ export default function ContactSection() {
 
   const [showWeChatQR, setShowWeChatQR] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [imageLoadFailed, setImageLoadFailed] = useState(false)
 
   const handleWeChatClick = () => {
     // 모바일에서는 새 탭으로 열기, 데스크톱에서는 모달
@@ -235,21 +236,25 @@ export default function ContactSection() {
             <div className="bg-gray-100 p-6 rounded-lg mb-4">
               <div className="flex flex-col items-center">
                 <div className="w-48 h-48 bg-white rounded-lg shadow-md mb-4 flex items-center justify-center relative">
-                  <Image
-                    src="/scc-wechat-qr.jpg"
-                    alt="WeChat QR Code"
-                    width={192}
-                    height={192}
-                    className="object-contain rounded-lg"
-                    onError={(e) => {
-                      console.error('QR code image load failed:', e);
-                    }}
-                  />
-                  <div className="text-center text-gray-500 p-4 hidden" id="qr-fallback">
-                    <div className="text-4xl mb-2">📱</div>
-                    <div className="text-sm">QR Code</div>
-                    <div className="text-xs mt-1">WeChat ID: SeoulCareConcierge</div>
-                  </div>
+                  {imageLoadFailed ? (
+                    <div className="text-center text-gray-500 p-4">
+                      <div className="text-4xl mb-2">📱</div>
+                      <div className="text-sm">QR Code</div>
+                      <div className="text-xs mt-1">WeChat ID: {CONTACT.wechatId}</div>
+                    </div>
+                  ) : (
+                    <Image
+                      src="/scc-wechat-qr.jpg"
+                      alt="WeChat QR Code"
+                      width={192}
+                      height={192}
+                      className="object-contain rounded-lg"
+                      onError={(e) => {
+                        console.error('QR code image load failed:', e);
+                        setImageLoadFailed(true);
+                      }}
+                    />
+                  )}
                 </div>
                 <p className="text-sm text-gray-600">
                   {language === 'zh' ? 'WeChat ID: ' : 'WeChat ID: '}
