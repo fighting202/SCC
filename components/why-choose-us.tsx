@@ -16,7 +16,7 @@ export function WhyChooseUs() {
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
+          if (entry?.isIntersecting) {
             setTimeout(() => {
               setVisibleCards(prev => [...prev, index])
             }, index * 100) // Stagger animation

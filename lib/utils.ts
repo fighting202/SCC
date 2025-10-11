@@ -69,7 +69,7 @@ export function scrollToSection(id: string): void {
     'default': 120,
   }
 
-  const headerHeight = offsets[id] || offsets.default
+  const headerHeight = offsets[id] || offsets.default || 120
   const elementPosition = element.getBoundingClientRect().top
   const offsetPosition = elementPosition + window.pageYOffset - headerHeight
 

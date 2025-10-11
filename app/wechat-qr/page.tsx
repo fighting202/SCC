@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { CONTACT } from "@/lib/scc-constants"
 import { useSCCStore } from "@/lib/store/sccStore"
 import { Button } from "@/components/ui/button"
@@ -36,14 +37,15 @@ export default function WeChatQRPage() {
 
         <div className="bg-gray-100 p-6 rounded-xl mb-6">
           <div className="flex flex-col items-center">
-            <div className="w-48 h-48 bg-white rounded-lg shadow-md mb-4 flex items-center justify-center">
-              <img
+            <div className="w-48 h-48 bg-white rounded-lg shadow-md mb-4 flex items-center justify-center relative">
+              <Image
                 src="/scc-wechat-qr.jpg"
                 alt="WeChat QR Code"
-                className="max-w-full max-h-full object-contain rounded-lg"
+                width={192}
+                height={192}
+                className="object-contain rounded-lg"
                 onError={(e) => {
                   console.error('QR 이미지 로드 실패:', e);
-                  e.currentTarget.style.display = 'none';
                 }}
               />
             </div>

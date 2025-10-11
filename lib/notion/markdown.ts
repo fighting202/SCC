@@ -39,7 +39,7 @@ export class NotionMarkdownConverter {
     try {
       const mdblocks = await this.n2m.pageToMarkdown(pageId)
       const mdString = this.n2m.toMarkdownString(mdblocks)
-      return mdString.parent
+      return mdString.parent || ''
     } catch (error) {
       console.error('페이지 마크다운 변환 실패:', error)
       throw new Error('페이지를 마크다운으로 변환할 수 없습니다.')
@@ -57,7 +57,7 @@ export class NotionMarkdownConverter {
     try {
       const mdblocks = await this.n2m.blocksToMarkdown(blocks as any)
       const mdString = this.n2m.toMarkdownString(mdblocks)
-      return mdString.parent
+      return mdString.parent || ''
     } catch (error) {
       console.error('블록 마크다운 변환 실패:', error)
       throw new Error('블록을 마크다운으로 변환할 수 없습니다.')
@@ -200,8 +200,8 @@ export class NotionMarkdownConverter {
 
     while ((match = linkRegex.exec(markdown)) !== null) {
       links.push({
-        text: match[1],
-        url: match[2]
+        text: match[1] || '',
+        url: match[2] || ''
       })
     }
 
@@ -219,7 +219,7 @@ export class NotionMarkdownConverter {
     while ((match = imageRegex.exec(markdown)) !== null) {
       images.push({
         alt: match[1] || '',
-        src: match[2]
+        src: match[2] || ''
       })
     }
 

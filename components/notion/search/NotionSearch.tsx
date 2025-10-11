@@ -47,6 +47,17 @@ type SearchResult = {
 type SortOption = 'relevance' | 'title' | 'created' | 'modified'
 type ViewMode = 'grid' | 'list'
 
+// Fuse.js configuration (moved outside component to avoid recreating on every render)
+const fuseOptions = {
+  keys: [
+    { name: 'title', weight: 0.7 },
+    { name: 'properties', weight: 0.3 }
+  ],
+  threshold: 0.3,
+  includeScore: true,
+  minMatchCharLength: 2
+}
+
 export function NotionSearch({
   pages,
   databases,
@@ -65,17 +76,6 @@ export function NotionSearch({
   // const [showFilters, setShowFilters] = useState(false) // props에서 받아옴
   const [selectedTypes, setSelectedTypes] = useState<Set<'page' | 'database'>>(new Set(['page', 'database']))
   const [isLoading, setIsLoading] = useState(false)
-
-  // Fuse.js 설정
-  const fuseOptions = {
-    keys: [
-      { name: 'title', weight: 0.7 },
-      { name: 'properties', weight: 0.3 }
-    ],
-    threshold: 0.3,
-    includeScore: true,
-    minMatchCharLength: 2
-  }
 
   // 페이지 검색 인덱스
   const pageFuse = useMemo(() => {
