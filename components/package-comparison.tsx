@@ -102,7 +102,7 @@ export default function PackageComparison() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     // 오른쪽 작은 카드들(index 2,3)은 더 큰 각도 적용
-    const multiplier = cardIndex >= 2 ? 20 : 15;
+    const multiplier = cardIndex >= 2 ? 30 : 15; // 오른쪽 카드들을 20에서 30으로 증가
     const rotateX = ((y - centerY) / centerY) * -multiplier;
     const rotateY = ((x - centerX) / centerX) * multiplier;
 
@@ -444,7 +444,9 @@ export default function PackageComparison() {
                   rotateY: cardRotations[2]?.rotateY || 0,
                 }}
                 whileHover={{
-                  scale: 1.05,
+                  scale: 1.08, // 더 큰 스케일 효과
+                  rotateX: 8, // 추가 회전 효과
+                  rotateY: 8, // 추가 회전 효과
                   transition: {
                     type: 'spring',
                     stiffness: 300,
@@ -505,7 +507,9 @@ export default function PackageComparison() {
                   rotateY: cardRotations[3]?.rotateY || 0,
                 }}
                 whileHover={{
-                  scale: 1.05,
+                  scale: 1.08, // 더 큰 스케일 효과
+                  rotateX: 8, // 추가 회전 효과
+                  rotateY: 8, // 추가 회전 효과
                   transition: {
                     type: 'spring',
                     stiffness: 300,
