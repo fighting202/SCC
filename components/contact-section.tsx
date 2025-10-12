@@ -1,8 +1,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useTallyAnimation } from '@/hooks/use-tally-animation';
 import { CONTACT } from '@/lib/scc-constants';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
@@ -15,6 +16,9 @@ export default function ContactSection() {
   );
   const sectionRef = useRef<HTMLElement>(null);
   const elementRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // 탤리 모달 애니메이션 적용 (아래에서 위로 올라오는 애니메이션)
+  useTallyAnimation('bottom-up');
 
   // Intersection Observer for scroll animations
   useEffect(() => {

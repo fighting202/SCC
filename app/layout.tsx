@@ -262,11 +262,67 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
         />
-        {/* Tally Form Script */}
+        {/* Tally Modal Animation Script */}
         <script
-          src="https://tally.so/widgets/embed.js"
-          async
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                let animationType = 'center'; // 기본 애니메이션 타입
+                
+                // 애니메이션 타입 설정 함수
+                window.setTallyAnimation = function(type) {
+                  animationType = type;
+                };
+                
+                // 탤리 모달 애니메이션 적용 함수
+                function applyTallyAnimation() {
+                  const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                      if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(function(node) {
+                          if (node.nodeType === Node.ELEMENT_NODE) {
+                            const element = node;
+                            
+                            // 탤리 모달이 추가되었는지 확인
+                            if (element.tagName === 'DIV' && element.style.position === 'fixed') {
+                              setTimeout(function() {
+                                // 애니메이션 클래스 추가
+                                element.classList.add('tally-modal-content');
+                                
+                                switch (animationType) {
+                                  case 'center':
+                                    element.classList.add('tally-modal-center');
+                                    break;
+                                  case 'bottom-up':
+                                    element.classList.add('tally-modal-bottom-up');
+                                    break;
+                                }
+                              }, 100);
+                            }
+                          }
+                        });
+                      }
+                    });
+                  });
+                  
+                  observer.observe(document.body, {
+                    childList: true,
+                    subtree: true,
+                  });
+                }
+                
+                // DOM이 로드된 후 애니메이션 적용
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', applyTallyAnimation);
+                } else {
+                  applyTallyAnimation();
+                }
+              })();
+            `,
+          }}
         />
+        {/* Tally Form Script */}
+        <script src="https://tally.so/widgets/embed.js" async />
       </head>
       <body
         className={`${raleway.className} ${notoSansSC.className} antialiased`}

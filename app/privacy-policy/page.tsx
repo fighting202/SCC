@@ -1,7 +1,7 @@
 'use client';
 
 import FloatingButtons from '@/components/floating-buttons';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 

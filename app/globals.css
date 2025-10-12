@@ -124,17 +124,21 @@ img[alt*='icon'] {
 
   body {
     @apply bg-background text-foreground;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 }
 
 /* CSS 변수 정의 */
 :root {
-  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-inter:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', sans-serif;
   --font-playfair: 'Playfair Display', 'Times New Roman', Times, serif;
-  --font-noto-sans-sc: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  --font-noto-sans-sc:
+    'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'WenQuanYi Micro Hei', sans-serif;
 }
 
 /* 기본 폰트 설정 */
@@ -143,12 +147,21 @@ img[alt*='icon'] {
 }
 
 .font-sans {
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family:
+    var(--font-inter),
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    sans-serif;
 }
 
 .font-chinese {
-  font-family: var(--font-noto-sans-sc), 'PingFang SC', 'Hiragino Sans GB',
+  font-family:
+    var(--font-noto-sans-sc), 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
   word-break: break-word;
   line-break: auto;
@@ -382,7 +395,8 @@ img[alt*='icon'] {
     }
     50% {
       transform: scale3d(1.02, 1.02, 1.02);
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5),
+      box-shadow:
+        0 0 30px rgba(212, 175, 55, 0.5),
         0 0 40px rgba(212, 175, 55, 0.3);
     }
   }
@@ -445,25 +459,33 @@ img[alt*='icon'] {
   .animate-on-scroll {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
   }
 
   .animate-on-scroll-left {
     opacity: 0;
     transform: translate3d(-30px, 0, 0);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
   }
 
   .animate-on-scroll-right {
     opacity: 0;
     transform: translate3d(30px, 0, 0);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
   }
 
   .animate-on-scroll-scale {
     opacity: 0;
     transform: scale3d(0.9, 0.9, 1);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
   }
 
   .animate-visible {
@@ -473,7 +495,8 @@ img[alt*='icon'] {
 
   /* Hover effects - will-change applied only on hover for better GPU memory management */
   .hover-lift {
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
       box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
   .hover-lift:hover {
@@ -503,7 +526,9 @@ img[alt*='icon'] {
   }
   .hover-glow:hover {
     will-change: box-shadow;
-    box-shadow: 0 0 20px rgba(44, 95, 124, 0.6), 0 0 40px rgba(44, 95, 124, 0.3);
+    box-shadow:
+      0 0 20px rgba(44, 95, 124, 0.6),
+      0 0 40px rgba(44, 95, 124, 0.3);
   }
 
   /* Mobile-specific adjustments for animations and hover effects */
@@ -698,4 +723,52 @@ img[alt*='icon'] {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+/* 탤리 모달 애니메이션 및 스타일 */
+.tally-modal-center {
+  animation: tallyCenterExpand 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.tally-modal-bottom-up {
+  animation: tallyBottomUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+@keyframes tallyCenterExpand {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) translateY(-50px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.8) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes tallyBottomUp {
+  from {
+    opacity: 0;
+    transform: translateY(100vh) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 탤리 모달 배경 블러 효과 */
+body > div:last-child {
+  backdrop-filter: blur(8px) !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 탤리 모달 콘텐츠 스타일 */
+body > div:last-child > div {
+  border-radius: 16px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }

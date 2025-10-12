@@ -1,8 +1,9 @@
 'use client';
 
 import { TrustIndicators } from '@/components/scc/trust-indicators';
+import { useTallyAnimation } from '@/hooks/use-tally-animation';
 import { scrollToSection } from '@/lib/client-utils';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,9 @@ import { useEffect, useState } from 'react';
 export default function HeroSection() {
   const { language } = useSCCStore();
   const [isTallyLoaded, setIsTallyLoaded] = useState(false);
+
+  // 탤리 모달 애니메이션 적용 (중앙에서 펼쳐지는 애니메이션)
+  useTallyAnimation('center');
 
   useEffect(() => {
     // Tally 스크립트 로딩 확인
