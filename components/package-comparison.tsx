@@ -444,9 +444,7 @@ export default function PackageComparison() {
                   rotateY: cardRotations[2]?.rotateY || 0,
                 }}
                 whileHover={{
-                  scale: 1.08, // 더 큰 스케일 효과
-                  rotateX: 8, // 추가 회전 효과
-                  rotateY: 8, // 추가 회전 효과
+                  scale: 1.08, // 더 큰 스케일 효과만 유지
                   transition: {
                     type: 'spring',
                     stiffness: 300,
@@ -507,9 +505,7 @@ export default function PackageComparison() {
                   rotateY: cardRotations[3]?.rotateY || 0,
                 }}
                 whileHover={{
-                  scale: 1.08, // 더 큰 스케일 효과
-                  rotateX: 8, // 추가 회전 효과
-                  rotateY: 8, // 추가 회전 효과
+                  scale: 1.08, // 더 큰 스케일 효과만 유지
                   transition: {
                     type: 'spring',
                     stiffness: 300,
