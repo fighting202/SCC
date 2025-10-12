@@ -2,7 +2,7 @@
 
 import { scrollToSection } from '@/lib/client-utils';
 import { CONTACT } from '@/lib/scc-constants';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -76,7 +76,7 @@ export default function Footer() {
                 </p>
               </div>
             </div>
-          <div>
+            <div>
               <p
                 className={`text-xs md:text-sm text-white/80 ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
@@ -90,7 +90,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="text-center md:text-left flex flex-col justify-between">
-          <div>
+            <div>
               <h4
                 className={`text-lg font-bold mb-4 ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
@@ -101,7 +101,7 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-x-4 gap-y-3">
                 <button
                   onClick={() => scrollToSection('services')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse py-2 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -111,7 +111,8 @@ export default function Footer() {
                   onMouseEnter={e => {
                     e.currentTarget.style.textShadow =
                       '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                    e.currentTarget.style.transform = 'scale(1.1) rotate(1deg)';
+                    e.currentTarget.style.transform =
+                      'scale(1.05) rotate(1deg)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.textShadow = '0 0 0 transparent';
@@ -122,7 +123,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('how-it-works')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse py-2 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -133,7 +134,7 @@ export default function Footer() {
                     e.currentTarget.style.textShadow =
                       '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
                     e.currentTarget.style.transform =
-                      'scale(1.1) rotate(-1deg)';
+                      'scale(1.05) rotate(-1deg)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.textShadow = '0 0 0 transparent';
@@ -144,28 +145,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('packages')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse py-2 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
-                    language === 'zh' ? 'font-chinese' : 'font-sans'
-                  }`}
-                  style={{
-                    textShadow: '0 0 0 transparent',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.textShadow =
-                      '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                    e.currentTarget.style.transform = 'scale(1.1) rotate(1deg)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.textShadow = '0 0 0 transparent';
-                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-                  }}
-                >
-                  {language === 'zh' ? '套餐' : 'Packages'}
-                </button>
-                <button
-                  onClick={() => scrollToSection('faq')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse py-2 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -176,7 +156,29 @@ export default function Footer() {
                     e.currentTarget.style.textShadow =
                       '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
                     e.currentTarget.style.transform =
-                      'scale(1.1) rotate(-1deg)';
+                      'scale(1.05) rotate(1deg)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.textShadow = '0 0 0 transparent';
+                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                  }}
+                >
+                  {language === 'zh' ? '套餐' : 'Packages'}
+                </button>
+                <button
+                  onClick={() => scrollToSection('faq')}
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                    language === 'zh' ? 'font-chinese' : 'font-sans'
+                  }`}
+                  style={{
+                    textShadow: '0 0 0 transparent',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.textShadow =
+                      '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
+                    e.currentTarget.style.transform =
+                      'scale(1.05) rotate(-1deg)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.textShadow = '0 0 0 transparent';
@@ -187,7 +189,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('get-started')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse py-2 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -197,7 +199,8 @@ export default function Footer() {
                   onMouseEnter={e => {
                     e.currentTarget.style.textShadow =
                       '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                    e.currentTarget.style.transform = 'scale(1.1) rotate(1deg)';
+                    e.currentTarget.style.transform =
+                      'scale(1.05) rotate(1deg)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.textShadow = '0 0 0 transparent';
@@ -210,7 +213,7 @@ export default function Footer() {
                   href="/privacy-policy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse py-2 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -221,7 +224,7 @@ export default function Footer() {
                     e.currentTarget.style.textShadow =
                       '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
                     e.currentTarget.style.transform =
-                      'scale(1.1) rotate(-1deg)';
+                      'scale(1.05) rotate(-1deg)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.textShadow = '0 0 0 transparent';
@@ -236,7 +239,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="text-center md:text-left flex flex-col justify-between">
-          <div>
+            <div>
               <h4
                 className={`text-lg font-bold mb-4 ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
