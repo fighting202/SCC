@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { handleKeyboardEvent, scrollToSection } from '@/lib/client-utils';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import {
   HelpCircle,
   Home,
@@ -66,6 +66,11 @@ export default function MobileMenu({
   ];
 
   const handleNavClick = (id: string) => {
+    // 햅틱 피드백 (지원하는 기기에서)
+    if ('vibrate' in navigator) {
+      navigator.vibrate(50); // 50ms 진동
+    }
+
     scrollToSection(id);
     onClose();
   };
@@ -148,7 +153,11 @@ export default function MobileMenu({
                   <button
                     onClick={() => handleNavClick(item.id)}
                     onKeyDown={handleKeyDown}
-                    className="w-full flex items-center gap-4 px-4 py-4 rounded-xl text-white hover:bg-white/20 hover:text-[#D4AF37] transition-all duration-300 font-medium group"
+                    className="w-full flex items-center gap-4 px-4 py-4 rounded-xl text-white hover:bg-white/20 hover:text-[#D4AF37] active:bg-white/30 active:scale-95 transition-all duration-200 font-medium group touch-manipulation"
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation',
+                    }}
                     aria-label={`Navigate to ${
                       language === 'zh' ? item.zh : item.en
                     } section`}

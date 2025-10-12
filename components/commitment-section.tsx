@@ -222,7 +222,11 @@ export function CommitmentSection() {
         <div className="text-center">
           <button
             onClick={handleTallyClick}
-            className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold bg-[#2C5F7C] hover:bg-[#1F4A5F] active:bg-[#1F4A5F] text-white hover:text-[#D4AF37] rounded-lg transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] active:shadow-lg hover:scale-105 active:scale-95 animate-pulse-glow"
+            className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold bg-[#2C5F7C] hover:bg-[#1F4A5F] active:bg-[#1F4A5F] text-white hover:text-[#D4AF37] rounded-lg transition-all duration-200 shadow-lg hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] active:shadow-lg hover:scale-105 active:scale-95 animate-pulse-glow touch-manipulation"
+            style={{
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
           >
             {language === 'zh' ? '开始使用' : 'Get Started'}
           </button>

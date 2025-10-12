@@ -8,9 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { scrollToSection } from '@/lib/client-utils';
-import { useSCCStore } from '@/store/scc_store';
 import { useTallyAnimation } from '@/hooks/use-tally-animation';
+import { useSCCStore } from '@/store/scc_store';
 import { motion } from 'framer-motion';
 import { Building, Check, Clock } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -313,7 +312,11 @@ export default function PackageComparison() {
                 >
                   <Button
                     onClick={handleTallyClick}
-                    className="px-8 py-4 text-base font-bold transition-all duration-300 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl animate-pulse-glow border-2 border-[#D4AF37]"
+                    className="px-8 py-4 text-base font-bold transition-all duration-200 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl animate-pulse-glow border-2 border-[#D4AF37] active:scale-95 touch-manipulation"
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation',
+                    }}
                   >
                     {language === 'zh' ? '获取报价' : 'Get Quote'}
                   </Button>
@@ -416,7 +419,11 @@ export default function PackageComparison() {
                 >
                   <Button
                     onClick={handleTallyClick}
-                    className="px-8 py-4 text-base font-bold transition-all duration-300 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl animate-pulse-glow border-2 border-[#D4AF37]"
+                    className="px-8 py-4 text-base font-bold transition-all duration-200 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl animate-pulse-glow border-2 border-[#D4AF37] active:scale-95 touch-manipulation"
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation',
+                    }}
                   >
                     {language === 'zh' ? '获取报价' : 'Get Quote'}
                   </Button>
@@ -546,7 +553,11 @@ export default function PackageComparison() {
                   >
                     <Button
                       onClick={handleTallyClick}
-                      className="px-8 py-4 text-base font-bold bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl inline-flex items-center justify-center transition-all duration-300 animate-pulse-glow border-2 border-[#D4AF37]"
+                      className="px-8 py-4 text-base font-bold bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl inline-flex items-center justify-center transition-all duration-200 animate-pulse-glow border-2 border-[#D4AF37] active:scale-95 touch-manipulation"
+                      style={{
+                        WebkitTapHighlightColor: 'transparent',
+                        touchAction: 'manipulation',
+                      }}
                     >
                       {language === 'zh' ? '定制套餐' : 'Customize It'}
                     </Button>

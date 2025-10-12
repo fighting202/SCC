@@ -208,7 +208,11 @@ export default function ContactSection() {
               variant="primary"
               size="xl"
               language={language}
-              className="w-full md:w-auto min-w-[280px] h-20 px-16 text-2xl font-bold hover:scale-105 transition-all duration-300 border-2 border-[#D4AF37]"
+              className="w-full md:w-auto min-w-[280px] h-20 px-16 text-2xl font-bold hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-[#D4AF37] animate-pulse-glow touch-manipulation"
+              style={{
+                WebkitTapHighlightColor: 'transparent',
+                touchAction: 'manipulation',
+              }}
             >
               <span className="flex items-center gap-3">
                 <span>✈️</span>
@@ -293,7 +297,11 @@ export default function ContactSection() {
                     onClick={handleWeChatClick}
                     variant="outline"
                     size="lg"
-                    className="flex-1 bg-green-500 hover:bg-green-600 text-white border-green-500 hover:border-green-600 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                    className="flex-1 bg-green-500 hover:bg-green-600 text-white border-green-500 hover:border-green-600 hover:text-[#D4AF37] transition-all duration-200 px-8 py-4 text-base font-bold active:scale-95 touch-manipulation"
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation',
+                    }}
                   >
                     <span className="flex items-center gap-2">
                       <span className="text-xl">💬</span>
@@ -322,7 +330,11 @@ export default function ContactSection() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="flex-1 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 hover:text-[#D4AF37] transition-all duration-200 px-8 py-4 text-base font-bold active:scale-95 touch-manipulation"
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation',
+                    }}
                   >
                     <span className="flex items-center gap-2">
                       <span className="text-xl">📱</span>
@@ -347,7 +359,11 @@ export default function ContactSection() {
                     <Button
                       variant="outline"
                       size="lg"
-                      className="flex-1 bg-gray-600 hover:bg-gray-700 text-white border-gray-600 hover:border-gray-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                      className="flex-1 bg-gray-600 hover:bg-gray-700 text-white border-gray-600 hover:border-gray-700 hover:text-[#D4AF37] transition-all duration-200 px-8 py-4 text-base font-bold active:scale-95 touch-manipulation"
+                      style={{
+                        WebkitTapHighlightColor: 'transparent',
+                        touchAction: 'manipulation',
+                      }}
                     >
                       <span className="flex items-center gap-2">
                         <span className="text-xl">📧</span>
@@ -379,7 +395,11 @@ export default function ContactSection() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="flex-1 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 hover:text-[#D4AF37] transition-all duration-200 px-8 py-4 text-base font-bold active:scale-95 touch-manipulation"
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation',
+                    }}
                   >
                     <span className="flex items-center gap-2">
                       <span className="text-xl">📱</span>
@@ -404,7 +424,11 @@ export default function ContactSection() {
                     onClick={handleWeChatClick}
                     variant="outline"
                     size="lg"
-                    className="flex-1 bg-green-500 hover:bg-green-600 text-white border-green-500 hover:border-green-600 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                    className="flex-1 bg-green-500 hover:bg-green-600 text-white border-green-500 hover:border-green-600 hover:text-[#D4AF37] transition-all duration-200 px-8 py-4 text-base font-bold active:scale-95 touch-manipulation"
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      touchAction: 'manipulation',
+                    }}
                   >
                     <span className="flex items-center gap-2">
                       <span className="text-xl">💬</span>
@@ -429,7 +453,11 @@ export default function ContactSection() {
                     <Button
                       variant="outline"
                       size="lg"
-                      className="flex-1 bg-gray-600 hover:bg-gray-700 text-white border-gray-600 hover:border-gray-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                      className="flex-1 bg-gray-600 hover:bg-gray-700 text-white border-gray-600 hover:border-gray-700 hover:text-[#D4AF37] transition-all duration-200 px-8 py-4 text-base font-bold active:scale-95 touch-manipulation"
+                      style={{
+                        WebkitTapHighlightColor: 'transparent',
+                        touchAction: 'manipulation',
+                      }}
                     >
                       <span className="flex items-center gap-2">
                         <span className="text-xl">📧</span>
