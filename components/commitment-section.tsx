@@ -1,8 +1,9 @@
 'use client';
 
-import { useSCCStore } from '@/store/scc_store';
 import { useTallyAnimation } from '@/hooks/use-tally-animation';
+import { useSCCStore } from '@/store/scc_store';
 import { Clock, DollarSign, FileText, Shield } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 export function CommitmentSection() {
@@ -14,8 +15,45 @@ export function CommitmentSection() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isTallyLoaded, setIsTallyLoaded] = useState(false);
 
+  // 3D 효과를 위한 상태
+  const [cardRotations, setCardRotations] = useState<
+    Record<number, { rotateX: number; rotateY: number }>
+  >({});
+
   // 탤리 모달 애니메이션 적용 (중앙에서 펼쳐지는 애니메이션)
   useTallyAnimation('center');
+
+  // 3D 효과를 위한 마우스 이벤트 핸들러
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    const card = cardRefs.current[index];
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const mouseX = e.clientX - centerX;
+    const mouseY = e.clientY - centerY;
+
+    const multiplier = 15; // Package Comparison과 동일한 강도
+    const rotateX = (mouseY / rect.height) * multiplier;
+    const rotateY = (mouseX / rect.width) * multiplier;
+
+    setCardRotations(prev => ({
+      ...prev,
+      [index]: { rotateX, rotateY },
+    }));
+  };
+
+  const handleMouseLeave = (index: number) => {
+    setCardRotations(prev => ({
+      ...prev,
+      [index]: { rotateX: 0, rotateY: 0 },
+    }));
+  };
 
   // Intersection Observer for scroll animations
   useEffect(() => {
@@ -146,18 +184,47 @@ export function CommitmentSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16"
+          style={{ perspective: '1000px' }}
+        >
           {commitments.map((commitment, index) => (
-            <div
+            <motion.div
               key={index}
               ref={el => {
                 cardRefs.current[index] = el;
               }}
               data-card-index={index}
-              className={`bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 min-h-[320px] flex flex-col cursor-pointer animate-on-scroll hover-lift hover-glow hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] hover:shadow-[0_0_40px_rgba(44,95,124,0.3)] ${
+              className={`bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 hover:-translate-y-2 min-h-[320px] flex flex-col cursor-pointer animate-on-scroll hover-lift hover-glow ${
                 visibleElements.has(index) ? 'animate-visible' : ''
               }`}
-              style={{ animationDelay: `${index * 0.2}s` }}
+              style={{
+                animationDelay: `${index * 0.2}s`,
+                transformStyle: 'preserve-3d',
+              }}
+              animate={{
+                opacity: visibleElements.has(index) ? 1 : 0,
+                y: visibleElements.has(index) ? 0 : 50,
+                rotateX: cardRotations[index]?.rotateX || 0,
+                rotateY: cardRotations[index]?.rotateY || 0,
+              }}
+              whileHover={{
+                scale: 1.05,
+                y: -8,
+                transition: {
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 20,
+                },
+              }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                rotateX: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+                rotateY: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+              }}
+              onMouseMove={e => handleMouseMove(e, index)}
+              onMouseLeave={() => handleMouseLeave(index)}
             >
               {/* 아이콘 영역 */}
               <div className="flex-shrink-0 flex justify-center mb-6">
@@ -214,7 +281,7 @@ export function CommitmentSection() {
                   {commitment.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
