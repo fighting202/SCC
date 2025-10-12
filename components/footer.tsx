@@ -101,7 +101,7 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-x-4 gap-y-3">
                 <button
                   onClick={() => scrollToSection('services')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -123,7 +123,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('how-it-works')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -145,7 +145,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('packages')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -167,7 +167,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('faq')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -189,7 +189,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('get-started')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -213,7 +213,7 @@ export default function Footer() {
                   href="/privacy-policy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] flex items-center justify-center md:justify-start ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{

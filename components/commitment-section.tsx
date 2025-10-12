@@ -1,6 +1,7 @@
 'use client';
 
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
+import { useTallyAnimation } from '@/hooks/use-tally-animation';
 import { Clock, DollarSign, FileText, Shield } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -11,6 +12,10 @@ export function CommitmentSection() {
   );
   const sectionRef = useRef<HTMLElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [isTallyLoaded, setIsTallyLoaded] = useState(false);
+
+  // 탤리 모달 애니메이션 적용 (중앙에서 펼쳐지는 애니메이션)
+  useTallyAnimation('center');
 
   // Intersection Observer for scroll animations
   useEffect(() => {
@@ -82,6 +87,38 @@ export function CommitmentSection() {
           : 'Your dedicated care manager is available via WhatsApp any time, day or night, throughout your stay.',
     },
   ];
+
+  // 탤리 폼 열기 함수
+  const handleTallyClick = () => {
+    const formId = process.env.NEXT_PUBLIC_TALLY_FORM_ID || 'n9Yd3Z';
+
+    if (typeof window !== 'undefined' && (window as any).Tally) {
+      (window as any).Tally.openPopup(formId, {
+        layout: 'modal',
+        width: 800,
+        height: 600,
+        alignLeft: false,
+        hideHeaders: false,
+        overlay: true,
+        customForm: true,
+      });
+    } else {
+      // 탤리가 로드되지 않은 경우 새 탭으로 열기
+      window.open(`https://tally.so/r/${formId}`, '_blank');
+    }
+  };
+
+  // 탤리 스크립트 로드 확인
+  useEffect(() => {
+    const checkTallyLoaded = () => {
+      if (typeof window !== 'undefined' && (window as any).Tally) {
+        setIsTallyLoaded(true);
+      } else {
+        setTimeout(checkTallyLoaded, 100);
+      }
+    };
+    checkTallyLoaded();
+  }, []);
 
   return (
     <section
@@ -184,12 +221,8 @@ export function CommitmentSection() {
         {/* Call to Action */}
         <div className="text-center">
           <button
-            onClick={() => {
-              document
-                .getElementById('get-started')
-                ?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold bg-[#2C5F7C] hover:bg-[#1F4A5F] active:bg-[#1F4A5F] text-white hover:text-[#D4AF37] rounded-lg transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] active:shadow-lg hover:scale-105 active:scale-95"
+            onClick={handleTallyClick}
+            className="inline-flex items-center justify-center px-6 py-4 text-base font-semibold bg-[#2C5F7C] hover:bg-[#1F4A5F] active:bg-[#1F4A5F] text-white hover:text-[#D4AF37] rounded-lg transition-all duration-300 shadow-lg hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] active:shadow-lg hover:scale-105 active:scale-95 animate-pulse-glow"
           >
             {language === 'zh' ? '开始使用' : 'Get Started'}
           </button>

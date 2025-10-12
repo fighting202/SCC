@@ -9,7 +9,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { scrollToSection } from '@/lib/client-utils';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
+import { useTallyAnimation } from '@/hooks/use-tally-animation';
 import { motion } from 'framer-motion';
 import { Building, Check, Clock } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -18,6 +19,43 @@ export default function PackageComparison() {
   const { language } = useSCCStore();
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [isTallyLoaded, setIsTallyLoaded] = useState(false);
+
+  // 탤리 모달 애니메이션 적용 (중앙에서 펼쳐지는 애니메이션)
+  useTallyAnimation('center');
+
+  // 탤리 폼 열기 함수
+  const handleTallyClick = () => {
+    const formId = process.env.NEXT_PUBLIC_TALLY_FORM_ID || 'n9Yd3Z';
+
+    if (typeof window !== 'undefined' && (window as any).Tally) {
+      (window as any).Tally.openPopup(formId, {
+        layout: 'modal',
+        width: 800,
+        height: 600,
+        alignLeft: false,
+        hideHeaders: false,
+        overlay: true,
+        customForm: true,
+      });
+    } else {
+      // 탤리가 로드되지 않은 경우 새 탭으로 열기
+      window.open(`https://tally.so/r/${formId}`, '_blank');
+    }
+  };
+
+  // 탤리 스크립트 로드 확인
+  useEffect(() => {
+    const checkTallyLoaded = () => {
+      if (typeof window !== 'undefined' && (window as any).Tally) {
+        setIsTallyLoaded(true);
+      } else {
+        setTimeout(checkTallyLoaded, 100);
+      }
+    };
+    checkTallyLoaded();
+  }, []);
+
   const [cardRotations, setCardRotations] = useState<
     { rotateX: number; rotateY: number }[]
   >([
@@ -26,6 +64,7 @@ export default function PackageComparison() {
     { rotateX: 0, rotateY: 0 },
     { rotateX: 0, rotateY: 0 },
   ]);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   useEffect(() => {
     const observers = cardsRef.current.map((card, index) => {
@@ -62,8 +101,10 @@ export default function PackageComparison() {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
+    // 오른쪽 작은 카드들(index 2,3)은 더 큰 각도 적용
+    const multiplier = cardIndex >= 2 ? 20 : 15;
+    const rotateX = ((y - centerY) / centerY) * -multiplier;
+    const rotateY = ((x - centerX) / centerX) * multiplier;
 
     setCardRotations(prev => {
       const newRotations = [...prev];
@@ -182,7 +223,9 @@ export default function PackageComparison() {
         >
           {/* Basic Package */}
           <motion.div
-            ref={el => { cardsRef.current[0] = el; }}
+            ref={el => {
+              cardsRef.current[0] = el;
+            }}
             className="lg:col-span-4"
             animate={{
               opacity: visibleCards.includes(0) ? 1 : 0,
@@ -208,29 +251,15 @@ export default function PackageComparison() {
             onMouseMove={e => handleMouseMove(e, 0)}
             onMouseLeave={() => handleMouseLeave(0)}
           >
-            <Card className="relative flex flex-col h-[650px] opacity-100 translate-y-0 border border-gray-200 shadow-lg hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] hover:shadow-[0_0_40px_rgba(44,95,124,0.3)]">
+            <Card className="relative flex flex-col h-[650px] opacity-100 translate-y-0 border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="text-center pb-4">
                 <div className="text-sm font-semibold text-gray-600 dark:text-scc-dark-text-secondary mb-2">
                   {packages[0]?.badge}
                 </div>
                 <CardTitle
-                  className={`text-2xl font-bold mb-2 transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                  className={`text-2xl font-bold mb-2 ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
-                  style={{
-                    textShadow: '0 0 0 transparent',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.textShadow =
-                      '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                    e.currentTarget.style.transform =
-                      'scale(1.05) rotate(1deg)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.textShadow = '0 0 0 transparent';
-                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-                  }}
                 >
                   {packages[0]?.title}
                 </CardTitle>
@@ -252,8 +281,8 @@ export default function PackageComparison() {
                         feature.startsWith('✓')
                           ? 'bg-green-100 text-green-600'
                           : feature.startsWith('无') || feature.startsWith('No')
-                          ? 'bg-red-100 text-red-600'
-                          : 'bg-[#2C5F7C] text-white'
+                            ? 'bg-red-100 text-red-600'
+                            : 'bg-[#2C5F7C] text-white'
                       }`}
                     >
                       {feature.startsWith('✓') ? (
@@ -266,24 +295,9 @@ export default function PackageComparison() {
                       )}
                     </div>
                     <span
-                      className={`text-gray-700 dark:text-scc-dark-text hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 cursor-pointer ${
+                      className={`text-gray-700 dark:text-scc-dark-text ${
                         language === 'zh' ? 'font-chinese' : 'font-sans'
                       }`}
-                      style={{
-                        textShadow: '0 0 0 transparent',
-                        transition: 'all 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.textShadow =
-                          '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                        e.currentTarget.style.transform =
-                          'scale(1.05) rotate(1deg)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.textShadow = '0 0 0 transparent';
-                        e.currentTarget.style.transform =
-                          'scale(1) rotate(0deg)';
-                      }}
                     >
                       {feature}
                     </span>
@@ -293,19 +307,13 @@ export default function PackageComparison() {
 
               <CardFooter className="pt-2 mt-auto flex justify-center">
                 <motion.div
-                  whileHover={{
-                    x: [0, -6, 6, -6, 6, 0],
-                    y: -2,
-                  }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{
-                    x: { duration: 0.5, ease: 'easeInOut' },
-                    y: { duration: 0.2 },
-                  }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Button
-                    onClick={() => scrollToSection('get-started')}
-                    className="px-8 py-4 text-base font-bold transition-all duration-300 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl border-2 border-[#D4AF37]"
+                    onClick={handleTallyClick}
+                    className="px-8 py-4 text-base font-bold transition-all duration-300 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl animate-pulse-glow border-2 border-[#D4AF37]"
                   >
                     {language === 'zh' ? '获取报价' : 'Get Quote'}
                   </Button>
@@ -316,7 +324,9 @@ export default function PackageComparison() {
 
           {/* Premium Package */}
           <motion.div
-            ref={el => { cardsRef.current[1] = el; }}
+            ref={el => {
+              cardsRef.current[1] = el;
+            }}
             className="lg:col-span-4"
             animate={{
               opacity: visibleCards.includes(1) ? 1 : 0,
@@ -342,7 +352,7 @@ export default function PackageComparison() {
             onMouseMove={e => handleMouseMove(e, 1)}
             onMouseLeave={() => handleMouseLeave(1)}
           >
-            <Card className="relative flex flex-col h-[650px] opacity-100 translate-y-0 border-2 border-[#D4AF37] shadow-2xl bg-gradient-to-br from-[#2C5F7C]/5 to-[#D4AF37]/5 hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] hover:shadow-[0_0_40px_rgba(44,95,124,0.3)]">
+            <Card className="relative flex flex-col h-[650px] opacity-100 translate-y-0 border-2 border-[#D4AF37] shadow-2xl bg-gradient-to-br from-[#2C5F7C]/5 to-[#D4AF37]/5 hover:shadow-2xl transition-shadow duration-300">
               {/* Popular Badge */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
                 {packages[1]?.badge}
@@ -350,23 +360,9 @@ export default function PackageComparison() {
 
               <CardHeader className="text-center pb-4">
                 <CardTitle
-                  className={`text-2xl font-bold mb-2 transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                  className={`text-2xl font-bold mb-2 ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
-                  style={{
-                    textShadow: '0 0 0 transparent',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.textShadow =
-                      '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                    e.currentTarget.style.transform =
-                      'scale(1.05) rotate(1deg)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.textShadow = '0 0 0 transparent';
-                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-                  }}
                 >
                   {packages[1]?.title}
                 </CardTitle>
@@ -388,8 +384,8 @@ export default function PackageComparison() {
                         feature.startsWith('✓')
                           ? 'bg-green-100 text-green-600'
                           : feature.startsWith('无') || feature.startsWith('No')
-                          ? 'bg-red-100 text-red-600'
-                          : 'bg-[#2C5F7C] text-white'
+                            ? 'bg-red-100 text-red-600'
+                            : 'bg-[#2C5F7C] text-white'
                       }`}
                     >
                       {feature.startsWith('✓') ? (
@@ -402,24 +398,9 @@ export default function PackageComparison() {
                       )}
                     </div>
                     <span
-                      className={`text-gray-700 dark:text-scc-dark-text hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 cursor-pointer ${
+                      className={`text-gray-700 dark:text-scc-dark-text ${
                         language === 'zh' ? 'font-chinese' : 'font-sans'
                       }`}
-                      style={{
-                        textShadow: '0 0 0 transparent',
-                        transition: 'all 0.3s ease',
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.textShadow =
-                          '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                        e.currentTarget.style.transform =
-                          'scale(1.05) rotate(1deg)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.textShadow = '0 0 0 transparent';
-                        e.currentTarget.style.transform =
-                          'scale(1) rotate(0deg)';
-                      }}
                     >
                       {feature}
                     </span>
@@ -429,19 +410,13 @@ export default function PackageComparison() {
 
               <CardFooter className="pt-2 mt-auto flex justify-center">
                 <motion.div
-                  whileHover={{
-                    x: [0, -6, 6, -6, 6, 0],
-                    y: -2,
-                  }}
+                  whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{
-                    x: { duration: 0.5, ease: 'easeInOut' },
-                    y: { duration: 0.2 },
-                  }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Button
-                    onClick={() => scrollToSection('get-started')}
-                    className="px-8 py-4 text-base font-bold transition-all duration-300 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl border-2 border-[#D4AF37]"
+                    onClick={handleTallyClick}
+                    className="px-8 py-4 text-base font-bold transition-all duration-300 bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl animate-pulse-glow border-2 border-[#D4AF37]"
                   >
                     {language === 'zh' ? '获取报价' : 'Get Quote'}
                   </Button>
@@ -458,35 +433,38 @@ export default function PackageComparison() {
             <div className="flex flex-col h-[650px]">
               {/* Common Features */}
               <motion.div
-                ref={el => { cardsRef.current[2] = el; }}
-                className="bg-white dark:bg-scc-dark-card rounded-xl p-6 shadow-lg h-[320px] flex flex-col hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] hover:shadow-[0_0_40px_rgba(44,95,124,0.3)]"
+                ref={el => {
+                  cardsRef.current[2] = el;
+                }}
+                className="bg-white dark:bg-scc-dark-card rounded-xl p-6 shadow-lg h-[320px] flex flex-col hover:shadow-xl transition-shadow duration-300"
                 animate={{
                   opacity: visibleCards.includes(2) ? 1 : 0,
                   y: visibleCards.includes(2) ? 0 : 50,
+                  rotateX: cardRotations[2]?.rotateX || 0,
+                  rotateY: cardRotations[2]?.rotateY || 0,
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: {
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20,
+                  },
                 }}
                 transition={{
                   opacity: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
                   y: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+                  rotateX: { duration: 0.15, ease: 'easeOut' },
+                  rotateY: { duration: 0.15, ease: 'easeOut' },
                 }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={e => handleMouseMove(e, 2)}
+                onMouseLeave={() => handleMouseLeave(2)}
               >
                 <h3
-                  className={`text-xl font-bold text-center mb-3 text-gray-900 dark:text-scc-dark-text transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                  className={`text-xl font-bold text-center mb-3 text-gray-900 dark:text-scc-dark-text ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
-                  style={{
-                    textShadow: '0 0 0 transparent',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.textShadow =
-                      '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                    e.currentTarget.style.transform =
-                      'scale(1.05) rotate(1deg)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.textShadow = '0 0 0 transparent';
-                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-                  }}
                 >
                   ✨{' '}
                   {language === 'zh'
@@ -500,25 +478,9 @@ export default function PackageComparison() {
                         <Check className="w-3 h-3" />
                       </div>
                       <span
-                        className={`text-gray-600 dark:text-scc-dark-text-secondary text-sm leading-relaxed hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 cursor-pointer ${
+                        className={`text-gray-600 dark:text-scc-dark-text-secondary text-sm leading-relaxed ${
                           language === 'zh' ? 'font-chinese' : 'font-sans'
                         }`}
-                        style={{
-                          textShadow: '0 0 0 transparent',
-                          transition: 'all 0.3s ease',
-                        }}
-                        onMouseEnter={e => {
-                          e.currentTarget.style.textShadow =
-                            '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                          e.currentTarget.style.transform =
-                            'scale(1.05) rotate(1deg)';
-                        }}
-                        onMouseLeave={e => {
-                          e.currentTarget.style.textShadow =
-                            '0 0 0 transparent';
-                          e.currentTarget.style.transform =
-                            'scale(1) rotate(0deg)';
-                        }}
                       >
                         {feature}
                       </span>
@@ -532,36 +494,39 @@ export default function PackageComparison() {
 
               {/* Custom Package CTA */}
               <motion.div
-                ref={el => { cardsRef.current[3] = el; }}
-                className="bg-white dark:bg-scc-dark-card rounded-xl p-6 shadow-lg h-[320px] flex flex-col text-center hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] hover:shadow-[0_0_40px_rgba(44,95,124,0.3)]"
+                ref={el => {
+                  cardsRef.current[3] = el;
+                }}
+                className="bg-white dark:bg-scc-dark-card rounded-xl p-6 shadow-lg h-[320px] flex flex-col text-center hover:shadow-xl transition-shadow duration-300"
                 animate={{
                   opacity: visibleCards.includes(3) ? 1 : 0,
                   y: visibleCards.includes(3) ? 0 : 50,
+                  rotateX: cardRotations[3]?.rotateX || 0,
+                  rotateY: cardRotations[3]?.rotateY || 0,
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  transition: {
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20,
+                  },
                 }}
                 transition={{
                   opacity: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
                   y: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+                  rotateX: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+                  rotateY: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
                 }}
+                style={{ transformStyle: 'preserve-3d' }}
+                onMouseMove={e => handleMouseMove(e, 3)}
+                onMouseLeave={() => handleMouseLeave(3)}
               >
                 <div className="flex-1 flex flex-col justify-center">
                   <h3
-                    className={`text-xl font-bold mb-3 text-gray-900 dark:text-scc-dark-text transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                    className={`text-xl font-bold mb-3 text-gray-900 dark:text-scc-dark-text ${
                       language === 'zh' ? 'font-chinese' : 'font-sans'
                     }`}
-                    style={{
-                      textShadow: '0 0 0 transparent',
-                      transition: 'all 0.3s ease',
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.textShadow =
-                        '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                      e.currentTarget.style.transform =
-                        'scale(1.05) rotate(1deg)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.textShadow = '0 0 0 transparent';
-                      e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-                    }}
                   >
                     {language === 'zh'
                       ? '需要定制套餐？'
@@ -575,19 +540,13 @@ export default function PackageComparison() {
                 </div>
                 <div className="mt-auto">
                   <motion.div
-                    whileHover={{
-                      x: [0, -6, 6, -6, 6, 0],
-                      y: -2,
-                    }}
+                    whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    transition={{
-                      x: { duration: 0.5, ease: 'easeInOut' },
-                      y: { duration: 0.2 },
-                    }}
+                    transition={{ duration: 0.2 }}
                   >
                     <Button
-                      onClick={() => scrollToSection('get-started')}
-                      className="px-8 py-4 text-base font-bold bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl inline-flex items-center justify-center transition-all duration-300 border-2 border-[#D4AF37]"
+                      onClick={handleTallyClick}
+                      className="px-8 py-4 text-base font-bold bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl inline-flex items-center justify-center transition-all duration-300 animate-pulse-glow border-2 border-[#D4AF37]"
                     >
                       {language === 'zh' ? '定制套餐' : 'Customize It'}
                     </Button>
