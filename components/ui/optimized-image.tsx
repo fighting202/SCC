@@ -71,7 +71,6 @@ export function OptimizedImage({
             'absolute inset-0',
             fill ? 'w-full h-full' : ''
           )}
-          style={{ width, height }}
         />
       )}
 

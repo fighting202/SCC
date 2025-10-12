@@ -1,287 +1,494 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { CONTACT } from "@/lib/scc-constants"
-import { useSCCStore } from "@/lib/store/sccStore"
-import { Button } from "@/components/ui/button"
-
-// Tally global object type - moved to global types
+import { Button } from '@/components/ui/button';
+import { CONTACT } from '@/lib/scc-constants';
+import { useSCCStore } from '@/lib/store/sccStore';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ContactSection() {
-  const { language } = useSCCStore()
-  const [isTallyLoaded, setIsTallyLoaded] = useState(false)
+  const { language } = useSCCStore();
+  const [isTallyLoaded, setIsTallyLoaded] = useState(false);
+  const [visibleElements, setVisibleElements] = useState<Set<number>>(
+    new Set()
+  );
+  const sectionRef = useRef<HTMLElement>(null);
+  const elementRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = parseInt(
+              entry.target.getAttribute('data-element-index') || '0'
+            );
+            setVisibleElements(prev => new Set([...prev, index]));
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+      }
+    );
+
+    // Observe all elements
+    elementRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref);
+    });
+
+    // Also observe the main section
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     // Tally 스크립트 로딩 확인
     const checkTally = setInterval(() => {
       if (typeof window !== 'undefined' && (window as any).Tally) {
-        setIsTallyLoaded(true)
-        clearInterval(checkTally)
+        setIsTallyLoaded(true);
+        clearInterval(checkTally);
       }
-    }, 100)
+    }, 100);
 
-    return () => clearInterval(checkTally)
-  }, [])
+    return () => clearInterval(checkTally);
+  }, []);
 
   const handleTallyClick = () => {
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined') return;
+
+    // 임시 Tally Form ID (실제 Form ID로 교체 필요)
+    const formId = process.env.NEXT_PUBLIC_TALLY_FORM_ID || 'n9Yd3Z';
+    const tallyUrl = `https://tally.so/r/${formId}`;
 
     // 모바일: 새 탭에서 열기 (더 나은 UX)
     if (window.innerWidth < 768) {
-      window.open(`https://tally.so/r/${process.env.NEXT_PUBLIC_TALLY_FORM_ID}`, '_blank')
-      return
+      window.open(tallyUrl, '_blank');
+      return;
     }
 
     // 데스크톱: 팝업 모달
     if (isTallyLoaded && (window as any).Tally) {
-      (window as any).Tally.openPopup(process.env.NEXT_PUBLIC_TALLY_FORM_ID, {
+      (window as any).Tally.openPopup(formId, {
         layout: 'modal',
         width: 700,
         autoClose: 3000,
         emoji: {
           text: '✈️',
-          animation: 'wave'
-        }
-      })
+          animation: 'wave',
+        },
+      });
     } else {
       // Fallback: 새 탭
-      window.open(`https://tally.so/r/${process.env.NEXT_PUBLIC_TALLY_FORM_ID}`, '_blank')
+      window.open(tallyUrl, '_blank');
     }
-  }
+  };
 
-  const [showWeChatQR, setShowWeChatQR] = useState(false)
-  const [copied, setCopied] = useState(false)
-  const [imageLoadFailed, setImageLoadFailed] = useState(false)
+  const [showWeChatQR, setShowWeChatQR] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [imageLoadFailed, setImageLoadFailed] = useState(false);
 
   const handleWeChatClick = () => {
     // 모바일에서는 새 탭으로 열기, 데스크톱에서는 모달
     if (window.innerWidth < 768) {
-      window.open('/wechat-qr', '_blank')
+      window.open('/wechat-qr', '_blank');
     } else {
-      setShowWeChatQR(true)
+      setShowWeChatQR(true);
     }
-  }
+  };
 
   const closeWeChatQR = () => {
-    setShowWeChatQR(false)
-  }
+    setShowWeChatQR(false);
+  };
 
-  const copyToClipboard = async (text: string) => {
+  const copyWeChatId = async () => {
     try {
-      await navigator.clipboard.writeText(text)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(CONTACT.wechatId);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       // Copy failed silently
     }
-  }
+  };
 
   return (
-    <section id="get-started" className="section-padding bg-gray-50 dark:bg-scc-dark-bg">
+    <section
+      ref={sectionRef}
+      id="get-started"
+      className="section-padding bg-gray-50 dark:bg-scc-dark-bg scroll-mt-16"
+    >
       <div className="container-responsive text-center">
         {/* 섹션 제목 */}
-        <h2 className={`text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-scc-dark-text mb-4 ${language === 'zh' ? 'font-chinese' : 'font-sans'}`} style={{ fontWeight: 700 }}>
+        <motion.h2
+          ref={el => {
+            if (el) elementRefs.current[0] = el;
+          }}
+          data-element-index="0"
+          className={`text-3xl sm:text-4xl md:text-5xl text-[#2C5F7C] dark:text-scc-dark-text mb-4 ${
+            language === 'zh' ? 'font-chinese' : 'font-sans'
+          }`}
+          style={{ fontWeight: 700 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{
+            opacity: visibleElements.has(0) ? 1 : 0,
+            y: visibleElements.has(0) ? 0 : 50,
+          }}
+          transition={{
+            duration: 0.6,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
+        >
           {language === 'en' ? 'Get Started Today' : '立即开始'}
-          </h2>
-        
+        </motion.h2>
+
         {/* 설명 */}
-        <p className="body-text text-gray-600 dark:text-scc-dark-text-secondary mb-12">
-          {language === 'en' 
-            ? 'Complete our quick form and receive a personalized consultation within 24 hours' 
-            : '填写快速表格，24小时内收到个性化咨询'
-          }
-        </p>
-        
+        <motion.p
+          ref={el => {
+            if (el) elementRefs.current[1] = el;
+          }}
+          data-element-index="1"
+          className="body-text text-gray-600 dark:text-scc-dark-text-secondary mb-12"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{
+            opacity: visibleElements.has(1) ? 1 : 0,
+            y: visibleElements.has(1) ? 0 : 50,
+          }}
+          transition={{
+            duration: 0.6,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: 0.1,
+          }}
+        >
+          {language === 'en'
+            ? 'Complete our quick form and receive a personalized consultation within 24 hours'
+            : '填写快速表格，24小时内收到个性化咨询'}
+        </motion.p>
+
         {/* 메인 CTA 버튼 */}
-        <div className="mb-8">
-          <Button
-            onClick={handleTallyClick}
-            variant="primary"
-            size="xl"
-            language={language}
-            className="w-full md:w-auto min-w-[280px] h-20 px-16 text-2xl
-              bg-[#2C5F7C] border-2 border-[#D4AF37]
-              hover:border-[#E5C158] hover:bg-[#2C5F7C] hover:text-scc-gold
-              hover:scale-105 transition-all duration-500
-              shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]
-              inline-flex items-center justify-center gap-3"
+        <motion.div
+          ref={el => {
+            if (el) elementRefs.current[2] = el;
+          }}
+          data-element-index="2"
+          className="mb-8"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{
+            opacity: visibleElements.has(2) ? 1 : 0,
+            y: visibleElements.has(2) ? 0 : 50,
+          }}
+          transition={{
+            duration: 0.6,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: 0.2,
+          }}
+        >
+          <motion.div
+            whileHover={{
+              x: [0, -8, 8, -8, 8, 0],
+              scale: 1.05,
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{
+              x: { duration: 0.6, ease: 'easeInOut' },
+              scale: { duration: 0.2 },
+            }}
           >
-            <span 
-              className="text-xl md:text-2xl"
-              style={{ filter: 'drop-shadow(0 0 8px rgba(212,175,55,0.6))' }}
+            <Button
+              onClick={handleTallyClick}
+              variant="primary"
+              size="xl"
+              language={language}
+              className="w-full md:w-auto min-w-[280px] h-20 px-16 text-2xl font-bold hover:scale-105 transition-all duration-300 border-2 border-[#D4AF37]"
             >
-              📋
-            </span>
-            <span className={language === 'zh' ? 'font-chinese' : ''}>
-              {language === 'en' ? 'Get Free Consultation' : '免费咨询'}
-            </span>
-          </Button>
-          <p className={`small-text mt-3 text-gray-600 dark:text-scc-dark-text-secondary ${language === 'zh' ? 'font-chinese' : ''}`}>
+              <span className="flex items-center gap-3">
+                <span>✈️</span>
+                <span>
+                  {language === 'en' ? 'Get Free Consultation' : '获取免费咨询'}
+                </span>
+              </span>
+            </Button>
+          </motion.div>
+          <p
+            className={`small-text mt-3 text-gray-600 dark:text-scc-dark-text-secondary ${
+              language === 'zh' ? 'font-chinese' : ''
+            }`}
+          >
             ⏱️ {language === 'en' ? 'Takes only 2 minutes' : '仅需2分钟'}
           </p>
-        </div>
+        </motion.div>
 
         {/* 대안 연락 방법 */}
-        <div className="mt-16">
-          <p className={`text-gray-600 mb-6 body-text ${language === 'zh' ? 'font-chinese' : ''}`}>
+        <motion.div
+          ref={el => {
+            if (el) elementRefs.current[3] = el;
+          }}
+          data-element-index="3"
+          className="mt-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{
+            opacity: visibleElements.has(3) ? 1 : 0,
+            y: visibleElements.has(3) ? 0 : 50,
+          }}
+          transition={{
+            duration: 0.6,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: 0.3,
+          }}
+        >
+          <motion.p
+            className={`text-gray-600 mb-6 body-text ${
+              language === 'zh' ? 'font-chinese' : ''
+            }`}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{
+              opacity: visibleElements.has(3) ? 1 : 0,
+              y: visibleElements.has(3) ? 0 : 30,
+            }}
+            transition={{
+              duration: 0.6,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: 0.4,
+            }}
+          >
             {language === 'en' ? 'Or contact us directly:' : '或直接联系我们：'}
-          </p>
-          <div className="flex flex-col sm:flex-row card-gap justify-center max-w-2xl mx-auto">
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row card-gap justify-center max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{
+              opacity: visibleElements.has(3) ? 1 : 0,
+              y: visibleElements.has(3) ? 0 : 30,
+            }}
+            transition={{
+              duration: 0.6,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: 0.5,
+            }}
+          >
             {language === 'zh' ? (
               <>
                 {/* WeChat - 중국 고객 우선 */}
-                <Button
-                  onClick={handleWeChatClick}
-                  variant="success"
-                  size="lg"
-                  language={language}
-                  className="w-full sm:w-auto bg-[#07C160] hover:bg-[#059B4A] text-white 
-                             shadow-lg hover:shadow-2xl hover:scale-105
-                             inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300
-                             h-12 min-h-[48px]"
+                <motion.div
+                  whileHover={{
+                    x: [0, -4, 4, -4, 4, 0],
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    x: { duration: 0.5, ease: 'easeInOut' },
+                    y: { duration: 0.2 },
+                  }}
                 >
-                  <span className="text-xl">🔲</span>
-                  <span className="text-base font-chinese">微信</span>
-              </Button>
+                  <Button
+                    onClick={handleWeChatClick}
+                    variant="outline"
+                    size="lg"
+                    className="flex-1 bg-green-500 hover:bg-green-600 text-white border-green-500 hover:border-green-600 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="text-xl">💬</span>
+                      <span className="text-lg font-chinese font-normal">
+                        微信
+                      </span>
+                    </span>
+                  </Button>
+                </motion.div>
 
-              {/* WhatsApp */}
-              <a
-                href={`https://wa.me/${CONTACT.phone.replace(/[^0-9]/g, '')}?text=Hi%20Seoul%20Care%20Concierge!%0A%0AName:%20%0AService:%20%0ATravel%20dates:%20`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1DA851] text-white 
-                           shadow-lg hover:shadow-2xl hover:scale-105
-                           inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300
-                           h-12 min-h-[48px]"
-              >
-                <span className="text-xl">💬</span>
-                <span className="text-base">WhatsApp</span>
-              </a>
+                {/* WhatsApp */}
+                <motion.a
+                  href={`https://wa.me/${CONTACT.phone.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{
+                    x: [0, -4, 4, -4, 4, 0],
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    x: { duration: 0.5, ease: 'easeInOut' },
+                    y: { duration: 0.2 },
+                  }}
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="text-xl">📱</span>
+                      <span className="text-base">WhatsApp</span>
+                    </span>
+                  </Button>
+                </motion.a>
 
-              {/* Email */}
-              <a
-                href={`mailto:${CONTACT.email}`}
-                className="w-full sm:w-auto bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white 
-                           shadow-lg hover:shadow-2xl hover:scale-105
-                           inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300
-                           h-12 min-h-[48px]"
-              >
-                <span className="text-xl">✉️</span>
-                <span className="text-base font-chinese">邮箱</span>
-              </a>
+                {/* Email */}
+                <motion.div
+                  whileHover={{
+                    x: [0, -4, 4, -4, 4, 0],
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    x: { duration: 0.5, ease: 'easeInOut' },
+                    y: { duration: 0.2 },
+                  }}
+                >
+                  <a href={`mailto:${CONTACT.email}`}>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="flex-1 bg-gray-600 hover:bg-gray-700 text-white border-gray-600 hover:border-gray-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="text-xl">📧</span>
+                        <span className="text-lg font-chinese font-normal">
+                          邮箱
+                        </span>
+                      </span>
+                    </Button>
+                  </a>
+                </motion.div>
               </>
             ) : (
               <>
                 {/* WhatsApp - 영문 고객 우선 */}
-                <Button
-                  asChild
-                  variant="success"
-                  size="lg"
-                  language={language}
-                  className="w-full sm:w-auto bg-[#25D366] hover:bg-[#1DA851] text-white
-                           shadow-lg hover:shadow-2xl hover:scale-105"
+                <motion.a
+                  href={`https://wa.me/${CONTACT.phone.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{
+                    x: [0, -4, 4, -4, 4, 0],
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    x: { duration: 0.5, ease: 'easeInOut' },
+                    y: { duration: 0.2 },
+                  }}
                 >
-                  <a
-                    href={`https://wa.me/${CONTACT.phone.replace(/[^0-9]/g, '')}?text=Hi%20Seoul%20Care%20Concierge!%0A%0AName:%20%0AService:%20%0ATravel%20dates:%20`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="flex-1 bg-green-600 hover:bg-green-700 text-white border-green-600 hover:border-green-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
                   >
-                    <span className="text-xl">💬</span>
-                    <span className="text-base">WhatsApp</span>
-                  </a>
-                </Button>
+                    <span className="flex items-center gap-2">
+                      <span className="text-xl">📱</span>
+                      <span className="text-base">WhatsApp</span>
+                    </span>
+                  </Button>
+                </motion.a>
 
-              {/* WeChat */}
-                <Button
-                  onClick={handleWeChatClick}
-                  variant="success"
-                  size="lg"
-                  language={language}
-                  className="w-full sm:w-auto bg-[#07C160] hover:bg-[#059B4A] text-white 
-                             shadow-lg hover:shadow-2xl hover:scale-105
-                             inline-flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold rounded-lg transition-all duration-300"
+                {/* WeChat */}
+                <motion.div
+                  whileHover={{
+                    x: [0, -4, 4, -4, 4, 0],
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    x: { duration: 0.5, ease: 'easeInOut' },
+                    y: { duration: 0.2 },
+                  }}
                 >
-                  <span className="text-xl">🔲</span>
-                  <span className="text-base">WeChat</span>
-                </Button>
+                  <Button
+                    onClick={handleWeChatClick}
+                    variant="outline"
+                    size="lg"
+                    className="flex-1 bg-green-500 hover:bg-green-600 text-white border-green-500 hover:border-green-600 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                  >
+                    <span className="flex items-center gap-2">
+                      <span className="text-xl">💬</span>
+                      <span className="text-base">WeChat</span>
+                    </span>
+                  </Button>
+                </motion.div>
 
                 {/* Email */}
-                <Button
-                  asChild
-                  variant="primary"
-                  size="lg"
-                  language={language}
-                  className="w-full sm:w-auto bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white
-                           shadow-lg hover:shadow-2xl hover:scale-105"
+                <motion.div
+                  whileHover={{
+                    x: [0, -4, 4, -4, 4, 0],
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    x: { duration: 0.5, ease: 'easeInOut' },
+                    y: { duration: 0.2 },
+                  }}
                 >
                   <a href={`mailto:${CONTACT.email}`}>
-                    <span className="text-xl">✉️</span>
-                    <span className="text-base">Email</span>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="flex-1 bg-gray-600 hover:bg-gray-700 text-white border-gray-600 hover:border-gray-700 hover:text-[#D4AF37] transition-all duration-300 px-8 py-4 text-base font-bold"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="text-xl">📧</span>
+                        <span className="text-base">Email</span>
+                      </span>
+                    </Button>
                   </a>
-                </Button>
+                </motion.div>
               </>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* WeChat QR Code Modal */}
       {showWeChatQR && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl p-8 max-w-sm w-full text-center">
-            <h3 className="text-xl font-bold mb-4 text-gray-900">
-              {language === 'zh' ? 'WeChat 二维码' : 'WeChat QR Code'}
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-scc-dark-card rounded-xl p-6 max-w-sm mx-4 text-center">
+            <h3
+              className={`text-xl font-bold mb-4 text-gray-900 dark:text-scc-dark-text ${
+                language === 'zh' ? 'font-chinese' : 'font-sans'
+              }`}
+            >
+              {language === 'zh' ? '微信二维码' : 'WeChat QR Code'}
             </h3>
-            <div className="bg-gray-100 p-6 rounded-lg mb-4">
-              <div className="flex flex-col items-center">
-                <div className="w-48 h-48 bg-white rounded-lg shadow-md mb-4 flex items-center justify-center relative">
-                  {imageLoadFailed ? (
-                    <div className="text-center text-gray-500 p-4">
-                      <div className="text-4xl mb-2">📱</div>
-                      <div className="text-sm">QR Code</div>
-                      <div className="text-xs mt-1">WeChat ID: {CONTACT.wechatId}</div>
+            <div className="mb-4">
+              {imageLoadFailed ? (
+                <div className="w-48 h-48 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-xs mt-1">
+                      WeChat ID: {CONTACT.wechatId}
                     </div>
-                  ) : (
-                    <Image
-                      src="/optimized/scc-wechat-qr.webp"
-                      alt="WeChat QR Code"
-                      width={192}
-                      height={192}
-                      className="object-contain rounded-lg"
-                      onError={(e) => {
-                        console.error('QR code image load failed:', e);
-                        setImageLoadFailed(true);
-                      }}
-                    />
-                  )}
+                  </div>
                 </div>
-                <p className="text-sm text-gray-600">
-                  {language === 'zh' ? 'WeChat ID: ' : 'WeChat ID: '}
-                  <span className="font-mono font-bold">{CONTACT.wechatId}</span>
-                </p>
-              </div>
+              ) : (
+                <Image
+                  src="/optimized/scc-wechat-qr.webp"
+                  alt="WeChat QR Code"
+                  width={192}
+                  height={192}
+                  className="object-contain rounded-lg"
+                  onError={e => {
+                    console.error('QR code image load failed:', e);
+                    setImageLoadFailed(true);
+                  }}
+                />
+              )}
             </div>
-            <p className="text-sm text-gray-600 mb-6">
-              {language === 'zh' 
-                ? '请使用 WeChat 扫描二维码或搜索 ID 添加好友' 
-                : 'Scan QR code with WeChat or search by ID to add friend'
-              }
+            <p className="text-sm text-gray-600">
+              {language === 'zh' ? 'WeChat ID: ' : 'WeChat ID: '}
+              <button
+                onClick={copyWeChatId}
+                className="text-[#2C5F7C] hover:underline font-mono"
+              >
+                {CONTACT.wechatId}
+              </button>
             </p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => copyToClipboard(CONTACT.wechatId)}
-                className="no-gold-hover flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors"
-              >
-                {language === 'zh' ? '复制 ID' : 'Copy ID'}
-              </button>
-              <button
-                onClick={closeWeChatQR}
-                className="no-gold-hover flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
-              >
-                {language === 'zh' ? '关闭' : 'Close'}
-              </button>
-            </div>
+            <button
+              onClick={closeWeChatQR}
+              className="no-gold-hover flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors"
+            >
+              {language === 'zh' ? '关闭' : 'Close'}
+            </button>
             {copied && (
               <p className="text-xs text-green-600 mt-2">
                 {language === 'zh' ? '已复制!' : 'Copied!'}
@@ -291,5 +498,5 @@ export default function ContactSection() {
         </div>
       )}
     </section>
-  )
+  );
 }

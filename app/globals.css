@@ -4,44 +4,137 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Favicon 완전 차단 */
+link[rel='icon'],
+link[rel='shortcut icon'],
+link[rel='apple-touch-icon'] {
+  display: none !important;
+}
+
+/* 로고 강제 표시 - 모든 가능한 선택자 사용 */
+.logo-container,
+.scc-logo,
+.scc-logo-svg {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 48px !important;
+  height: 48px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  position: relative !important;
+  margin-right: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.logo-text,
+.scc-logo-text {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  line-height: 1 !important;
+  user-select: none !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* SVG 로고 강제 표시 */
+.scc-logo-svg svg {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 48px !important;
+  height: 48px !important;
+}
+
+/* 다크모드에서 헤더 로고 가시성 개선 */
+.dark .scc-logo-image img {
+  filter: brightness(1.5) contrast(1.25)
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  transition: filter 0.3s ease;
+}
+
+/* 라이트모드에서 로고 스타일 */
+.scc-logo-image img {
+  transition: filter 0.3s ease;
+}
+
+/* 파비콘 완전 차단 */
+img[src*='favicon'],
+img[alt*='favicon'],
+img[alt*='icon'] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 /* Import accessibility styles */
 @import '../styles/accessibility.css';
 
 /* Dark mode base styles */
 @layer base {
   :root {
-    --background: 248 249 250;
-    --foreground: 44 62 80;
-    --card: 255 255 255;
-    --card-foreground: 44 62 80;
-    --primary: 44 95 124;
-    --primary-foreground: 255 255 255;
-    --accent: 212 175 55;
-    --accent-foreground: 44 62 80;
+    --background: 210 17% 97%; /* #F8F9FA */
+    --foreground: 210 29% 29%; /* #2C3E50 */
+    --card: 210 17% 100%;
+    --card-foreground: 210 29% 29%;
+    --popover: 210 17% 100%;
+    --popover-foreground: 210 29% 29%;
+    --primary: 202 47% 33%; /* #2C5F7C */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 17% 96%;
+    --secondary-foreground: 210 29% 29%;
+    --muted: 210 17% 96%;
+    --muted-foreground: 215 14% 65%;
+    --accent: 45 65% 52%; /* #D4AF37 */
+    --accent-foreground: 210 29% 29%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 210 17% 88%;
+    --input: 210 17% 88%;
+    --ring: 202 47% 33%;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 10 14 26;
-    --foreground: 229 231 235;
-    --card: 26 35 50;
-    --card-foreground: 229 231 235;
-    --primary: 59 130 246;
-    --primary-foreground: 255 255 255;
-    --accent: 245 158 11;
-    --accent-foreground: 10 14 26;
+    --background: 224 44% 8%; /* #0A0E1A */
+    --foreground: 220 14% 92%; /* #E5E7EB */
+    --card: 218 33% 15%; /* #1A2332 */
+    --card-foreground: 220 14% 92%;
+    --popover: 218 33% 15%;
+    --popover-foreground: 220 14% 92%;
+    --primary: 217 91% 60%; /* #3B82F6 */
+    --primary-foreground: 222 47% 11%;
+    --secondary: 222 33% 11%; /* #121826 */
+    --secondary-foreground: 220 14% 92%;
+    --muted: 222 33% 11%;
+    --muted-foreground: 215 14% 65%; /* #9CA3AF */
+    --accent: 38 92% 50%; /* #F59E0B */
+    --accent-foreground: 224 44% 8%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 21% 23%; /* #2D3748 */
+    --input: 215 21% 23%;
+    --ring: 217 91% 60%;
   }
 
   body {
-    @apply bg-scc-background text-scc-text dark:bg-scc-dark-bg dark:text-scc-dark-text;
+    @apply bg-background text-foreground;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
 /* CSS 변수 정의 */
 :root {
-  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   --font-playfair: 'Playfair Display', 'Times New Roman', Times, serif;
-  --font-noto-sans-sc: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  --font-noto-sans-sc: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
 }
 
 /* 기본 폰트 설정 */
@@ -50,11 +143,13 @@
 }
 
 .font-sans {
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
 .font-chinese {
-  font-family: var(--font-noto-sans-sc), 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+  font-family: var(--font-noto-sans-sc), 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
   word-break: break-word;
   line-break: auto;
   hyphens: none;
@@ -140,22 +235,22 @@
   .container-responsive {
     @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
-  
+
   /* Section padding standards */
   .section-padding {
     @apply py-12 md:py-16 lg:py-20;
   }
-  
+
   /* Section margin standards */
   .section-margin {
     @apply mb-12 md:mb-16 lg:mb-20;
   }
-  
+
   /* Element spacing standards */
   .element-spacing {
     @apply space-y-4 md:space-y-6 lg:space-y-8;
   }
-  
+
   /* Card responsive spacing */
   .card-gap {
     @apply gap-4 sm:gap-6 lg:gap-8;
@@ -215,67 +310,136 @@
 
   /* Animations */
   @keyframes fadeIn {
-    from { opacity: 0; transform: translate3d(0, 20px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translate3d(0, 30px, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+      opacity: 0;
+      transform: translate3d(0, 30px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   @keyframes fadeInLeft {
-    from { opacity: 0; transform: translate3d(-30px, 0, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+      opacity: 0;
+      transform: translate3d(-30px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   @keyframes fadeInRight {
-    from { opacity: 0; transform: translate3d(30px, 0, 0); }
-    to { opacity: 1; transform: translate3d(0, 0, 0); }
+    from {
+      opacity: 0;
+      transform: translate3d(30px, 0, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   @keyframes scaleIn {
-    from { opacity: 0; transform: scale3d(0.9, 0.9, 1); }
-    to { opacity: 1; transform: scale3d(1, 1, 1); }
+    from {
+      opacity: 0;
+      transform: scale3d(0.9, 0.9, 1);
+    }
+    to {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
   }
 
   @keyframes pulse {
-    0%, 100% { transform: scale3d(1, 1, 1); }
-    50% { transform: scale3d(1.05, 1.05, 1.05); }
+    0%,
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+    50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
   }
 
   @keyframes pulseGlow {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale3d(1, 1, 1);
       box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
     }
     50% {
       transform: scale3d(1.02, 1.02, 1.02);
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.5),
+        0 0 40px rgba(212, 175, 55, 0.3);
     }
   }
 
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
   }
 
   @keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   /* Animations - will-change removed for better GPU memory management */
-  .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
-  .animate-fade-in-up { animation: fadeInUp 0.7s ease-out forwards; }
-  .animate-fade-in-left { animation: fadeInLeft 0.7s ease-out forwards; }
-  .animate-fade-in-right { animation: fadeInRight 0.7s ease-out forwards; }
-  .animate-scale-in { animation: scaleIn 0.6s ease-out forwards; }
-  .animate-pulse { animation: pulse 2s infinite; }
-  .animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
-  .animate-bounce { animation: bounce 1s infinite; }
-  .animate-rotate { animation: rotate 2s linear infinite; }
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s ease-out forwards;
+  }
+  .animate-fade-in-left {
+    animation: fadeInLeft 0.7s ease-out forwards;
+  }
+  .animate-fade-in-right {
+    animation: fadeInRight 0.7s ease-out forwards;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+  .animate-pulse {
+    animation: pulse 2s infinite;
+  }
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  .animate-bounce {
+    animation: bounce 1s infinite;
+  }
+  .animate-rotate {
+    animation: rotate 2s linear infinite;
+  }
 
   /* Scroll-triggered animations - will-change removed for better performance */
   .animate-on-scroll {
@@ -309,7 +473,8 @@
 
   /* Hover effects - will-change applied only on hover for better GPU memory management */
   .hover-lift {
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
   .hover-lift:hover {
     will-change: transform;
@@ -424,9 +589,23 @@
 }
 /* Form Validation Animations */
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-  20%, 40%, 60%, 80% { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
 }
 
 @keyframes slide-down {
@@ -452,8 +631,12 @@
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-up {

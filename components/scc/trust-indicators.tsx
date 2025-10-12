@@ -3,6 +3,7 @@
 import { Shield, Clock, Globe, CheckCircle } from 'lucide-react'
 import { BilingualText } from './bilingualtext'
 import { cn } from '@/lib/scc-utils'
+import { motion } from 'framer-motion'
 
 interface TrustBadgeProps {
   icon: 'verified' | 'insurance' | '24-7' | 'multilingual'
@@ -21,13 +22,50 @@ function TrustBadge({ icon, text, className }: TrustBadgeProps) {
   const Icon = iconMap[icon]
 
   return (
-    <div className={cn(
-      "flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium",
-      className
-    )}>
-      <Icon className="w-5 h-5 text-green-600" />
+    <motion.div
+      className={cn(
+        "flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium relative",
+        className
+      )}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)'
+      }}
+      animate={{
+        scale: [1, 1.02, 1],
+      }}
+      transition={{
+        scale: {
+          duration: 2,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }
+      }}
+    >
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.7, 1, 0.7]
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: 'easeInOut'
+        }}
+      >
+        <Icon className="w-5 h-5 text-green-600" />
+      </motion.div>
       <span>{text}</span>
-    </div>
+
+      {/* Glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-full bg-green-400 opacity-0 blur-md"
+        whileHover={{
+          opacity: 0.3,
+        }}
+        transition={{ duration: 0.3 }}
+      />
+    </motion.div>
   )
 }
 

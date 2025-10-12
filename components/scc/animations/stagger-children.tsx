@@ -1,20 +1,20 @@
-"use client"
+'use client';
 
-import { motion } from 'framer-motion'
-import { ReactNode } from 'react'
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface StaggerChildrenProps {
-  children: ReactNode
-  delay?: number
-  staggerDelay?: number
-  className?: string
+  children: ReactNode;
+  delay?: number;
+  staggerDelay?: number;
+  className?: string;
 }
 
-export function StaggerChildren({ 
-  children, 
-  delay = 0, 
+export function StaggerChildren({
+  children,
+  delay = 0,
   staggerDelay = 0.1,
-  className 
+  className,
 }: StaggerChildrenProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -22,25 +22,25 @@ export function StaggerChildren({
       opacity: 1,
       transition: {
         delay,
-        staggerChildren: staggerDelay
-      }
-    }
-  }
+        staggerChildren: staggerDelay,
+      },
+    },
+  };
 
   const childVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 20 
+    hidden: {
+      opacity: 0,
+      y: 20,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut" as const
-      }
-    }
-  }
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    },
+  };
 
   return (
     <motion.div
@@ -49,14 +49,15 @@ export function StaggerChildren({
       animate="visible"
       className={className}
     >
-      {Array.isArray(children) 
-        ? children.map((child, index) => (
-            <motion.div key={index} variants={childVariants}>
-              {child}
-            </motion.div>
-          ))
-        : <motion.div variants={childVariants}>{children}</motion.div>
-      }
+      {Array.isArray(children) ? (
+        children.map((child, index) => (
+          <motion.div key={index} variants={childVariants}>
+            {child}
+          </motion.div>
+        ))
+      ) : (
+        <motion.div variants={childVariants}>{children}</motion.div>
+      )}
     </motion.div>
-  )
+  );
 }

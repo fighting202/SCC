@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import type { Language, InquiryForm } from '@/lib/scc-types';
 
 interface SCCStore {
@@ -124,6 +124,18 @@ export const useSCCStore = create<SCCStore>()(
     }),
     {
       name: 'scc-store', // localStorage 키
+      storage: createJSONStorage(() => {
+        // In a server environment, use a dummy storage that does nothing
+        if (typeof window === 'undefined') {
+          return {
+            getItem: () => null,
+            setItem: () => {},
+            removeItem: () => {},
+          };
+        }
+        // In a client environment, use localStorage
+        return localStorage;
+      }),
       partialize: (state) => ({
         // 지속할 상태만 선택
         language: state.language,

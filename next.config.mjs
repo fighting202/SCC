@@ -1,8 +1,8 @@
-import bundleAnalyzer from '@next/bundle-analyzer'
+import bundleAnalyzer from '@next/bundle-analyzer';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -52,7 +52,7 @@ const nextConfig = {
         fs: false,
         net: false,
         tls: false,
-      }
+      };
     }
 
     // 프로덕션 빌드 최적화
@@ -60,10 +60,10 @@ const nextConfig = {
       config.optimization = {
         ...config.optimization,
         minimize: true,
-      }
+      };
     }
 
-    return config
+    return config;
   },
 
   // 헤더 설정 (보안 강화)
@@ -90,14 +90,24 @@ const nextConfig = {
           },
         ],
       },
-    ]
+    ];
   },
 
   // 리다이렉트 설정 (필요시)
   async redirects() {
-    return []
+    return [];
   },
-}
+
+  // favicon 요청 차단
+  async rewrites() {
+    return [
+      {
+        source: '/favicon.ico',
+        destination: '/api/block-favicon',
+      },
+    ];
+  },
+};
 
 // Bundle Analyzer 설정 적용
-export default withBundleAnalyzer(nextConfig)
+export default withBundleAnalyzer(nextConfig);

@@ -56,6 +56,7 @@ export function useFocusManagement(options: FocusManagementOptions = {}) {
       document.addEventListener('keydown', trapFocus)
       return () => document.removeEventListener('keydown', trapFocus)
     }
+    return undefined
   }, [trap, trapFocus])
 
   useEffect(() => {
@@ -63,6 +64,7 @@ export function useFocusManagement(options: FocusManagementOptions = {}) {
       previousActiveElement.current = document.activeElement
       return restorePreviousFocus
     }
+    return undefined
   }, [restoreFocus, restorePreviousFocus])
 
   // Set initial focus

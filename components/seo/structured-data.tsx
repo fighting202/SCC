@@ -1,253 +1,195 @@
-/**
- * Structured Data (JSON-LD) for SEO
- * Schema.org markup for better search engine understanding
- */
+'use client';
 
-import Script from 'next/script'
+import { useEffect } from 'react';
 
-interface OrganizationSchemaProps {
-  language?: 'en' | 'zh'
+interface StructuredDataProps {
+  type: 'organization' | 'website' | 'service' | 'faq' | 'breadcrumb';
+  data?: any;
 }
 
-export function OrganizationSchema({ language = 'en' }: OrganizationSchemaProps) {
-  const organizationData = {
+export function StructuredData({ type, data }: StructuredDataProps) {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+
+    let jsonLd: any = {};
+
+    switch (type) {
+      case 'organization':
+        jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'MedicalBusiness',
-    '@id': 'https://seoulcareconcierge.com',
+          '@type': 'Organization',
     name: 'Seoul Care Concierge',
-    alternateName: language === 'zh' ? '首尔护理礼宾' : 'SCC',
+          alternateName: 'SCC',
+          description:
+            'Premium medical and beauty tourism concierge service in Seoul, Korea',
     url: 'https://seoulcareconcierge.com',
-    logo: 'https://seoulcareconcierge.com/scc-logo-header.png',
-    image: 'https://seoulcareconcierge.com/modern-seoul-skyline-at-sunset-with-luxury-medical.jpg',
-    description:
-      language === 'zh'
-        ? '首尔专业医疗和美容护理礼宾服务。为国际客户提供机场接送、住宿、翻译和全面支持。'
-        : 'Professional medical and beauty care concierge service in Seoul, Korea. Airport pickup, accommodation, translation, and full support for international clients.',
+          logo: 'https://seoulcareconcierge.com/optimized/scc-logo-header.webp',
+          contactPoint: {
+            '@type': 'ContactPoint',
     telephone: '+82-10-2981-6653',
+            contactType: 'customer service',
+            availableLanguage: ['English', 'Chinese'],
+            areaServed: 'KR',
     email: 'seoulcareconcierge@gmail.com',
+          },
     address: {
       '@type': 'PostalAddress',
+            addressCountry: 'KR',
       addressLocality: 'Seoul',
-      addressCountry: 'KR',
-      addressRegion: 'Seoul',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 37.5665,
-      longitude: 126.978,
+          },
+          sameAs: [
+            'https://wa.me/821029816653',
+            'https://wechat.com/SeoulCareConcierge',
+          ],
+          serviceArea: {
+            '@type': 'Country',
+            name: 'South Korea',
+          },
+          foundingDate: '2024',
+          slogan: 'Making Korea accessible, one journey at a time',
+        };
+        break;
+
+      case 'website':
+        jsonLd = {
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'Seoul Care Concierge',
+          url: 'https://seoulcareconcierge.com',
+          description:
+            'Premium medical and beauty tourism concierge service in Seoul, Korea',
+          inLanguage: ['en-US', 'zh-CN'],
+          potentialAction: {
+            '@type': 'SearchAction',
+            target:
+              'https://seoulcareconcierge.com/search?q={search_term_string}',
+            'query-input': 'required name=search_term_string',
+          },
+        };
+        break;
+
+      case 'service':
+        jsonLd = {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: 'Medical & Beauty Tourism Concierge',
+          description:
+            'Comprehensive concierge services for medical and beauty tourism in Seoul, Korea',
+          provider: {
+            '@type': 'Organization',
+            name: 'Seoul Care Concierge',
     },
     areaServed: {
       '@type': 'Country',
-      name: ['South Korea', 'China', 'International'],
-    },
-    availableLanguage: [
-      {
-        '@type': 'Language',
-        name: 'English',
-        alternateName: 'en',
-      },
-      {
-        '@type': 'Language',
-        name: 'Chinese',
-        alternateName: 'zh',
-      },
-      {
-        '@type': 'Language',
-        name: 'Korean',
-        alternateName: 'ko',
-      },
-    ],
-    priceRange: '$$-$$$',
-    paymentAccepted: ['Cash', 'Credit Card', 'Bank Transfer', 'WeChat Pay', 'Alipay'],
-    sameAs: [
-      'https://www.instagram.com/seoulcareconcierge',
-      'https://www.facebook.com/seoulcareconcierge',
-    ],
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Medical & Beauty Services',
-      itemListElement: [
-        {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: language === 'zh' ? '医疗服务' : 'Medical Services',
-            description:
-              language === 'zh'
-                ? '整形外科、皮肤科、牙科、韩医'
-                : 'Plastic surgery, Dermatology, Dental care, Traditional Korean medicine',
+            name: 'South Korea',
+          },
+          serviceType: 'Medical Tourism',
+          category: 'Health and Beauty Services',
+          offers: [
+            {
+              '@type': 'Offer',
+              name: 'Basic Package',
+              description: 'Essential medical tourism support services',
+              price: '500',
+              priceCurrency: 'USD',
+            },
+            {
+              '@type': 'Offer',
+              name: 'Premium Package',
+              description:
+                'Comprehensive medical and beauty tourism concierge services',
+              price: '1000',
+              priceCurrency: 'USD',
+            },
+          ],
+        };
+        break;
+
+      case 'faq':
+        jsonLd = {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: 'What services do you provide?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'We provide comprehensive medical and beauty tourism concierge services including hospital appointments, translation services, accommodation assistance, and cultural guidance.',
           },
         },
         {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: language === 'zh' ? '美容服务' : 'Beauty Services',
-            description:
-              language === 'zh'
-                ? 'K-Beauty 护肤、美发化妆、水疗健康'
-                : 'K-Beauty skincare, Hair & makeup, Spa & wellness',
+              '@type': 'Question',
+              name: 'Do you provide translation services?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Yes, we provide professional translation services in English and Chinese for all medical consultations and procedures.',
           },
         },
         {
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: language === 'zh' ? '全面支持' : 'Complete Support',
-            description:
-              language === 'zh'
-                ? '机场接送、住宿预订、翻译服务、紧急援助'
-                : 'Airport transfer, Accommodation booking, Interpreter service, Emergency assistance',
+              '@type': 'Question',
+              name: 'How do I get started?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Contact us via WhatsApp, WeChat, or email to discuss your needs and receive a personalized consultation.',
           },
         },
       ],
-    },
-  }
+        };
+        break;
 
-  return (
-    <Script
-      id="organization-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
-      strategy="afterInteractive"
-    />
-  )
-}
-
-export function WebSiteSchema() {
-  const websiteData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': 'https://seoulcareconcierge.com/#website',
-    url: 'https://seoulcareconcierge.com',
-    name: 'Seoul Care Concierge',
-    inLanguage: ['en', 'zh'],
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://seoulcareconcierge.com/?s={search_term_string}',
-      },
-      'query-input': 'required name=search_term_string',
-    },
-  }
-
-  return (
-    <Script
-      id="website-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
-      strategy="afterInteractive"
-    />
-  )
-}
-
-export function BreadcrumbSchema({ items }: { items: Array<{ name: string; url: string }> }) {
-  const breadcrumbData = {
+      case 'breadcrumb':
+        jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: 'https://seoulcareconcierge.com',
+            },
+            {
       '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  }
+              position: 2,
+              name: 'Services',
+              item: 'https://seoulcareconcierge.com#services',
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: 'Packages',
+              item: 'https://seoulcareconcierge.com#packages',
+            },
+          ],
+        };
+        break;
 
-  return (
-    <Script
-      id="breadcrumb-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      strategy="afterInteractive"
-    />
-  )
+      default:
+        jsonLd = data || {};
+    }
+
+    script.textContent = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, [type, data]);
+
+  return null;
 }
 
-export function ServiceSchema({
-  name,
-  description,
-  provider = 'Seoul Care Concierge',
-  areaServed = 'Seoul, South Korea',
-}: {
-  name: string
-  description: string
-  provider?: string
-  areaServed?: string
-}) {
-  const serviceData = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: name,
-    description: description,
-    provider: {
-      '@type': 'Organization',
-      name: provider,
-    },
-    areaServed: {
-      '@type': 'City',
-      name: areaServed,
-    },
-  }
-
+// 모든 구조화된 데이터를 한 번에 렌더링하는 컴포넌트
+export function AllStructuredData() {
   return (
-    <Script
-      id={`service-schema-${name.toLowerCase().replace(/\s+/g, '-')}`}
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceData) }}
-      strategy="afterInteractive"
-    />
-  )
-}
-
-export function FAQSchema({ faqs }: { faqs: Array<{ question: string; answer: string }> }) {
-  const faqData = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  }
-
-  return (
-    <Script
-      id="faq-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
-      strategy="afterInteractive"
-    />
-  )
-}
-
-export function ContactPointSchema() {
-  const contactData = {
-    '@context': 'https://schema.org',
-    '@type': 'ContactPoint',
-    telephone: '+82-10-2981-6653',
-    contactType: 'Customer Service',
-    email: 'seoulcareconcierge@gmail.com',
-    availableLanguage: ['English', 'Chinese', 'Korean'],
-    areaServed: ['KR', 'CN', 'International'],
-    contactOption: 'TollFree',
-    hoursAvailable: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '09:00',
-      closes: '21:00',
-    },
-  }
-
-  return (
-    <Script
-      id="contact-schema"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(contactData) }}
-      strategy="afterInteractive"
-    />
-  )
+    <>
+      <StructuredData type="organization" />
+      <StructuredData type="website" />
+      <StructuredData type="service" />
+      <StructuredData type="faq" />
+      <StructuredData type="breadcrumb" />
+    </>
+  );
 }

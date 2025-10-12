@@ -1,37 +1,37 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { ArrowUp, Home } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useSCCStore } from "@/lib/store/sccStore"
+import { Button } from '@/components/ui/button';
+import { useSCCStore } from '@/store/scc_store';
+import { ArrowUp, Home } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function FloatingButtons() {
-  const [isVisible, setIsVisible] = useState(false)
-  const { language } = useSCCStore()
+  const [isVisible, setIsVisible] = useState(false);
+  const { language } = useSCCStore();
 
   useEffect(() => {
     const toggleVisibility = () => {
       if (window.scrollY > 500) {
-        setIsVisible(true)
+        setIsVisible(true);
       } else {
-        setIsVisible(false)
+        setIsVisible(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", toggleVisibility)
-    return () => window.removeEventListener("scroll", toggleVisibility)
-  }, [])
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
-    })
-  }
+      behavior: 'smooth',
+    });
+  };
 
   const goToHome = () => {
-    window.location.href = '/'
-  }
+    window.location.href = '/';
+  };
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function FloatingButtons() {
           >
             <Home className="w-5 h-5" />
           </Button>
-          
+
           {/* Back to Top Button */}
           <Button
             onClick={scrollToTop}
@@ -59,5 +59,5 @@ export default function FloatingButtons() {
         </div>
       )}
     </>
-  )
+  );
 }

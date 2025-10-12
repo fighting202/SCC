@@ -1,47 +1,81 @@
-'use client'
+'use client';
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg'
-  className?: string
-  text?: string
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  text?: string;
 }
 
-export function LoadingSpinner({ 
-  size = 'md', 
-  className,
-  text = 'Loading...'
-}: LoadingSpinnerProps) {
-  const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-6 h-6',
-    lg: 'w-8 h-8'
-  }
+const sizeClasses = {
+  sm: 'w-4 h-4',
+  md: 'w-8 h-8',
+  lg: 'w-12 h-12',
+};
 
+export function LoadingSpinner({
+  size = 'md',
+  className,
+  text,
+}: LoadingSpinnerProps) {
   return (
-    <div className={cn('flex items-center justify-center space-x-2', className)}>
-      <div
+    <div
+      className={cn(
+        'flex flex-col items-center justify-center space-y-2',
+        className
+      )}
+    >
+      <motion.div
         className={cn(
-          'animate-spin rounded-full border-2 border-gray-300 border-t-scc-primary',
+          'border-2 border-gray-300 border-t-[#D4AF37] rounded-full',
           sizeClasses[size]
         )}
+        animate={{ rotate: 360 }}
+        transition={{
+          duration: 1,
+          repeat: Infinity,
+          ease: 'linear',
+        }}
       />
       {text && (
-        <span className="text-sm text-gray-600 dark:text-scc-dark-text-secondary">
+        <motion.p
+          className="text-sm text-gray-600 dark:text-gray-400"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           {text}
-        </span>
+        </motion.p>
       )}
     </div>
-  )
+  );
 }
 
-export function PageLoadingSpinner() {
+// 페이지 전체 로딩 오버레이
+export function LoadingOverlay({
+  isVisible,
+  text = 'Loading...',
+}: {
+  isVisible: boolean;
+  text?: string;
+}) {
+  if (!isVisible) return null;
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-scc-dark-bg">
-      <div className="text-center">
-        <LoadingSpinner size="lg" text="Loading Seoul Care Concierge..." />
-      </div>
-    </div>
-  )
+    <motion.div
+      className="fixed inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50 flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <LoadingSpinner size="lg" text={text} />
+    </motion.div>
+  );
+}
+
+// 버튼 내부 로딩 스피너
+export function ButtonSpinner({ size = 'sm' }: { size?: 'sm' | 'md' | 'lg' }) {
+  return <LoadingSpinner size={size} className="mr-2" />;
 }
