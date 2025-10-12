@@ -1,6 +1,7 @@
 'use client';
 
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
+import { motion } from 'framer-motion';
 import { Building2, MessageCircle, Plane, UserCheck } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -8,6 +9,46 @@ export function WhyChooseUs() {
   const { language } = useSCCStore();
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // 3D 효과를 위한 상태 추가
+  const [cardRotations, setCardRotations] = useState<
+    { rotateX: number; rotateY: number }[]
+  >([
+    { rotateX: 0, rotateY: 0 },
+    { rotateX: 0, rotateY: 0 },
+    { rotateX: 0, rotateY: 0 },
+    { rotateX: 0, rotateY: 0 },
+  ]);
+
+  // 마우스 움직임에 따른 3D 회전 효과
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    cardIndex: number
+  ) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const multiplier = 15; // 다른 섹션과 동일한 값
+    const rotateX = ((y - centerY) / centerY) * -multiplier;
+    const rotateY = ((x - centerX) / centerX) * multiplier;
+
+    setCardRotations(prev => {
+      const newRotations = [...prev];
+      newRotations[cardIndex] = { rotateX, rotateY };
+      return newRotations;
+    });
+  };
+
+  const handleMouseLeave = (cardIndex: number) => {
+    setCardRotations(prev => {
+      const newRotations = [...prev];
+      newRotations[cardIndex] = { rotateX: 0, rotateY: 0 };
+      return newRotations;
+    });
+  };
 
   useEffect(() => {
     const observers = cardsRef.current.map((card, index) => {
@@ -99,15 +140,41 @@ export function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+          style={{ perspective: '1000px' }}
+        >
           {features.map((feature, index) => (
-            <div
+            <motion.div
               key={index}
               ref={el => {
                 cardsRef.current[index] = el;
               }}
-              className="bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 min-h-[320px] flex flex-col cursor-pointer hover-glow hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] hover:shadow-[0_0_40px_rgba(44,95,124,0.3)] opacity-100 translate-y-0"
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className="bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 min-h-[320px] flex flex-col cursor-pointer hover-glow opacity-100 translate-y-0"
+              animate={{
+                opacity: visibleCards.includes(index) ? 1 : 0,
+                y: visibleCards.includes(index) ? 0 : 50,
+                rotateX: cardRotations[index]?.rotateX || 0,
+                rotateY: cardRotations[index]?.rotateY || 0,
+              }}
+              whileHover={{
+                scale: 1.05,
+                y: -8,
+                transition: {
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 20,
+                },
+              }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                rotateX: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+                rotateY: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+              }}
+              style={{ transformStyle: 'preserve-3d' }}
+              onMouseMove={e => handleMouseMove(e, index)}
+              onMouseLeave={() => handleMouseLeave(index)}
             >
               {/* 아이콘 영역 */}
               <div className="flex-shrink-0 flex justify-center mb-6">
@@ -164,7 +231,7 @@ export function WhyChooseUs() {
                   {feature.description}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
