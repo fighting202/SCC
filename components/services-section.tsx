@@ -2,9 +2,10 @@
 
 import { AnimatedIcon } from '@/components/ui/animated-icon';
 import { useScrollReveal } from '@/hooks/use-scroll-reveal';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import { motion } from 'framer-motion';
 import { HeartHandshake, Sparkles, Stethoscope } from 'lucide-react';
+import { useState } from 'react';
 
 export function ServicesSection() {
   const { language } = useSCCStore();
@@ -12,6 +13,45 @@ export function ServicesSection() {
   const { ref: descriptionRef, isVisible: descriptionVisible } =
     useScrollReveal();
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollReveal();
+
+  // 3D 효과를 위한 상태 추가
+  const [cardRotations, setCardRotations] = useState<
+    { rotateX: number; rotateY: number }[]
+  >([
+    { rotateX: 0, rotateY: 0 },
+    { rotateX: 0, rotateY: 0 },
+    { rotateX: 0, rotateY: 0 },
+  ]);
+
+  // 마우스 움직임에 따른 3D 회전 효과
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    cardIndex: number
+  ) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const multiplier = 15; // Package Comparison과 동일한 값
+    const rotateX = ((y - centerY) / centerY) * -multiplier;
+    const rotateY = ((x - centerX) / centerX) * multiplier;
+
+    setCardRotations(prev => {
+      const newRotations = [...prev];
+      newRotations[cardIndex] = { rotateX, rotateY };
+      return newRotations;
+    });
+  };
+
+  const handleMouseLeave = (cardIndex: number) => {
+    setCardRotations(prev => {
+      const newRotations = [...prev];
+      newRotations[cardIndex] = { rotateX: 0, rotateY: 0 };
+      return newRotations;
+    });
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -119,6 +159,7 @@ export function ServicesSection() {
         <motion.div
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          style={{ perspective: '1000px' }}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -128,7 +169,29 @@ export function ServicesSection() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] transition-all duration-500 hover:scale-105 hover:-translate-y-2 min-h-[420px] flex flex-col cursor-pointer hover-glow"
+              className="service-card click-ripple bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-[0_0_20px_rgba(44,95,124,0.6)] transition-all duration-500 hover:scale-105 hover:-translate-y-2 min-h-[420px] flex flex-col cursor-pointer hover-glow"
+              animate={{
+                rotateX: cardRotations[index]?.rotateX || 0,
+                rotateY: cardRotations[index]?.rotateY || 0,
+              }}
+              whileHover={{
+                scale: 1.05,
+                y: -8,
+                transition: {
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 20,
+                },
+              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{
+                duration: 0.3,
+                rotateX: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+                rotateY: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+              }}
+              style={{ transformStyle: 'preserve-3d' }}
+              onMouseMove={e => handleMouseMove(e, index)}
+              onMouseLeave={() => handleMouseLeave(index)}
             >
               {/* 아이콘 영역 */}
               <div className="flex-shrink-0 relative w-full h-40 sm:h-48 md:h-52 rounded-lg mb-6 overflow-hidden bg-gradient-to-br from-[#2C5F7C] to-[#1F4A5F] flex items-center justify-center">
@@ -192,25 +255,23 @@ export function ServicesSection() {
                 <ul className="space-y-3 text-center">
                   {service.items.map((item, idx) => (
                     <li key={idx} className="flex items-center justify-center">
-                      <button
-                        className={`text-gray-700 dark:text-scc-dark-text hover:text-[#D4AF37] active:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg text-sm md:text-base cursor-pointer rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                      <motion.button
+                        className={`click-ripple text-gray-700 dark:text-scc-dark-text hover:text-[#D4AF37] active:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg text-sm md:text-base cursor-pointer rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
                           language === 'zh' ? 'font-chinese' : 'font-sans'
                         }`}
                         style={{
                           textShadow: '0 0 0 transparent',
                           transition: 'all 0.3s ease',
                         }}
+                        whileHover={{ scale: 1.05, rotate: 1 }}
+                        whileTap={{ scale: 0.95 }}
                         onMouseEnter={e => {
                           e.currentTarget.style.textShadow =
                             '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
-                          e.currentTarget.style.transform =
-                            'scale(1.05) rotate(1deg)';
                         }}
                         onMouseLeave={e => {
                           e.currentTarget.style.textShadow =
                             '0 0 0 transparent';
-                          e.currentTarget.style.transform =
-                            'scale(1) rotate(0deg)';
                         }}
                         onClick={() => {
                           // 클릭 시 스크롤을 Contact 섹션으로 이동
@@ -224,7 +285,7 @@ export function ServicesSection() {
                         }}
                       >
                         {item}
-                      </button>
+                      </motion.button>
                     </li>
                   ))}
                 </ul>
