@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
 import { Noto_Sans_SC, Playfair_Display, Raleway } from 'next/font/google';
 import type React from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
 // Elegant, thin and refined sans-serif for body text (얇고 세련된 폰트)
@@ -336,6 +337,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
