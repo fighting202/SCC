@@ -35,8 +35,8 @@ export default function HeroSection() {
   const handleTallyClick = () => {
     if (typeof window === 'undefined') return;
 
-    // 임시 Tally Form ID (실제 Form ID로 교체 필요)
-    const formId = process.env.NEXT_PUBLIC_TALLY_FORM_ID || 'n9Yd3Z';
+    // Tally Form ID - Vercel 환경 변수에서 가져오기
+    const formId = process.env.NEXT_PUBLIC_TALLY_FORM_ID || 'nWxl8Q';
     const tallyUrl = `https://tally.so/r/${formId}`;
 
     // 모바일에서는 새 창으로 열기

@@ -128,7 +128,7 @@ export function CommitmentSection() {
 
   // 탤리 폼 열기 함수
   const handleTallyClick = () => {
-    const formId = process.env.NEXT_PUBLIC_TALLY_FORM_ID || 'n9Yd3Z';
+    const formId = process.env.NEXT_PUBLIC_TALLY_FORM_ID || 'nWxl8Q';
 
     if (typeof window !== 'undefined' && (window as any).Tally) {
       (window as any).Tally.openPopup(formId, {
