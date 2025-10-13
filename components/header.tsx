@@ -80,8 +80,26 @@ export default function Header() {
 
             {/* Right side controls */}
             <div className="flex items-center space-x-4">
-              {/* Language Switcher */}
+              {/* Language Switcher - Desktop */}
               <LanguageSwitcher className="hidden sm:flex" />
+
+              {/* Language Switcher - Mobile */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  const { setLanguage } = useSCCStore.getState();
+                  setLanguage(language === 'en' ? 'zh' : 'en');
+                  // 햅틱 피드백
+                  if ('vibrate' in navigator) {
+                    navigator.vibrate(50);
+                  }
+                }}
+                className="sm:hidden active:scale-95 touch-manipulation px-3 py-2 text-sm font-medium"
+                aria-label={language === 'zh' ? 'Switch to English' : '切换到中文'}
+              >
+                {language === 'zh' ? 'EN' : '中文'}
+              </Button>
 
               {/* Theme Toggle */}
               <ThemeToggle />

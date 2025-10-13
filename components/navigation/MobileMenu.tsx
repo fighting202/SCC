@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { handleKeyboardEvent, scrollToSection } from '@/lib/client-utils';
 import { useSCCStore } from '@/store/scc_store';
 import {
+    Globe,
     HelpCircle,
     Home,
     MessageCircle,
     Package,
     Settings,
     X,
-    Globe,
 } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -88,7 +88,7 @@ export default function MobileMenu({
     if ('vibrate' in navigator) {
       navigator.vibrate(50);
     }
-    
+
     setLanguage(language === 'en' ? 'zh' : 'en');
   };
 
