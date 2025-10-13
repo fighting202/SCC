@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     description: 'Professional medical and beauty care concierge service in Seoul, Korea. Airport pickup, accommodation, translation, and full support for international clients.',
     images: [
       {
-        url: '/modern-seoul-skyline-at-sunset-with-luxury-medical.jpg',
+        url: 'https://scc-kr.vercel.app/optimized/modern-seoul-skyline-at-sunset-with-luxury-medical-social.webp',
         width: 1200,
         height: 630,
         alt: 'Seoul medical tourism skyline with luxury medical facilities',
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Seoul Care Concierge | Medical & Beauty Tourism in Korea',
     description: 'Professional medical and beauty care concierge service in Seoul, Korea.',
-    images: ['/modern-seoul-skyline-at-sunset-with-luxury-medical.jpg'],
+    images: ['https://scc-kr.vercel.app/optimized/modern-seoul-skyline-at-sunset-with-luxury-medical-social.webp'],
   },
   alternates: {
     canonical: '/',
