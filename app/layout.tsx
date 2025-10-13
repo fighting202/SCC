@@ -75,7 +75,29 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://seoulcareconcierge.com'),
+  metadataBase: new URL('https://scc-kr.vercel.app'),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://scc-kr.vercel.app',
+    siteName: 'Seoul Care Concierge',
+    title: 'Seoul Care Concierge | Medical & Beauty Tourism in Korea',
+    description: 'Professional medical and beauty care concierge service in Seoul, Korea. Airport pickup, accommodation, translation, and full support for international clients.',
+    images: [
+      {
+        url: '/modern-seoul-skyline-at-sunset-with-luxury-medical.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Seoul medical tourism skyline with luxury medical facilities',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Seoul Care Concierge | Medical & Beauty Tourism in Korea',
+    description: 'Professional medical and beauty care concierge service in Seoul, Korea.',
+    images: ['/modern-seoul-skyline-at-sunset-with-luxury-medical.jpg'],
+  },
   alternates: {
     canonical: '/',
     languages: {
