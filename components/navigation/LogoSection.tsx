@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { useSCCStore } from '@/store/scc_store';
+import Image from 'next/image';
 
 interface LogoSectionProps {
   isScrolled: boolean;
@@ -26,10 +27,13 @@ export default function LogoSection({ isScrolled }: LogoSectionProps) {
           isScrolled ? 'w-12 h-12' : 'w-16 h-16'
         )}
       >
-        <img
+        <Image
           src="/scc-logo/scc-letter logo_배경다크.png"
           alt="SCC Logo"
+          width={64}
+          height={64}
           className="dark:brightness-150 dark:contrast-125 dark:drop-shadow-lg w-full h-full object-contain"
+          priority
         />
       </div>
       <div className="hidden sm:block">
