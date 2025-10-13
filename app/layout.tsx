@@ -1,8 +1,8 @@
 import { ThemeProvider } from '@/components/theme-provider';
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import { Noto_Sans_SC, Playfair_Display, Raleway } from 'next/font/google';
 import type React from 'react';
-import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
 // Elegant, thin and refined sans-serif for body text (얇고 세련된 폰트)
@@ -269,12 +269,12 @@ export default function RootLayout({
             __html: `
               (function() {
                 let animationType = 'center'; // 기본 애니메이션 타입
-                
+
                 // 애니메이션 타입 설정 함수
                 window.setTallyAnimation = function(type) {
                   animationType = type;
                 };
-                
+
                 // 탤리 모달 애니메이션 적용 함수
                 function applyTallyAnimation() {
                   const observer = new MutationObserver(function(mutations) {
@@ -283,13 +283,13 @@ export default function RootLayout({
                         mutation.addedNodes.forEach(function(node) {
                           if (node.nodeType === Node.ELEMENT_NODE) {
                             const element = node;
-                            
+
                             // 탤리 모달이 추가되었는지 확인
                             if (element.tagName === 'DIV' && element.style.position === 'fixed') {
                               setTimeout(function() {
                                 // 애니메이션 클래스 추가
                                 element.classList.add('tally-modal-content');
-                                
+
                                 switch (animationType) {
                                   case 'center':
                                     element.classList.add('tally-modal-center');
@@ -305,13 +305,13 @@ export default function RootLayout({
                       }
                     });
                   });
-                  
+
                   observer.observe(document.body, {
                     childList: true,
                     subtree: true,
                   });
                 }
-                
+
                 // DOM이 로드된 후 애니메이션 적용
                 if (document.readyState === 'loading') {
                   document.addEventListener('DOMContentLoaded', applyTallyAnimation);

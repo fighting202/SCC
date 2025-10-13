@@ -10,6 +10,7 @@ import {
     Package,
     Settings,
     X,
+    Globe,
 } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -24,7 +25,7 @@ export default function MobileMenu({
   onClose,
   className = '',
 }: MobileMenuProps) {
-  const { language } = useSCCStore();
+  const { language, setLanguage } = useSCCStore();
 
   const navigationItems = [
     {
@@ -82,6 +83,15 @@ export default function MobileMenu({
     });
   };
 
+  const handleLanguageToggle = () => {
+    // 햅틱 피드백 (지원하는 기기에서)
+    if ('vibrate' in navigator) {
+      navigator.vibrate(50);
+    }
+    
+    setLanguage(language === 'en' ? 'zh' : 'en');
+  };
+
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -127,16 +137,30 @@ export default function MobileMenu({
           <h2 className="text-lg font-semibold text-white drop-shadow-md">
             {language === 'zh' ? '导航菜单' : 'Navigation Menu'}
           </h2>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            onKeyDown={handleKeyDown}
-            aria-label={language === 'zh' ? '关闭菜单' : 'Close menu'}
-            className="hover:bg-muted active:scale-95 touch-manipulation"
-          >
-            <X className="h-5 w-5" />
-          </Button>
+          <div className="flex items-center space-x-2">
+            {/* Language Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleLanguageToggle}
+              onKeyDown={handleKeyDown}
+              aria-label={language === 'zh' ? 'Switch to English' : '切换到中文'}
+              className="hover:bg-white/20 active:scale-95 touch-manipulation"
+            >
+              <Globe className="h-5 w-5" />
+            </Button>
+            {/* Close Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              onKeyDown={handleKeyDown}
+              aria-label={language === 'zh' ? '关闭菜单' : 'Close menu'}
+              className="hover:bg-muted active:scale-95 touch-manipulation"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
 
         {/* Navigation Items */}
