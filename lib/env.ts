@@ -18,12 +18,6 @@ const envSchema = z.object({
   NEXT_PUBLIC_WHATSAPP: z.string().min(1, 'WhatsApp number is required'),
   NEXT_PUBLIC_WECHAT_ID: z.string().min(1, 'WeChat ID is required'),
 
-  // Notion CRM (서버 전용)
-  NOTION_API_KEY: z.string().min(1, 'Notion API key is required').optional(),
-  NOTION_DATABASE_ID: z
-    .string()
-    .min(1, 'Notion database ID is required')
-    .optional(),
 
   // JWT Secret
   JWT_SECRET: z
