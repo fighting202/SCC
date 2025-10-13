@@ -71,9 +71,9 @@ export function ServicesSection() {
     },
   };
 
-  const services = [
-    {
-      icon: Stethoscope,
+const services = [
+  {
+    icon: Stethoscope,
       title: language === 'zh' ? '医疗服务' : 'Medical Services',
       items:
         language === 'zh'
@@ -91,9 +91,9 @@ export function ServicesSection() {
       fallbackIcon: '🏥',
       gradient: 'from-blue-500 to-blue-700',
       animation: 'pulse' as const,
-    },
-    {
-      icon: Sparkles,
+  },
+  {
+    icon: Sparkles,
       title: language === 'zh' ? '美容服务' : 'Beauty Services',
       items:
         language === 'zh'
@@ -111,9 +111,9 @@ export function ServicesSection() {
       fallbackIcon: '💄',
       gradient: 'from-pink-500 to-purple-600',
       animation: 'bounce' as const,
-    },
-    {
-      icon: HeartHandshake,
+  },
+  {
+    icon: HeartHandshake,
       title: language === 'zh' ? '全程支持' : 'Complete Support',
       items:
         language === 'zh'
@@ -137,12 +137,12 @@ export function ServicesSection() {
   return (
     <section
       id="services"
-      className="section-padding bg-gray-50 dark:bg-scc-dark-bg scroll-mt-16"
+      className="section-padding bg-gray-50 dark:bg-scc-dark-bg scroll-mt-16 relative z-0"
     >
       <div className="container-responsive">
         <div className="text-center section-margin">
           <h2
-            className={`text-3xl sm:text-4xl md:text-5xl text-[#2C5F7C] dark:text-scc-dark-text mb-4 ${
+            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#2C5F7C] dark:text-scc-dark-text mb-4 ${
               language === 'zh' ? 'font-chinese' : 'font-sans'
             }`}
             style={{ fontWeight: 700 }}
@@ -194,20 +194,20 @@ export function ServicesSection() {
               onMouseLeave={() => handleMouseLeave(index)}
             >
               {/* 아이콘 영역 */}
-              <div className="flex-shrink-0 relative w-full h-40 sm:h-48 md:h-52 rounded-lg mb-6 overflow-hidden bg-gradient-to-br from-[#2C5F7C] to-[#1F4A5F] flex items-center justify-center">
+              <div className="flex-shrink-0 relative w-full h-40 sm:h-48 md:h-52 rounded-lg mb-6 overflow-hidden bg-gradient-to-br from-[#2C5F7C] to-[#1F4A5F] hover:from-[#D4AF37] hover:to-[#B8941F] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] flex items-center justify-center transition-all duration-300 active:scale-95 touch-manipulation">
                 <AnimatedIcon
                   animation={service.animation}
                   delay={index * 0.2}
-                  className="text-center text-white"
+                  className="text-center text-white group-hover:scale-125 group-hover:rotate-12 group-hover:drop-shadow-2xl group-hover:text-yellow-200 transition-all duration-500 ease-out"
                 >
-                  <div className="text-6xl">{service.fallbackIcon}</div>
+                  <div className="text-6xl group-hover:animate-bounce">{service.fallbackIcon}</div>
                 </AnimatedIcon>
               </div>
 
               {/* 카드 내용 */}
               <div className="flex flex-col">
                 <h3
-                  className={`text-xl md:text-2xl font-bold text-gray-900 dark:text-scc-dark-text mb-4 text-center transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                  className={`text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-scc-dark-text mb-4 text-center transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -253,10 +253,10 @@ export function ServicesSection() {
                 </p>
 
                 <ul className="space-y-3 text-center">
-                  {service.items.map((item, idx) => (
+                {service.items.map((item, idx) => (
                     <li key={idx} className="flex items-center justify-center">
                       <motion.button
-                        className={`click-ripple text-gray-700 dark:text-scc-dark-text hover:text-[#D4AF37] active:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg text-sm md:text-base cursor-pointer rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                        className={`click-ripple text-gray-700 dark:text-scc-dark-text hover:text-[#D4AF37] active:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg text-xs sm:text-sm md:text-base cursor-pointer rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
                           language === 'zh' ? 'font-chinese' : 'font-sans'
                         }`}
                         style={{
@@ -286,10 +286,10 @@ export function ServicesSection() {
                       >
                         {item}
                       </motion.button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
             </motion.div>
           ))}
         </motion.div>

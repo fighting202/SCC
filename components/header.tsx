@@ -6,8 +6,8 @@ import LogoSection from '@/components/navigation/LogoSection';
 import MobileMenu from '@/components/navigation/MobileMenu';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
-import { useSCCStore } from '@/lib/store/sccStore';
 import { cn } from '@/lib/utils';
+import { useSCCStore } from '@/store/scc_store';
 import { Menu } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -91,7 +91,7 @@ export default function Header() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleMobileMenu}
-                className="md:hidden"
+                className="md:hidden active:scale-95 touch-manipulation"
                 aria-label={language === 'zh' ? '打开菜单' : 'Open menu'}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"

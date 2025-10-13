@@ -62,6 +62,9 @@ export function DraggableBlock({
   } = useSortable({
     id: block.id,
     disabled: isDragDisabled,
+    resizeObserverConfig: {
+      disabled: true,
+    },
   });
 
   const { setNodeRef: setDroppableRef, isOver } = useDroppable({

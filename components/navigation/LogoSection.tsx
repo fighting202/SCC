@@ -1,7 +1,7 @@
 'use client';
 
-import { useSCCStore } from '@/lib/store/sccStore';
 import { cn } from '@/lib/utils';
+import { useSCCStore } from '@/store/scc_store';
 
 interface LogoSectionProps {
   isScrolled: boolean;
@@ -17,7 +17,7 @@ export default function LogoSection({ isScrolled }: LogoSectionProps) {
   return (
     <button
       onClick={handleScrollToTop}
-      className="flex items-center space-x-3 hover:scale-105 transition-transform duration-200"
+      className="flex items-center space-x-3 hover:scale-105 transition-transform duration-200 active:scale-95 touch-manipulation"
       aria-label={language === 'zh' ? '返回首页' : 'Go to Home'}
     >
       <div
@@ -35,7 +35,7 @@ export default function LogoSection({ isScrolled }: LogoSectionProps) {
       <div className="hidden sm:block">
         <h1
           className={cn(
-            'font-bold drop-shadow-lg transition-all duration-300 hover:text-[#D4AF37]',
+            'font-bold drop-shadow-lg transition-all duration-300 hover:text-[#D4AF37] active:scale-95',
             isScrolled
               ? 'text-xl text-[#2C5F7C] dark:text-white'
               : 'text-2xl text-white'
@@ -45,7 +45,7 @@ export default function LogoSection({ isScrolled }: LogoSectionProps) {
         </h1>
         <p
           className={cn(
-            'drop-shadow-md transition-all duration-300 cursor-pointer hover:text-[#D4AF37]',
+            'drop-shadow-md transition-all duration-300 cursor-pointer hover:text-[#D4AF37] active:scale-95',
             isScrolled
               ? 'text-xs text-[#2C5F7C]/80 dark:text-gray-300'
               : 'text-sm text-white/90'

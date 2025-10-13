@@ -202,13 +202,13 @@ export default function PackageComparison() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2
-            className={`text-4xl sm:text-5xl font-bold text-[#2C5F7C] dark:text-scc-dark-text mb-6 ${
+            className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-[#2C5F7C] dark:text-scc-dark-text mb-6 ${
               language === 'zh' ? 'font-chinese' : 'font-sans'
             }`}
           >
             {language === 'zh' ? '套餐对比' : 'Package Comparison'}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-scc-dark-text-secondary max-w-3xl mx-auto">
+          <p className="text-xl lg:text-2xl text-gray-600 dark:text-scc-dark-text-secondary max-w-4xl mx-auto">
             {language === 'zh'
               ? '找到最适合您需求的套餐'
               : 'Find the perfect fit for your needs'}

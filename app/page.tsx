@@ -33,6 +33,8 @@ export default function Home() {
   ];
 
   useEffect(() => {
+    // 페이지 로드 시 히어로 섹션으로 스크롤
+    window.scrollTo(0, 0);
     // 페이지 로드 시 애니메이션 시작
     setIsVisible(true);
   }, []);
@@ -66,10 +68,10 @@ export default function Home() {
     <motion.main
       id="main"
       className="min-h-screen bg-white"
-      initial={{ opacity: 0, scale: 0.1 }}
+      initial={{ opacity: 0, y: 100 }}
       animate={{
         opacity: 1,
-        scale: 1,
+        y: 0,
       }}
       transition={{
         duration: 0.8,

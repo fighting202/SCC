@@ -40,7 +40,7 @@ export default function FloatingButtons() {
           {/* Home Button */}
           <Button
             onClick={goToHome}
-            className="w-12 h-12 rounded-full bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl transition-all hover:scale-110"
+            className="w-12 h-12 rounded-full bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white shadow-lg hover:shadow-xl transition-all hover:scale-110 active:scale-95 touch-manipulation"
             aria-label={language === 'zh' ? '返回首页' : 'Back to Home'}
             title={language === 'zh' ? '返回首页' : 'Back to Home'}
           >
@@ -50,7 +50,7 @@ export default function FloatingButtons() {
           {/* Back to Top Button */}
           <Button
             onClick={scrollToTop}
-            className="w-12 h-12 rounded-full bg-[#D4AF37] hover:bg-[#B8941F] text-white shadow-lg hover:shadow-xl transition-all hover:scale-110"
+            className="w-12 h-12 rounded-full bg-[#D4AF37] hover:bg-[#B8941F] text-white shadow-lg hover:shadow-xl transition-all hover:scale-110 active:scale-95 touch-manipulation"
             aria-label={language === 'zh' ? '返回顶部' : 'Back to Top'}
             title={language === 'zh' ? '返回顶部' : 'Back to Top'}
           >

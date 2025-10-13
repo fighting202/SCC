@@ -97,7 +97,7 @@ export function WhyChooseUs() {
       title:
         language === 'zh'
           ? '母语沟通，安心无忧'
-          : 'Your Language, Your Comfort',
+          : 'Language Support',
       description:
         language === 'zh'
           ? '全程中文服务支持，让您在韩国感受如家般的便利'
@@ -105,7 +105,7 @@ export function WhyChooseUs() {
     },
     {
       icon: UserCheck,
-      title: language === 'zh' ? '专属客户经理' : 'Personal Care Manager',
+      title: language === 'zh' ? '专属客户经理' : 'Personal Manager',
       description:
         language === 'zh' ? (
           <React.Fragment>
@@ -126,7 +126,7 @@ export function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2
-            className={`text-3xl sm:text-4xl md:text-5xl text-[#2C5F7C] dark:text-scc-dark-text mb-4 ${
+            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#2C5F7C] dark:text-scc-dark-text mb-4 ${
               language === 'zh' ? 'font-chinese' : 'font-sans'
             }`}
             style={{ fontWeight: 700 }}
@@ -179,7 +179,7 @@ export function WhyChooseUs() {
               {/* 아이콘 영역 */}
               <div className="flex-shrink-0 flex justify-center mb-6">
                 <div
-                  className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[#2C5F7C] flex items-center justify-center transition-all duration-300 hover:rotate-12 hover:scale-110"
+                  className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[#2C5F7C] hover:bg-[#D4AF37] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] flex items-center justify-center transition-all duration-300 hover:rotate-12 hover:scale-110"
                   style={{
                     transition: 'all 0.3s ease',
                   }}
@@ -198,7 +198,7 @@ export function WhyChooseUs() {
               {/* 카드 내용 */}
               <div className="flex flex-col flex-1 text-center">
                 <h3
-                  className={`text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-scc-dark-text mb-4 transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 ${
+                  className={`text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-scc-dark-text mb-4 transition-all duration-300 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg rounded-md px-3 py-2 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 active:scale-95 active:text-[#D4AF37] active:bg-gray-200/50 whitespace-nowrap flex items-center justify-center touch-manipulation ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -214,6 +214,14 @@ export function WhyChooseUs() {
                   onMouseLeave={e => {
                     e.currentTarget.style.textShadow = '0 0 0 transparent';
                     e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                  }}
+                  onTouchStart={e => {
+                    e.currentTarget.style.textShadow = '0 0 10px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6)';
+                    e.currentTarget.style.transform = 'scale(0.95)';
+                  }}
+                  onTouchEnd={e => {
+                    e.currentTarget.style.textShadow = '0 0 0 transparent';
+                    e.currentTarget.style.transform = 'scale(1)';
                   }}
                 >
                   {feature.title}

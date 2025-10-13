@@ -37,7 +37,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#1A1A1A] text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 mb-8">
           {/* Brand */}
           <div className="text-center md:text-left flex flex-col justify-between">
             <div>
@@ -49,7 +49,7 @@ export default function Footer() {
                       behavior: 'smooth',
                     });
                   }}
-                  className="hover:opacity-80 transition-opacity duration-200 cursor-pointer flex-shrink-0 mb-2"
+                  className="hover:opacity-80 transition-opacity duration-200 cursor-pointer flex-shrink-0 mb-2 active:scale-95 touch-manipulation"
                   title={language === 'zh' ? '返回顶部' : 'Back to top'}
                 >
                   <Image
@@ -76,7 +76,7 @@ export default function Footer() {
                 </p>
               </div>
             </div>
-            <div>
+            <div className="mt-auto">
               <p
                 className={`text-xs md:text-sm text-white/80 ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
@@ -101,7 +101,7 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-x-4 gap-y-3">
                 <button
                   onClick={() => scrollToSection('services')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center active:scale-95 touch-manipulation ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -123,7 +123,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('how-it-works')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center active:scale-95 touch-manipulation ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -145,7 +145,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('packages')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center active:scale-95 touch-manipulation ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -167,7 +167,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('faq')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center active:scale-95 touch-manipulation ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -189,7 +189,7 @@ export default function Footer() {
                 </button>
                 <button
                   onClick={() => scrollToSection('get-started')}
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center active:scale-95 touch-manipulation ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -213,7 +213,7 @@ export default function Footer() {
                   href="/privacy-policy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center ${
+                  className={`text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-105 hover:drop-shadow-lg rounded-md px-1 py-2 hover:bg-white/10 text-sm md:text-base min-h-[44px] inline-block text-center active:scale-95 touch-manipulation ${
                     language === 'zh' ? 'font-chinese' : 'font-sans'
                   }`}
                   style={{
@@ -259,7 +259,7 @@ export default function Footer() {
                   </span>
                   <a
                     href={`mailto:${CONTACT.email}`}
-                    className="text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse inline-block break-all"
+                    className="text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse inline-block break-all active:scale-95 touch-manipulation"
                     style={{
                       textShadow: '0 0 0 transparent',
                       transition: 'all 0.3s ease',
@@ -292,7 +292,7 @@ export default function Footer() {
                     href={CONTACT.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/90 hover:text-[#25D366] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse inline-block"
+                    className="text-white/90 hover:text-[#25D366] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse inline-block active:scale-95 touch-manipulation"
                     style={{
                       textShadow: '0 0 0 transparent',
                       transition: 'all 0.3s ease',
@@ -323,7 +323,7 @@ export default function Footer() {
                   </span>
                   <button
                     onClick={openWeChatQR}
-                    className="no-gold-hover text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse inline-block cursor-pointer"
+                    className="no-gold-hover text-white/90 hover:text-[#D4AF37] transition-all duration-300 hover:scale-110 hover:drop-shadow-lg hover:animate-pulse inline-block cursor-pointer active:scale-95 touch-manipulation"
                     style={{
                       textShadow: '0 0 0 transparent',
                       transition: 'all 0.3s ease',
@@ -354,7 +354,7 @@ export default function Footer() {
                   }`}
                 >
                   <span className="text-xl">⏰</span>
-                  <span>
+                  <span className="whitespace-nowrap">
                     {language === 'zh'
                       ? '营业时间: 周一至周五 09:00-18:00 (韩国时间)'
                       : 'Business hours: Mon-Fri 9AM-6PM KST'}
@@ -429,7 +429,7 @@ export default function Footer() {
             <div className="flex gap-3">
               <button
                 onClick={() => copyToClipboard(CONTACT.wechatId)}
-                className={`no-gold-hover flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors ${
+                className={`no-gold-hover flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors active:scale-95 touch-manipulation ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
                 }`}
               >
@@ -437,7 +437,7 @@ export default function Footer() {
               </button>
               <button
                 onClick={closeWeChatQR}
-                className={`no-gold-hover flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors ${
+                className={`no-gold-hover flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded-lg transition-colors active:scale-95 touch-manipulation ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
                 }`}
               >

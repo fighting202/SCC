@@ -19,17 +19,17 @@ export default function PrivacyPolicyPage() {
       } else {
         window.location.href = '/';
       }
-    }, 300);
+    }, 800);
   };
 
   return (
     <motion.div
       className="min-h-screen bg-gray-50 dark:bg-background py-20"
       style={{ paddingTop: '5rem', paddingBottom: '5rem' }}
-      initial={{ opacity: 0, scale: 0.1 }}
+      initial={{ opacity: 0, y: 100 }}
       animate={{
         opacity: isNavigating ? 0 : 1,
-        scale: isNavigating ? 0.1 : 1,
+        y: isNavigating ? -100 : 0,
       }}
       transition={{
         duration: 0.8,
@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
         <div className="mb-6">
           <motion.button
             onClick={handleBackToHome}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl active:scale-95 touch-manipulation"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -247,7 +247,7 @@ export default function PrivacyPolicyPage() {
                   <span className="text-primary">📧</span>
                   <a
                     href="mailto:seoulcareconcierge@gmail.com"
-                    className="text-primary hover:text-accent hover:underline font-medium transition-colors duration-200"
+                    className="text-primary hover:text-accent hover:underline font-medium transition-colors duration-200 active:scale-95 touch-manipulation"
                   >
                     seoulcareconcierge@gmail.com
                   </a>
@@ -257,7 +257,7 @@ export default function PrivacyPolicyPage() {
                   <span className="text-primary">📱</span>
                   <a
                     href="tel:+82-10-2981-6653"
-                    className="text-primary hover:text-accent hover:underline font-medium transition-colors duration-200"
+                    className="text-primary hover:text-accent hover:underline font-medium transition-colors duration-200 active:scale-95 touch-manipulation"
                   >
                     +82-10-2981-6653
                   </a>

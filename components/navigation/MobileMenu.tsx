@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button';
 import { handleKeyboardEvent, scrollToSection } from '@/lib/client-utils';
 import { useSCCStore } from '@/store/scc_store';
 import {
-  HelpCircle,
-  Home,
-  MessageCircle,
-  Package,
-  Settings,
-  X,
+    HelpCircle,
+    Home,
+    MessageCircle,
+    Package,
+    Settings,
+    X,
 } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -133,7 +133,7 @@ export default function MobileMenu({
             onClick={onClose}
             onKeyDown={handleKeyDown}
             aria-label={language === 'zh' ? '关闭菜单' : 'Close menu'}
-            className="hover:bg-muted"
+            className="hover:bg-muted active:scale-95 touch-manipulation"
           >
             <X className="h-5 w-5" />
           </Button>
@@ -145,7 +145,7 @@ export default function MobileMenu({
           role="navigation"
           aria-label="Mobile navigation"
         >
-          <ul className="space-y-3">
+          <ul className="space-y-2 sm:space-y-3">
             {navigationItems.map((item, index) => {
               const IconComponent = item.icon;
               return (
@@ -153,7 +153,7 @@ export default function MobileMenu({
                   <button
                     onClick={() => handleNavClick(item.id)}
                     onKeyDown={handleKeyDown}
-                    className="w-full flex items-center gap-4 px-4 py-4 rounded-xl text-white hover:bg-white/20 hover:text-[#D4AF37] active:bg-white/30 active:scale-95 transition-all duration-200 font-medium group touch-manipulation"
+                    className="w-full flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 sm:py-4 rounded-xl text-white hover:bg-white/20 hover:text-[#D4AF37] active:bg-white/30 active:scale-95 transition-all duration-200 font-medium group touch-manipulation"
                     style={{
                       WebkitTapHighlightColor: 'transparent',
                       touchAction: 'manipulation',

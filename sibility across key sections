@@ -1,0 +1,190 @@
+[33mcommit 4e958ddd3ca8bada7df2f240cc5a98a93b529129[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 16:24:48 2025 +0900
+
+    Apply consistent hover effects across all section cards
+    
+    Applied Why Choose Us style hover effects to all section cards:
+    
+    Services Section:
+    - Enhanced card hover with custom shadow and border glow
+    - Icon background changes from teal to gold gradient on hover
+    - Strengthened title text shadow and background highlight
+    - Added cursor pointer to title for better UX
+    
+    Our Commitment Section:
+    - Updated card hover with custom shadow and border glow
+    - Icon hover with color change to gold (#D4AF37) and glow effect
+    - Enhanced title hover with stronger text shadow and background
+    - Consistent 300ms transition duration
+    
+    How It Works Section:
+    - Improved card hover with custom shadow and border glow
+    - Icon hover with color change to gold and glow effect
+    - Enhanced title hover with stronger text shadow and background
+    - Added cursor pointer to title
+    
+    Consistent features across all sections:
+    - Icons change from teal (#2C5F7C) to gold (#D4AF37) on hover
+    - Titles have stronger golden text shadow (15px, 30px blur)
+    - Cards have custom shadow with brand color glow
+    - All effects use 300ms transition duration
+    - Subtle background highlight on title hover
+    - Cursor pointer on interactive elements
+
+[33mcommit 9618a304efe03cda3c2c03fc76a22f403f8df45d[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 16:17:57 2025 +0900
+
+    Improve accessibility across key sections
+    
+    Enhanced focus management:
+    - Added focus-visible:ring-2 focus-visible:ring-[#D4AF37] to all main CTA buttons
+    - Added focus-visible:ring-offset-2 for better visual separation
+    - Added focus-visible:outline-none to prevent default browser outline
+    - Consistent focus styling across Hero, Contact, Package Comparison, and Commitment sections
+    
+    Accessibility improvements:
+    - Better keyboard navigation with visible focus indicators
+    - High contrast focus rings using brand gold color (#D4AF37)
+    - Proper focus management for screen readers
+    - Enhanced button accessibility with clear focus states
+    
+    Sections updated:
+    - Hero Section: Main CTA button focus styling
+    - Contact Section: Get Free Consultation button focus styling
+    - Package Comparison: All package buttons focus styling
+    - Commitment Section: Get Started button focus styling
+    
+    All focus indicators use the brand gold color for consistency and high visibility.
+
+[33mcommit 57e951c357c5e2e253c7a14dcd1615a23bfe40ca[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 16:14:45 2025 +0900
+
+    Improve responsive design across key sections
+    
+    Package Comparison Section:
+    - Enhanced grid layout: grid-cols-1 md:grid-cols-2 lg:grid-cols-12
+    - Better mobile/tablet layout with md:col-span adjustments
+    - Side content spans full width on tablets (md:col-span-2)
+    - Improved gap spacing: gap-6 md:gap-8
+    
+    Contact Section:
+    - Better button layout with explicit gap spacing
+    - Replaced card-gap with gap-4 sm:gap-6 for cleaner spacing
+    - Improved mobile button stacking
+    
+    Hero Section:
+    - Enhanced responsive text sizing with more breakpoints
+    - Added sm: breakpoint for better small screen support
+    - Improved title: text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
+    - Better subtitle scaling: text-lg sm:text-xl md:text-2xl lg:text-3xl
+    
+    Overall improvements:
+    - More granular responsive breakpoints
+    - Better mobile-first approach
+    - Consistent spacing and layout patterns
+
+[33mcommit 6e11c08aec48b3771046f8919b448cba18d43b8d[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 16:10:41 2025 +0900
+
+    Complete Why Choose Us hover effects
+    
+    Enhanced hover effects:
+    - Improved card hover with custom shadow and border glow
+    - Enhanced icon hover with color change to gold (#D4AF37) and glow effect
+    - Improved title hover with stronger text shadow and background highlight
+    - Added cursor pointer to title for better UX
+    - Reduced transition duration to 300ms for snappier feel
+    - Fixed duplicate shadow classes for cleaner CSS
+    
+    Visual improvements:
+    - Icons now change from teal to gold on hover with glow
+    - Titles have stronger golden text shadow and subtle background
+    - Cards have custom shadow with brand color glow
+    - All effects are smooth and consistent with brand colors
+
+[33mcommit 7a899bc80b94a98dad629d9bc1268f056e04c014[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 16:04:55 2025 +0900
+
+    Add yellow border to Get Started button in Our Commitment section
+    
+    - Add border-2 border-[#D4AF37] to Get Started button
+    - Maintains consistency with other main CTA buttons
+    - Matches Package Comparison and Contact Section button styling
+
+[33mcommit 0ac1c6d876cdddab3a9e540ea198f2851f494e7d[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 15:49:47 2025 +0900
+
+    Add 3D effects to Our Commitment to You section
+    
+    - Add cardRotations state for 3D rotation tracking
+    - Implement handleMouseMove and handleMouseLeave functions
+    - Apply Package Comparison style 3D effects with multiplier: 15
+    - Add perspective: 1000px to container
+    - Include transformStyle: preserve-3d and smooth transitions
+    - Convert div cards to motion.div with 3D animations
+    - Maintain existing hover effects while adding natural 3D rotation
+    - Unify animation duration to 200ms for consistency
+
+[33mcommit 775f1bf88947b4e167998db0d747bf635fc2b2b2[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 15:38:11 2025 +0900
+
+    Improve mobile touch gestures and unify animation durations
+    
+    Mobile Touch Gestures:
+    - Add haptic feedback to mobile menu navigation
+    - Add active:scale-95 and touch-manipulation to all buttons
+    - Add WebkitTapHighlightColor: transparent for better touch feedback
+    - Add touchAction: manipulation for optimized touch response
+    - Reduce transition duration from 300ms to 200ms for snappier feel
+    
+    Animation Duration Unification:
+    - Standardize all button transitions to 200ms duration
+    - Apply consistent touch feedback across all interactive elements
+    - Improve mobile user experience with better tactile feedback
+    
+    Files updated:
+    - MobileMenu.tsx: Added haptic feedback and touch optimization
+    - contact-section.tsx: Enhanced all contact buttons with touch feedback
+    - package-comparison.tsx: Improved package selection buttons
+    - commitment-section.tsx: Enhanced Get Started button touch response
+
+[33mcommit 28621e93558fcb5d9b803840f0e7c591f84ccc35[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 15:25:52 2025 +0900
+
+    Add 3D effects to Why Choose Us section
+    
+    - Add cardRotations state for 3D rotation tracking
+    - Implement handleMouseMove and handleMouseLeave functions
+    - Apply Package Comparison style 3D effects with multiplier: 15
+    - Add perspective: 1000px to container
+    - Include transformStyle: preserve-3d and smooth transitions
+    - Convert div cards to motion.div with 3D animations
+    - Remove duplicate shadow classes to fix lint warnings
+    - Maintain existing hover effects while adding natural 3D rotation
+
+[33mcommit 905fcdbd7de98f2b830240f63966f6195cc0c21a[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 15:22:20 2025 +0900
+
+    Add 3D effects to Services Section cards
+    
+    - Add cardRotations state for 3D rotation tracking
+    - Implement handleMouseMove and handleMouseLeave functions
+    - Apply Package Comparison style 3D effects with multiplier: 15
+    - Add perspective: 1000px to container
+    - Include transformStyle: preserve-3d and smooth transitions
+    - Maintain existing hover effects while adding natural 3D rotation
+
+[33mcommit a7f87cb213451731a10bdcdde9ad79308b173478[m
+Author: Sung-eun <skyisfree1@gmail.com>
+Date:   Sun Oct 12 15:18:51 2025 +0900
+
+    Fix right-side cards 3D animation - 

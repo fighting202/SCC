@@ -1,13 +1,13 @@
 'use client';
 
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import {
-  ArrowRight,
-  Calendar,
-  CheckCircle,
-  Clock,
-  CreditCard,
-  MessageSquare,
+    ArrowRight,
+    Calendar,
+    CheckCircle,
+    Clock,
+    CreditCard,
+    MessageSquare,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -145,7 +145,7 @@ export function HowItWorks() {
             >
               <div className="flex flex-col items-center text-center p-4 bg-white dark:bg-scc-dark-card rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 group h-full min-h-[400px]">
                 {/* Icon */}
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2C5F7C] flex items-center justify-center mb-4 hover-rotate group-hover:bg-[#2C5F7C]/80 transition-colors duration-300">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2C5F7C] hover:bg-[#D4AF37] group-hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] flex items-center justify-center mb-4 hover-rotate transition-all duration-300 active:scale-95 touch-manipulation">
                   <step.icon className="w-8 h-8 md:w-10 md:h-10 text-white group-hover:text-white/80 transition-colors duration-300" />
                 </div>
 

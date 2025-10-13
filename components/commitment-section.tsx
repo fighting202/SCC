@@ -2,8 +2,8 @@
 
 import { useTallyAnimation } from '@/hooks/use-tally-animation';
 import { useSCCStore } from '@/store/scc_store';
-import { Clock, DollarSign, FileText, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Clock, DollarSign, FileText, Shield } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 export function CommitmentSection() {
@@ -195,7 +195,7 @@ export function CommitmentSection() {
                 cardRefs.current[index] = el;
               }}
               data-card-index={index}
-              className={`bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 hover:-translate-y-2 min-h-[320px] flex flex-col cursor-pointer animate-on-scroll hover-lift hover-glow ${
+              className={`group bg-white dark:bg-scc-dark-card rounded-xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 hover:-translate-y-2 min-h-[320px] flex flex-col cursor-pointer animate-on-scroll hover-lift hover-glow ${
                 visibleElements.has(index) ? 'animate-visible' : ''
               }`}
               style={{
@@ -229,17 +229,7 @@ export function CommitmentSection() {
               {/* 아이콘 영역 */}
               <div className="flex-shrink-0 flex justify-center mb-6">
                 <div
-                  className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[#2C5F7C] flex items-center justify-center transition-all duration-300 hover:rotate-12 hover:scale-110"
-                  style={{
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.transform =
-                      'rotate(12deg) scale(1.1)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.transform = 'rotate(0deg) scale(1)';
-                  }}
+                  className="w-16 h-16 md:w-18 md:h-18 rounded-full bg-[#2C5F7C] group-hover:bg-[#D4AF37] flex items-center justify-center transition-all duration-300 group-hover:rotate-12 group-hover:scale-110"
                 >
                   <commitment.icon className="w-8 h-8 md:w-9 md:h-9 text-white" />
                 </div>

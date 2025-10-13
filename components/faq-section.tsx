@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { useSCCStore } from '@/lib/store/sccStore';
+import { useSCCStore } from '@/store/scc_store';
 import { motion } from 'framer-motion';
 
 const faqs = [
@@ -129,13 +129,13 @@ export default function FAQSection() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="hover-glow"
+                className="hover-glow active:scale-95 touch-manipulation"
               >
                 <AccordionItem
                   value={`item-${index}`}
                   className="bg-white dark:bg-scc-dark-card rounded-xl border-none shadow-sm"
                 >
-                  <AccordionTrigger className="w-full text-left py-4 md:py-5 px-4 md:px-6 flex items-center min-h-[60px] hover:no-underline">
+                  <AccordionTrigger className="w-full text-left py-4 md:py-5 px-4 md:px-6 flex items-center min-h-[60px] hover:no-underline active:scale-95 touch-manipulation">
                     <span
                       className={`body-text leading-relaxed ${
                         language === 'zh' ? 'font-chinese' : 'font-sans'

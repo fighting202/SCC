@@ -18,6 +18,9 @@ export default function HeroSection() {
   useTallyAnimation('center');
 
   useEffect(() => {
+    // 페이지 로딩 시 히어로 섹션으로 스크롤
+    window.scrollTo(0, 0);
+
     // Tally 스크립트 로딩 확인
     const checkTally = setInterval(() => {
       if (typeof window !== 'undefined' && (window as any).Tally) {
@@ -62,7 +65,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-16 md:pt-20 lg:pt-28 section-padding"
+      className="relative h-screen flex items-center justify-center pt-16 md:pt-20 lg:pt-28 section-padding"
       role="banner"
       aria-label="Hero section"
     >
@@ -89,23 +92,106 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 container-responsive text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white dark:text-white text-balance leading-tight animate-fade-in">
-          {language === 'zh'
-            ? '您在韩国的安全无忧之旅'
-            : 'Your Safe & Seamless Journey in Korea'}
-        </h1>
-        <p className="text-xl md:text-2xl text-white/95 dark:text-white/90 mb-6 md:mb-10 max-w-3xl mx-auto text-pretty leading-relaxed animate-slide-up">
-          {language === 'zh'
-            ? '专业医疗美容管家服务'
-            : 'Professional Medical & Beauty Concierge'}
-        </p>
+        <motion.h1
+          key={`title-${language}`}
+          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-white dark:text-white text-balance leading-tight"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.1,
+            delay: 0.2
+          }}
+        >
+          {language === 'zh' ? (
+            '您在韩国的安全无忧之旅'.split('').map((char, index) => (
+              <motion.span
+                key={`zh-title-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.08,
+                  delay: 0.3 + index * 0.08,
+                  ease: "easeOut"
+                }}
+              >
+                {char}
+              </motion.span>
+            ))
+          ) : (
+            'Your Safe & Seamless Journey in Korea'.split('').map((char, index) => (
+              <motion.span
+                key={`en-title-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.08,
+                  delay: 0.3 + index * 0.08,
+                  ease: "easeOut"
+                }}
+              >
+                {char}
+              </motion.span>
+            ))
+          )}
+        </motion.h1>
+        <motion.p
+          key={`subtitle-${language}`}
+          className="text-xl md:text-2xl lg:text-3xl text-white/95 dark:text-white/90 mb-6 md:mb-10 max-w-4xl mx-auto text-pretty leading-relaxed"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.1,
+            delay: 1.5
+          }}
+        >
+          {language === 'zh' ? (
+            '专业医疗美容管家服务'.split('').map((char, index) => (
+              <motion.span
+                key={`zh-subtitle-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.08,
+                  delay: 1.6 + index * 0.08,
+                  ease: "easeOut"
+                }}
+              >
+                {char}
+              </motion.span>
+            ))
+          ) : (
+            'Professional Medical & Beauty Concierge'.split('').map((char, index) => (
+              <motion.span
+                key={`en-subtitle-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.08,
+                  delay: 1.6 + index * 0.08,
+                  ease: "easeOut"
+                }}
+              >
+                {char}
+              </motion.span>
+            ))
+          )}
+        </motion.p>
 
         {/* Main CTA Button */}
-        <div className="mb-8 animate-scale-in">
+        <motion.div
+          className="mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.8,
+            delay: 3.0,
+            ease: "easeOut"
+          }}
+        >
           <motion.button
             onClick={handleTallyClick}
             className={`bg-[#2C5F7C] hover:bg-[#1F4A5F] text-white hover:text-[#D4AF37] w-full md:w-auto px-8 py-4 font-bold
-                         rounded-xl shadow-2xl transition-all duration-300
+                         rounded-xl shadow-2xl transition-all duration-300 animate-pulse-glow border-2 border-[#D4AF37]
                          inline-flex items-center justify-center gap-3 ${
                            language === 'zh' ? 'font-chinese' : 'font-sans'
                          }`}
@@ -136,21 +222,28 @@ export default function HeroSection() {
           >
             ⏱️ {language === 'en' ? 'Takes only 2 minutes' : '仅需2分钟'}
           </p>
-        </div>
+        </motion.div>
 
         {/* Small CTA Buttons */}
         <div className="grid grid-cols-2 md:flex items-center justify-center gap-4 mb-16 animate-scale-in max-w-2xl mx-auto">
           <motion.button
             onClick={() => scrollToSection('services')}
-            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl active:scale-95 touch-manipulation"
             whileHover={{
-              x: [0, -5, 5, -5, 5, 0],
-              y: -2,
+              x: [0, -8, 8, -8, 8, 0],
+              y: -3,
+              scale: 1.05,
             }}
             whileTap={{ scale: 0.95 }}
+            onTouchStart={() => {
+              if (navigator.vibrate) {
+                navigator.vibrate(50);
+              }
+            }}
             transition={{
-              x: { duration: 0.5, ease: 'easeInOut' },
+              x: { duration: 0.6, ease: 'easeInOut' },
               y: { duration: 0.2 },
+              scale: { duration: 0.2 },
             }}
           >
             <span
@@ -163,15 +256,22 @@ export default function HeroSection() {
           </motion.button>
           <motion.button
             onClick={() => scrollToSection('how-it-works')}
-            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl active:scale-95 touch-manipulation"
             whileHover={{
-              x: [0, -5, 5, -5, 5, 0],
-              y: -2,
+              x: [0, -8, 8, -8, 8, 0],
+              y: -3,
+              scale: 1.05,
             }}
             whileTap={{ scale: 0.95 }}
+            onTouchStart={() => {
+              if (navigator.vibrate) {
+                navigator.vibrate(50);
+              }
+            }}
             transition={{
-              x: { duration: 0.5, ease: 'easeInOut' },
+              x: { duration: 0.6, ease: 'easeInOut' },
               y: { duration: 0.2 },
+              scale: { duration: 0.2 },
             }}
           >
             <span
@@ -184,15 +284,22 @@ export default function HeroSection() {
           </motion.button>
           <motion.button
             onClick={() => scrollToSection('packages')}
-            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl active:scale-95 touch-manipulation"
             whileHover={{
-              x: [0, -5, 5, -5, 5, 0],
-              y: -2,
+              x: [0, -8, 8, -8, 8, 0],
+              y: -3,
+              scale: 1.05,
             }}
             whileTap={{ scale: 0.95 }}
+            onTouchStart={() => {
+              if (navigator.vibrate) {
+                navigator.vibrate(50);
+              }
+            }}
             transition={{
-              x: { duration: 0.5, ease: 'easeInOut' },
+              x: { duration: 0.6, ease: 'easeInOut' },
               y: { duration: 0.2 },
+              scale: { duration: 0.2 },
             }}
           >
             <span
@@ -205,15 +312,22 @@ export default function HeroSection() {
           </motion.button>
           <motion.button
             onClick={() => scrollToSection('faq')}
-            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+            className="bg-white/20 dark:bg-white/10 backdrop-blur-sm text-white dark:text-white hover:bg-white/30 dark:hover:bg-white/20 px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl active:scale-95 touch-manipulation"
             whileHover={{
-              x: [0, -5, 5, -5, 5, 0],
-              y: -2,
+              x: [0, -8, 8, -8, 8, 0],
+              y: -3,
+              scale: 1.05,
             }}
             whileTap={{ scale: 0.95 }}
+            onTouchStart={() => {
+              if (navigator.vibrate) {
+                navigator.vibrate(50);
+              }
+            }}
             transition={{
-              x: { duration: 0.5, ease: 'easeInOut' },
+              x: { duration: 0.6, ease: 'easeInOut' },
               y: { duration: 0.2 },
+              scale: { duration: 0.2 },
             }}
           >
             <span

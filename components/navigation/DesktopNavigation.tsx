@@ -1,8 +1,8 @@
 'use client';
 
 import { scrollToSection } from '@/lib/client-utils';
-import { useSCCStore } from '@/lib/store/sccStore';
 import { cn } from '@/lib/utils';
+import { useSCCStore } from '@/store/scc_store';
 
 interface DesktopNavigationProps {
   className?: string;
@@ -58,7 +58,7 @@ export default function DesktopNavigation({
           key={item.id}
           onClick={() => handleNavClick(item.id)}
           className={cn(
-            'transition-all duration-300 font-medium text-sm lg:text-base rounded-md px-3 py-2 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg',
+            'transition-all duration-300 font-medium text-sm lg:text-base rounded-md px-3 py-2 hover:text-[#D4AF37] hover:scale-105 hover:drop-shadow-lg active:scale-95 touch-manipulation focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-transparent',
             isScrolled
               ? 'text-[#2C5F7C] dark:text-white hover:bg-gray-200/50 dark:hover:bg-gray-700/50'
               : 'text-white hover:bg-white/10'
