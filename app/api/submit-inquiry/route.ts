@@ -1,22 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { saveCustomerInquiry } from '@/lib/notion/crm'
-import { CONTACT } from '@/lib/scc-constants'
 
 export async function POST(request: NextRequest) {
   try {
     const inquiryData = await request.json()
     
-    // 1. Notion CRM에 저장 (내부 관리용)
-    const crmResult = await saveCustomerInquiry({
-      ...inquiryData,
-      source: 'website'
-    })
-
-    if (!crmResult.success) {
-      // CRM 저장 실패해도 고객에게는 성공 응답 (내부 문제)
-    }
-
-    // 2. Tally → Notion → 이메일 → Slack 알림 시스템이 자동으로 처리
+    // 간단한 로그 출력 (실제 환경에서는 데이터베이스에 저장)
+    console.log('Inquiry received:', inquiryData)
 
     return NextResponse.json({ 
       success: true, 
