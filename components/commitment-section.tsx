@@ -161,7 +161,7 @@ export function CommitmentSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 lg:py-32 bg-gradient-to-br from-scc-primary/5 to-scc-accent/5 dark:from-scc-dark-bg dark:to-scc-dark-bg-secondary scroll-mt-16"
+      className="py-20 lg:py-32 bg-gradient-to-br from-scc-primary/5 to-scc-accent/5 dark:from-scc-dark-bg dark:to-scc-dark-bg-secondary scroll-mt-32"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
