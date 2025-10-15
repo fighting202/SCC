@@ -58,38 +58,18 @@ export function scrollToSection(id: string): void {
     return;
   }
 
-  // 섹션의 실제 콘텐츠 시작 위치를 찾기 위해 첫 번째 자식 요소 확인
-  const firstChild = element.querySelector(
-    'h1, h2, h3, .section-title, .container > *:first-child'
-  );
-  const targetElement = firstChild || element;
+  // 간단한 스크롤 - 헤더 높이만 고려
+  const header = document.querySelector('header');
+  const headerHeight = header ? header.offsetHeight : 80;
+  const offset = headerHeight + 20;
 
-  // 스크롤 함수 정의
-  const performScroll = () => {
-    // 헤더의 현재 높이를 실시간으로 계산
-    const header = document.querySelector('header');
-    const headerHeight = header ? header.offsetHeight : 80;
+  const elementPosition = element.getBoundingClientRect().top;
+  const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-    // 섹션 패딩 및 여백 고려
-    const extraOffset = 20;
-    const totalOffset = headerHeight + extraOffset;
-
-    const elementPosition = targetElement.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
-
-    window.scrollTo({
-      top: Math.max(0, offsetPosition), // 음수 방지
-      behavior: 'smooth',
-    });
-  };
-
-  // 즉시 스크롤 시작
-  performScroll();
-
-  // 스크롤 애니메이션 완료 후 헤더 높이 변화를 고려하여 정확한 위치로 재조정
-  setTimeout(() => {
-    performScroll();
-  }, 100); // 스크롤 애니메이션 완료 대기
+  window.scrollTo({
+    top: Math.max(0, offsetPosition),
+    behavior: 'smooth',
+  });
 }
 
 /**
