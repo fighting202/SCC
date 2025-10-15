@@ -1,9 +1,3 @@
-import bundleAnalyzer from '@next/bundle-analyzer';
-
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // 이미지 최적화 설정
@@ -109,5 +103,4 @@ const nextConfig = {
   },
 };
 
-// Bundle Analyzer 설정 적용
-export default withBundleAnalyzer(nextConfig);
+export default nextConfig;
