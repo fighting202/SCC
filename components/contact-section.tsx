@@ -148,7 +148,9 @@ export default function ContactSection() {
             ease: [0.25, 0.46, 0.45, 0.94],
           }}
         >
-          {language === 'en' ? 'Ready to Plan Your Medical Journey to Seoul?' : '准备规划您的首尔医疗之旅？'}
+          {language === 'en'
+            ? 'Ready to Plan Your Medical Journey to Seoul?'
+            : '准备规划您的首尔医疗之旅？'}
         </motion.h2>
 
         {/* 설명 */}
@@ -217,7 +219,9 @@ export default function ContactSection() {
               <span className="flex items-center gap-3">
                 <span>✈️</span>
                 <span>
-                  {language === 'en' ? 'Get Your Personalized Consultation Now →' : '立即获取您的个性化咨询 →'}
+                  {language === 'en'
+                    ? 'Get Your Personalized Consultation Now →'
+                    : '立即获取您的个性化咨询 →'}
                 </span>
               </span>
             </Button>
@@ -227,7 +231,10 @@ export default function ContactSection() {
               language === 'zh' ? 'font-chinese' : ''
             }`}
           >
-            💰 {language === 'en' ? 'Have questions? Email us at seoulcareconcierge@gmail.com' : '有疑问？请发邮件至 seoulcareconcierge@gmail.com'}
+            💰{' '}
+            {language === 'en'
+              ? 'Have questions? Email us at seoulcareconcierge@gmail.com'
+              : '有疑问？请发邮件至 seoulcareconcierge@gmail.com'}
           </p>
         </motion.div>
 
