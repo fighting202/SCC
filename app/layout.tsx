@@ -105,32 +105,6 @@ export const metadata: Metadata = {
       zh: '/?lang=zh',
     },
   },
-  openGraph: {
-    title: 'Seoul Care Concierge | Medical & Beauty Tourism in Korea',
-    description:
-      'Professional medical and beauty care concierge service in Seoul, Korea. Safe, transparent, affordable.',
-    url: 'https://seoulcareconcierge.com',
-    siteName: 'Seoul Care Concierge',
-    images: [
-      {
-        url: '/optimized/modern-seoul-skyline-at-sunset-with-luxury-medical-social.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Seoul medical tourism skyline',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Seoul Care Concierge | Medical & Beauty Tourism in Korea',
-    description:
-      'Professional medical and beauty care concierge service in Seoul, Korea.',
-    images: [
-      '/optimized/modern-seoul-skyline-at-sunset-with-luxury-medical-social.webp',
-    ],
-  },
   robots: {
     index: true,
     follow: true,
