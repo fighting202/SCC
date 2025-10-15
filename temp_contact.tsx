@@ -148,7 +148,7 @@ export default function ContactSection() {
             ease: [0.25, 0.46, 0.45, 0.94],
           }}
         >
-          {language === 'en' ? 'Ready to Plan Your Medical Journey to Seoul?' : '准备规划您的首尔医疗之旅？'}
+          {language === 'en' ? 'Get Started Today' : '立即开始'}
         </motion.h2>
 
         {/* 설명 */}
@@ -170,8 +170,8 @@ export default function ContactSection() {
           }}
         >
           {language === 'en'
-            ? 'Get expert guidance in 3-5 days. No more guesswork, just clarity and confidence.'
-            : '3-5天内获得专家指导。不再猜测，只有清晰和信心。'}
+            ? 'Complete our quick form and receive a personalized consultation within 24 hours'
+            : '填写快速表格，24小时内收到个性化咨询'}
         </motion.p>
 
         {/* 메인 CTA 버튼 */}
@@ -217,7 +217,7 @@ export default function ContactSection() {
               <span className="flex items-center gap-3">
                 <span>✈️</span>
                 <span>
-                  {language === 'en' ? 'Get Your Personalized Consultation Now →' : '立即获取您的个性化咨询 →'}
+                  {language === 'en' ? 'Get Free Consultation' : '获取免费咨询'}
                 </span>
               </span>
             </Button>
@@ -227,7 +227,7 @@ export default function ContactSection() {
               language === 'zh' ? 'font-chinese' : ''
             }`}
           >
-            💰 {language === 'en' ? 'Have questions? Email us at seoulcareconcierge@gmail.com' : '有疑问？请发邮件至 seoulcareconcierge@gmail.com'}
+            ⏱️ {language === 'en' ? 'Takes only 2 minutes' : '仅需2分钟'}
           </p>
         </motion.div>
 

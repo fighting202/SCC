@@ -99,40 +99,40 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{
             duration: 0.1,
-            delay: 0.2
+            delay: 0.2,
           }}
         >
-          {language === 'zh' ? (
-            '您在韩国的安全无忧之旅'.split('').map((char, index) => (
-              <motion.span
-                key={`zh-title-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.08,
-                  delay: 0.3 + index * 0.08,
-                  ease: "easeOut"
-                }}
-              >
-                {char}
-              </motion.span>
-            ))
-          ) : (
-            'Your Safe & Seamless Journey in Korea'.split('').map((char, index) => (
-              <motion.span
-                key={`en-title-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.08,
-                  delay: 0.3 + index * 0.08,
-                  ease: "easeOut"
-                }}
-              >
-                {char}
-              </motion.span>
-            ))
-          )}
+          {language === 'zh'
+            ? '您在韩国的安全无忧之旅'.split('').map((char, index) => (
+                <motion.span
+                  key={`zh-title-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.08,
+                    delay: 0.3 + index * 0.08,
+                    ease: 'easeOut',
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))
+            : 'Your Safe & Seamless Journey in Korea'
+                .split('')
+                .map((char, index) => (
+                  <motion.span
+                    key={`en-title-${index}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.08,
+                      delay: 0.3 + index * 0.08,
+                      ease: 'easeOut',
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
         </motion.h1>
         <motion.p
           key={`subtitle-${language}`}
@@ -141,40 +141,40 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{
             duration: 0.1,
-            delay: 1.5
+            delay: 1.5,
           }}
         >
-          {language === 'zh' ? (
-            '专业医疗美容管家服务'.split('').map((char, index) => (
-              <motion.span
-                key={`zh-subtitle-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.08,
-                  delay: 1.6 + index * 0.08,
-                  ease: "easeOut"
-                }}
-              >
-                {char}
-              </motion.span>
-            ))
-          ) : (
-            'Professional Medical & Beauty Concierge'.split('').map((char, index) => (
-              <motion.span
-                key={`en-subtitle-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.08,
-                  delay: 1.6 + index * 0.08,
-                  ease: "easeOut"
-                }}
-              >
-                {char}
-              </motion.span>
-            ))
-          )}
+          {language === 'zh'
+            ? '专业医疗美容管家服务'.split('').map((char, index) => (
+                <motion.span
+                  key={`zh-subtitle-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.08,
+                    delay: 1.6 + index * 0.08,
+                    ease: 'easeOut',
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))
+            : 'Professional Medical & Beauty Concierge'
+                .split('')
+                .map((char, index) => (
+                  <motion.span
+                    key={`en-subtitle-${index}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.08,
+                      delay: 1.6 + index * 0.08,
+                      ease: 'easeOut',
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
         </motion.p>
 
         {/* Main CTA Button */}
@@ -185,7 +185,7 @@ export default function HeroSection() {
           transition={{
             duration: 0.8,
             delay: 3.0,
-            ease: "easeOut"
+            ease: 'easeOut',
           }}
         >
           <motion.button
