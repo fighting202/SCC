@@ -125,7 +125,7 @@ export default function ContactSection() {
     <section
       ref={sectionRef}
       id="get-started"
-      className="pt-40 pb-24 md:pt-48 md:pb-32 lg:pt-56 lg:pb-40 bg-gray-50 dark:bg-scc-dark-bg"
+      className="pt-32 pb-24 md:pt-40 md:pb-32 lg:pt-48 lg:pb-40 bg-gray-50 dark:bg-scc-dark-bg"
     >
       <div className="container-responsive text-center">
         {/* 섹션 제목 */}

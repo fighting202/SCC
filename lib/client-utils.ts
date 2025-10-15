@@ -58,10 +58,13 @@ export function scrollToSection(id: string): void {
     return;
   }
 
-  // 간단한 스크롤 - 헤더 높이만 고려
+  // 헤더 높이 계산
   const header = document.querySelector('header');
   const headerHeight = header ? header.offsetHeight : 80;
-  const offset = headerHeight + 20;
+  
+  // Contact 섹션은 더 큰 오프셋, 다른 섹션들은 작은 오프셋
+  const extraOffset = id === 'get-started' ? 40 : 10;
+  const offset = headerHeight + extraOffset;
 
   const elementPosition = element.getBoundingClientRect().top;
   const offsetPosition = elementPosition + window.pageYOffset - offset;
