@@ -117,3 +117,4 @@ The project is configured for deployment on Vercel:
 ## 📞 Support
 
 For support, email seoulcareconcierge@gmail.com or contact us via WhatsApp.
+# Force redeploy 10/15/2025 10:57:12
