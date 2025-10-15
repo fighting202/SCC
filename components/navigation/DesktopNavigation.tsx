@@ -27,6 +27,11 @@ export default function DesktopNavigation({
       zh: '工作流程',
     },
     {
+      id: 'why-choose-us',
+      en: 'Why Choose Us',
+      zh: '选择我们的理由',
+    },
+    {
       id: 'packages',
       en: 'Packages',
       zh: '套餐',

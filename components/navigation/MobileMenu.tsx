@@ -47,6 +47,12 @@ export default function MobileMenu({
       icon: Settings,
     },
     {
+      id: 'why-choose-us',
+      en: 'Why Choose Us',
+      zh: '选择我们的理由',
+      icon: Settings,
+    },
+    {
       id: 'packages',
       en: 'Packages',
       zh: '套餐',
