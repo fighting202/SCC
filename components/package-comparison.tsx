@@ -196,7 +196,7 @@ export default function PackageComparison() {
   return (
     <section
       id="packages"
-      className="py-20 bg-gray-50 dark:bg-scc-dark-bg scroll-mt-32"
+      className="py-20 bg-gray-50 dark:bg-scc-dark-bg"
     >
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}

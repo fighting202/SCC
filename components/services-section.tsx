@@ -137,7 +137,7 @@ const services = [
   return (
     <section
       id="services"
-      className="section-padding bg-gray-50 dark:bg-scc-dark-bg scroll-mt-16 relative z-0"
+      className="section-padding bg-gray-50 dark:bg-scc-dark-bg relative z-0"
     >
       <div className="container-responsive">
         <div className="text-center section-margin">

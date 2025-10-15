@@ -100,7 +100,7 @@ export default function FAQSection() {
   return (
     <section
       id="faq"
-      className="section-padding bg-gray-50 dark:bg-scc-dark-bg scroll-mt-32"
+      className="section-padding bg-gray-50 dark:bg-scc-dark-bg"
     >
       <div className="container-responsive">
         <div className="text-center section-margin">
