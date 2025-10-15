@@ -65,7 +65,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-16 md:pt-20 lg:pt-28 section-padding"
+      className="relative min-h-screen flex items-center justify-center pt-16 md:pt-20 lg:pt-28"
       role="banner"
       aria-label="Hero section"
     >
