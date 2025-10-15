@@ -40,7 +40,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16 mb-8">
           {/* Brand */}
           <div className="text-center md:text-left flex flex-col justify-between">
-            <div>
+          <div>
               <div className="text-center md:text-left">
                 <button
                   onClick={() => {
@@ -90,7 +90,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="text-center md:text-left flex flex-col justify-between">
-            <div>
+          <div>
               <h4
                 className={`text-lg font-bold mb-4 ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
@@ -239,7 +239,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="text-center md:text-left flex flex-col justify-between">
-            <div>
+          <div>
               <h4
                 className={`text-lg font-bold mb-4 ${
                   language === 'zh' ? 'font-chinese' : 'font-sans'
